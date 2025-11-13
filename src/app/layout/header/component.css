@@ -1,0 +1,69 @@
+/* --- 1. IMPORTAÇÃO DA FONTE --- */
+/* Esta linha importa a fonte "Konkhmer Sleokchher" do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap');
+
+header {
+  height: 275px;
+  background-color: #9350DB;
+  color: #242424;
+  padding: 20px 40px; /* Aumentei o padding lateral */
+  box-sizing: border-box;
+
+  /* 1. Define o layout principal como coluna */
+  display: flex;
+  flex-direction: column;
+
+  /* 2. Joga a "linha de cima" para o topo e a "linha de baixo" para o fundo */
+  justify-content: space-between;
+}
+
+/* --- ESTILOS DA LINHA DE CIMA --- */
+.header-top {
+  display: flex;
+  align-items: center; /* Alinha o logo e o texto verticalmente */
+  gap: 20px; /* Espaço entre o logo e o texto */
+
+  /* REMOVIDO: A linha "justify-content: center;" foi removida daqui */
+}
+
+.header-top .logo {
+  height: 70px; /* Tamanho maior para o logo principal */
+  width: 70px;
+}
+
+.header-top p {
+  /* --- 2. APLICAÇÃO DA FONTE --- */
+  font-family: 'Konkhmer Sleokchher', system-ui, sans-serif;
+
+  font-size: 2rem; /* Aumenta um pouco a fonte do título */
+  margin: 0; /* Remove margem padrão do <p> */
+
+  /* ADIÇÃO 1: Faz o <p> crescer e ocupar o espaço disponível */
+  flex-grow: 1;
+
+  /* ADIÇÃO 2: Centraliza o texto DENTRO do <p> */
+  text-align: center;
+
+  /* ADIÇÃO 3: Compensamos o espaço do logo (48px) + gap (20px)
+    para que o texto se centralize perfeitamente no header.
+  */
+  margin-right: 68px;
+
+  /* ADIÇÃO 4: Move o texto um pouco para baixo */
+  padding-top: 5px;
+}
+
+/* --- ESTILOS DA LINHA DE BAIXO (ÍCONES) --- */
+.icon-container {
+  display: flex;
+  align-items: center;
+
+  /* 3. Espaça os ícones igualmente pela largura, como na sua imagem */
+  justify-content: space-around;
+  width: 100%; /* Faz o container ocupar a largura toda */
+}
+
+.icon-container img {
+  height: 32px; /* Aumentei um pouco o tamanho dos ícones de baixo */
+  width: 32px;
+}
