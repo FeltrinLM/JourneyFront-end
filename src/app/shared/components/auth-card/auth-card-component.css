@@ -1,0 +1,15 @@
+.auth-card-container {
+  /* As especificações que você pediu: */
+  width: 511px;
+  height: 580px;
+  background-color: #9350DB;
+
+  /* Adições para ficar mais bonito */
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Para o texto de teste ficar legível */
+  color: white;
+  font-family: sans-serif;
+}
