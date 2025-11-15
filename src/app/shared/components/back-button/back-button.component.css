@@ -1,0 +1,35 @@
+.back-button {
+  /* --- O TRUQUE PARA FICAR "FLUTUANDO" --- */
+  position: fixed; /* Posição fixa relativa à janela do navegador */
+  bottom: 30px;    /* 30px do fundo */
+  left: 30px;      /* 30px da esquerda */
+  z-index: 100;    /* Garante que ele fique por cima de outros elementos */
+
+  /* --- O ESTILO QUE VOCÊ PEDIU --- */
+  width: 200px;
+  height: 80px;
+  background-color: #F459B6;
+
+  /* --- ESTILOS ADICIONAIS PARA FICAR BONITO --- */
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: sans-serif;
+  cursor: pointer;
+
+  /* Para alinhar o "← Voltar" */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  /* Efeito de hover */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.05); /* Aumenta um pouco */
+  background-color: #f87eba; /* Escurece um pouco */
+}
