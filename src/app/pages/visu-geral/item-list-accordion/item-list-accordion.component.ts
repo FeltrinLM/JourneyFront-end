@@ -1,62 +1,74 @@
-import { Component, signal } from '@angular/core';
+// item-list-accordion.component.ts
+
+import { Component, signal, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+// Imports dos serviços
+import { PecaService, PecaDTO } from './services/peca.service';
+import { EstampaService, EstampaDTO } from './services/estampa.service';
+import { AdesivoService, AdesivoDTO } from './services/adesivo.service';
+import { ColecaoService, ColecaoDTO } from './services/colecao.service';
+import { ChaveiroService, ChaveiroDTO } from './services/chaveiro.service'; // <-- 1. IMPORTAR NOVO SERVIÇO
 
 interface AccordionItem {
   id: number;
   title: string;
-  content: string;
-}
-
-interface TableItem {
-  id: number;
-  name: string;
-  category: string;
-  status: 'ativo' | 'inativo' | 'pendente';
-  quantity: number;
 }
 
 @Component({
   selector: 'app-item-list-accordion',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './item-list-accordion.component.html',
   styleUrl: './item-list-accordion.component.css'
 })
-export class ItemListAccordionComponent {
+export class ItemListAccordionComponent implements OnInit {
   openItemId = signal<number | null>(null);
 
+  // 2. INJETAR O NOVO SERVIÇO
+  private pecaService = inject(PecaService);
+  private estampaService = inject(EstampaService);
+  private adesivoService = inject(AdesivoService);
+  private colecaoService = inject(ColecaoService);
+  private chaveiroService = inject(ChaveiroService); // <-- NOVO
+
   items: AccordionItem[] = [
-    { id: 1, title: 'Lista de Peças', content: 'Conteúdo das peças' },
-    { id: 2, title: 'Lista de Estampas', content: 'Conteúdo das estampas' },
-    { id: 3, title: 'Lista de Adesivos', content: 'Conteúdo dos adesivos' },
-    { id: 4, title: 'Lista de Colecoes', content: 'Conteúdo das Colecoes' },
-    { id: 5, title: 'Lista de Chaveiros', content: 'Conteúdo dos Chaveiros' }
+    { id: 1, title: 'Lista de Peças' },
+    { id: 2, title: 'Lista de Estampas' },
+    { id: 3, title: 'Lista de Adesivos' },
+    { id: 4, title: 'Lista de Colecoes' },
+    { id: 5, title: 'Lista de Chaveiros' }
   ];
 
-  // Dados de exemplo para as tabelas
-  tableData: { [key: number]: TableItem[] } = {
-    1: [
-      { id: 101, name: 'Peça A', category: 'Mecânica', status: 'ativo', quantity: 15 },
-      { id: 102, name: 'Peça B', category: 'Elétrica', status: 'inativo', quantity: 8 },
-      { id: 103, name: 'Peça C', category: 'Hidráulica', status: 'pendente', quantity: 22 },
-      { id: 104, name: 'Peça D', category: 'Mecânica', status: 'ativo', quantity: 5 }
-    ],
-    2: [
-      { id: 201, name: 'Equipamento X', category: 'Produção', status: 'ativo', quantity: 3 },
-      { id: 202, name: 'Equipamento Y', category: 'Teste', status: 'ativo', quantity: 7 }
-    ],
-    3: [
-      { id: 301, name: 'Material 1', category: 'Insumo', status: 'ativo', quantity: 100 },
-      { id: 302, name: 'Material 2', category: 'Embalagem', status: 'pendente', quantity: 50 }
-    ],
-    4: [
-      { id: 401, name: 'Ferramenta P', category: 'Montagem', status: 'ativo', quantity: 12 },
-      { id: 402, name: 'Ferramenta Q', category: 'Medição', status: 'inativo', quantity: 4 }
-    ],
-    5: [
-      { id: 401, name: 'Ferramenta P', category: 'Montagem', status: 'ativo', quantity: 12 },
-      { id: 402, name: 'Ferramenta Q', category: 'Medição', status: 'inativo', quantity: 4 }
-    ]
-  };
+  // 3. ADICIONAR O NOVO SIGNAL
+  pecas = signal<PecaDTO[]>([]);
+  estampas = signal<EstampaDTO[]>([]);
+  adesivos = signal<AdesivoDTO[]>([]);
+  colecoes = signal<ColecaoDTO[]>([]);
+  chaveiros = signal<ChaveiroDTO[]>([]); // <-- NOVO
+
+  ngOnInit(): void {
+    // 4. CARREGAR TODAS AS 5 LISTAS
+    this.pecaService.listarPecas().subscribe(data => {
+      this.pecas.set(data);
+    });
+
+    this.estampaService.listarEstampas().subscribe(data => {
+      this.estampas.set(data);
+    });
+
+    this.adesivoService.listarAdesivos().subscribe(data => {
+      this.adesivos.set(data);
+    });
+
+    this.colecaoService.listarColecoes().subscribe(data => {
+      this.colecoes.set(data);
+    });
+
+    this.chaveiroService.listarChaveiros().subscribe(data => { // <-- NOVO
+      this.chaveiros.set(data);
+    });
+  }
 
   toggleItem(itemId: number): void {
     if (this.openItemId() === itemId) {
@@ -64,9 +76,5 @@ export class ItemListAccordionComponent {
     } else {
       this.openItemId.set(itemId);
     }
-  }
-
-  getTableItems(itemId: number): TableItem[] {
-    return this.tableData[itemId] || [];
   }
 }

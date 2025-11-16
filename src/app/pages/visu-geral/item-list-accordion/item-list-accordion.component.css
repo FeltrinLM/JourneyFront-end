@@ -161,37 +161,6 @@
   width: 15%;
 }
 
-/* Badges para categoria e status */
-.category-badge {
-  background-color: #e3f2fd;
-  color: #1976d2;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.status-badge {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.status-badge.ativo {
-  background-color: #e8f5e8;
-  color: #2e7d32;
-}
-
-.status-badge.inativo {
-  background-color: #ffebee;
-  color: #c62828;
-}
-
-.status-badge.pendente {
-  background-color: #fff3e0;
-  color: #ef6c00;
-}
 
 /* Botões de ação */
 .action-btn {
