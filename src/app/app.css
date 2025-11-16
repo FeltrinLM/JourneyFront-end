@@ -2,9 +2,6 @@
   centralizar todo o conteúdo que estiver dentro dela.
 */
 main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
+
   box-sizing: border-box;
 }

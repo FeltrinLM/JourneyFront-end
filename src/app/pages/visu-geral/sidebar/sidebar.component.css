@@ -1,0 +1,102 @@
+.sidebar-container {
+  /* ... (suas regras de .sidebar-container estão perfeitas) ... */
+  width: 225px;
+  height: 749px;
+  background-color: #9350DB;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #E8D6FB;
+  font-family: sans-serif;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.sidebar-nav-list {
+  /* ... (suas regras de .sidebar-nav-list estão perfeitas) ... */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+/* --- NOVO: O container de cada item (o <li>) --- */
+.nav-item {
+  /* Define o <li> como o "chefe" do posicionamento */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  /* ADICIONADO: Garante que toda a área (ícone e texto) mostre a "mãozinha" */
+  cursor: pointer;
+}
+
+/* --- ATUALIZADO: O ícone --- */
+.nav-icon {
+  height: 50px;
+  width: 50px;
+  /* cursor: pointer; */ /* Esta linha não é mais necessária aqui, já que o .nav-item cuida disso */
+
+  /* A transição agora se aplica ao ícone */
+  transition: filter 0.3s ease, transform 0.3s ease;
+
+  /* Coloca o ícone na camada de cima (para o texto não passar por cima) */
+  position: relative;
+  z-index: 2;
+}
+
+/* --- NOVO: A "bolha" de texto (o tooltip) --- */
+.nav-item::after {
+  /* 1. Pega o texto do atributo "data-text" do HTML */
+  content: attr(data-text);
+
+  /* 2. Posicionamento (ao lado do ícone) */
+  position: absolute;
+  left: 70%; /* Começa no meio... */
+  top: 50%;
+
+  /* 3. Esconde o texto por padrão */
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1; /* Fica atrás do ícone */
+
+  /* 4. Estilo do texto */
+  color: #e7e7e7; /* Texto escuro para ser legível */
+  padding: 8px 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap; /* Impede que o texto quebre linha */
+  text-transform: capitalize;
+
+  /* 5. Animação de entrada (começa um pouco à esquerda) */
+  transform: translateY(-50%) translateX(-40px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* --- NOVO: A MÁGICA DO HOVER --- */
+
+/* Quando o mouse passar sobre o <li> (nav-item)... */
+.nav-item:hover .nav-icon {
+  /* 1. ...mova o ícone para a esquerda (como você pediu) */
+  transform: scale(1.1) translateX(-40px);
+
+  /* 2. ...aplique o filtro no ícone */
+  filter: brightness(0) invert(1);
+}
+
+/* Quando o mouse passar sobre o <li> (nav-item)... */
+.nav-item:hover::after {
+  /* 1. ...mostre o texto */
+  opacity: 1;
+  visibility: visible;
+
+  /* 2. ...mova o texto para a direita (para dar espaço) */
+  transform: translateY(-50%) translateX(-40px);
+}
