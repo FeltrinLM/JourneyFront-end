@@ -1,11 +1,15 @@
-/* Este é o CSS mais importante.
-  Ele cria o layout de duas colunas (barra-lateral | conteúdo)
-*/
 .page-container {
   display: flex;
-
-  /* 'gap' adiciona um espaço entre a barra lateral e o conteúdo.
-    Se você quiser eles 100% "colados", troque por: gap: 0;
-  */
   gap: 30px;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* <-- MUDANÇA AQUI (centraliza horizontalmente) */
 }

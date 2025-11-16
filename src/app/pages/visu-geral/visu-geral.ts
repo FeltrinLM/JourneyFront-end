@@ -1,17 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// 1. IMPORTA O NOVO COMPONENTE DESTA PÁGINA
+// 1. IMPORTA A BARRA LATERAL
 import { SidebarComponent } from './sidebar/sidebar.component';
+
+// 2. IMPORTA O NOVO ACORDEÃO (ESTAVA FALTANDO)
+import { ItemListAccordionComponent } from './item-list-accordion/item-list-accordion.component';
+
 
 @Component({
   selector: 'app-visu-geral',
 
-  // 2. ADICIONA 'standalone: true'
   standalone: true,
 
-  // 3. ADICIONA O SidebarComponent (e CommonModule) AOS IMPORTS
-  imports: [CommonModule, SidebarComponent],
+  // 3. ADICIONA O ACORDEÃO AOS IMPORTS (ESTAVA FALTANDO)
+  imports: [
+    CommonModule,
+    SidebarComponent,
+    ItemListAccordionComponent // <--- A LINHA QUE FALTAVA
+  ],
 
   templateUrl: './visu-geral.html',
   styleUrl: './visu-geral.css'

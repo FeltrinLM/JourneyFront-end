@@ -1,0 +1,68 @@
+<div class="list-container">
+  <h2 class="list-title">Lista de Itens</h2>
+
+  <div class="accordion-container">
+    @for (item of items; track item.id) {
+      <div class="accordion-item">
+        <button class="accordion-header" (click)="toggleItem(item.id)">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="chevron-icon"
+            [class.rotated]="openItemId() === item.id"
+          >
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+          <span>{{ item.title }}</span>
+        </button>
+
+        <div class="accordion-content" [class.open]="openItemId() === item.id">
+          <div class="table-container">
+            <table class="items-table">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Status</th>
+                <th>Quantidade</th>
+                <th>Ações</th>
+              </tr>
+              </thead>
+              <tbody>
+                @for (tableItem of getTableItems(item.id); track tableItem.id) {
+                  <tr>
+                    <td>{{ tableItem.id }}</td>
+                    <td>{{ tableItem.name }}</td>
+                    <td>
+                      <span class="category-badge">{{ tableItem.category }}</span>
+                    </td>
+                    <td>
+                      <span class="status-badge" [class]="tableItem.status">
+                        {{ tableItem.status }}
+                      </span>
+                    </td>
+                    <td>{{ tableItem.quantity }}</td>
+                    <td>
+                      <button class="action-btn edit-btn">Editar</button>
+                      <button class="action-btn delete-btn">Excluir</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+    }
+  </div>
+</div>

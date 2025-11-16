@@ -1,0 +1,249 @@
+/* Container principal */
+.list-container {
+  width: 100%;
+  width: 990px;
+}
+
+/* Título - exatamente como na imagem */
+.list-title {
+  font-family: sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #242424;
+  margin-bottom: 30px;
+  text-align: center; /* <-- MUDANÇA AQUI */
+}
+
+/* Container dos itens do accordion */
+.accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* ITEM DO ACCORDION - LARGURA FIXA E GRANDE */
+.accordion-item {
+  width: 100%;
+}
+
+/* Header do accordion - GRANDE E LARGO */
+.accordion-header {
+  width: 100%;
+  padding: 20px 25px;
+  background-color: #E8D6FB;
+  color: #242424;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  transition: background-color 0.2s ease;
+  box-sizing: border-box;
+  min-height: 60px;
+}
+
+.accordion-header:hover {
+  background-color: #d9c8f5;
+}
+
+.chevron-icon {
+  width: 24px;
+  height: 24px;
+  color: #242424;
+  transition: transform 0.3s ease;
+}
+
+.chevron-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Conteúdo do accordion - MESMA LARGURA DO HEADER */
+.accordion-content {
+  width: 100%;
+  padding: 0 20px; /* Mantém padding lateral, zera o vertical */
+  font-family: sans-serif;
+  background-color: #E8D6FB;
+  border-radius: 0 0 12px 12px;
+  margin-top: -8px;
+  border: 1px solid #E8D6FB;
+  border-top: none;
+  box-sizing: border-box;
+
+  /* --- ESTADO FECHADO (PADRÃO) --- */
+  max-height: 0;
+  overflow: hidden;
+  border-bottom-width: 0; /* Esconde a borda de baixo */
+
+  /* --- A TRANSIÇÃO SUAVE --- */
+  transition:
+    max-height 0.4s ease-out,
+    padding-top 0.4s ease-out,
+    padding-bottom 0.4s ease-out,
+    border-bottom-width 0.4s ease-out;
+}
+
+/* --- ESTADO ABERTO (QUANDO TIVER A CLASSE '.open') --- */
+.accordion-content.open {
+  max-height: 1000px; /* Um valor BEM ALTO (maior que sua tabela) */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom-width: 1px; /* Mostra a borda de baixo */
+}
+/* Container da tabela */
+.table-container {
+  width: 100%;
+}
+
+/* Estilo da tabela */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #E8D6FB;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.items-table th {
+  background-color: #E8D6FB;
+  color: #242424;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.items-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.85rem;
+}
+
+.items-table tr:hover {
+  background-color: #E8D6FB;
+}
+
+/* Ajuste nas colunas */
+.items-table th:nth-child(1),
+.items-table td:nth-child(1) {
+  width: 10%;
+}
+
+.items-table th:nth-child(2),
+.items-table td:nth-child(2) {
+  width: 25%;
+}
+
+.items-table th:nth-child(3),
+.items-table td:nth-child(3) {
+  width: 20%;
+}
+
+.items-table th:nth-child(4),
+.items-table td:nth-child(4) {
+  width: 15%;
+}
+
+.items-table th:nth-child(5),
+.items-table td:nth-child(5) {
+  width: 15%;
+}
+
+.items-table th:nth-child(6),
+.items-table td:nth-child(6) {
+  width: 15%;
+}
+
+/* Badges para categoria e status */
+.category-badge {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-badge.ativo {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.status-badge.inativo {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.status-badge.pendente {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+/* Botões de ação */
+.action-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.edit-btn:hover {
+  background-color: #bbdefb;
+}
+
+.delete-btn {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.delete-btn:hover {
+  background-color: #ffcdd2;
+}
+
+/* Botão de adicionar item */
+.table-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #E8D6FB;
+  color: #242424;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-item-btn:hover {
+  background-color: #d9c8f5;
+}
