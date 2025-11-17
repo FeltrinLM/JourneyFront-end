@@ -7,6 +7,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 // 2. IMPORTA O NOVO ACORDEÃO (ESTAVA FALTANDO)
 import { ItemListAccordionComponent } from './item-list-accordion/item-list-accordion.component';
 
+// 3. IMPORTA O NOVO BOTÃO FLUTUANTE (NOVA LINHA)
+import { FloatingAddButtonComponent } from './floating-add-button/floating-add-button.component';
 
 @Component({
   selector: 'app-visu-geral',
@@ -17,7 +19,8 @@ import { ItemListAccordionComponent } from './item-list-accordion/item-list-acco
   imports: [
     CommonModule,
     SidebarComponent,
-    ItemListAccordionComponent // <--- A LINHA QUE FALTAVA
+    ItemListAccordionComponent,
+    FloatingAddButtonComponent
   ],
 
   templateUrl: './visu-geral.html',
