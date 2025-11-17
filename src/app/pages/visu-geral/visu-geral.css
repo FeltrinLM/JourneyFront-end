@@ -1,8 +1,14 @@
+/* Em visu-geral.css */
+
 .page-container {
-  display: flex;
+  display: flex; /* Direção 'row' (padrão) */
   gap: 30px;
   padding: 0;
-  min-height: 100vh;
+
+  /* Faz este container crescer para preencher o <app-visu-geral> */
+  flex-grow: 1;
+
+  /* align-items: stretch (padrão) vai esticar a sidebar e o conteúdo */
 }
 
 .main-content {
@@ -11,5 +17,11 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;     /* <-- MUDANÇA AQUI (centraliza horizontalmente) */
+
+  /* MUDANÇA SUGERIDA:
+     'center' fará a lista gigante ficar no meio da página.
+     'flex-start' a mantém no topo, o que é mais natural.
+  */
+  align-items: center;
+  justify-content: flex-start; /* <-- MUDADO DE 'center' PARA 'flex-start' */
 }

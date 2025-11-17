@@ -1,7 +1,23 @@
-/* Este CSS vai dizer para a tag <main> (do seu app.html)
-  centralizar todo o conteúdo que estiver dentro dela.
-*/
-main {
+/* Em app.component.css */
 
-  box-sizing: border-box;
+:host {
+  display: flex;
+  flex-direction: column;
+  /* A aplicação inteira tem NO MÍNIMO 100vh e PODE CRESCER */
+  min-height: 100vh;
+}
+
+app-header {
+  /* Impede que o header ("Sistema de gerenciamento...") encolha */
+  flex-shrink: 0;
+}
+
+/* Esta é a regra mais importante.
+  Dizemos ao <app-visu-geral> (o componente da página)
+  para crescer (flex-grow) e se comportar como um container flex.
+*/
+app-visu-geral {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
