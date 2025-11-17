@@ -1,23 +1,31 @@
 <header>
   <!-- 1. LINHA DE CIMA -->
   <div class="header-top">
-    <!--
-      Adicione seu novo logo aqui.
-      Estou usando o relógio como placeholder, troque o caminho
-      pelo seu novo ícone de logo.
-    -->
-    <img src="/assets/images/logo-journey.png" alt="Logo" class="logo">
+    <!-- Bônus: Coloquei o logo como um link para a home também -->
+    <a [routerLink]="['/visu-geral']" class="logo-link">
+      <img src="/assets/images/logo-journey.png" alt="Logo" class="logo">
+    </a>
     <p>Sistema de gerenciamento de estoque Journey Brasil</p>
   </div>
 
-  <!-- 2. LINHA DE BAIXO (Seus ícones) -->
+  <!-- 2. LINHA DE BAIXO (Ícones com links) -->
   <div class="icon-container">
-    <!--
-      Note a barra "/" no começo de CADA src.
-      Isso corrige as imagens quebradas.
-    -->
-    <img src="/assets/images/dashboard-icon.png" alt="Dashboard">
-    <img src="/assets/images/user-icon.png" alt="Usuário">
-    <img src="/assets/images/clock-icon.png" alt="Relógio">
+
+    <!-- Link do Dashboard -->
+    <!-- [routerLinkActiveOptions]="{exact: true}" garante que ele só fique "ativo" na home exata -->
+    <a [routerLink]="['/visu-geral']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+      <img src="/assets/images/dashboard-icon.png" alt="Dashboard">
+    </a>
+
+    <!-- Link do Usuário -->
+    <a [routerLink]="['/conta']" routerLinkActive="active-link">
+      <img src="/assets/images/user-icon.png" alt="Usuário">
+    </a>
+
+    <!-- Link do Relógio -->
+    <a [routerLink]="['/historico-de-alteracoes']" routerLinkActive="active-link">
+      <img src="/assets/images/clock-icon.png" alt="Relógio">
+    </a>
+
   </div>
 </header>

@@ -1,6 +1,4 @@
-// item-list-accordion.component.ts
-
-import { Component, signal, inject, OnInit } from '@angular/core';
+import { Component, signal, inject, OnInit, Input } from '@angular/core'; // 1. IMPORTAR 'Input'
 import { CommonModule } from '@angular/common';
 
 // Imports dos serviços
@@ -8,7 +6,7 @@ import { PecaService, PecaDTO } from './services/peca.service';
 import { EstampaService, EstampaDTO } from './services/estampa.service';
 import { AdesivoService, AdesivoDTO } from './services/adesivo.service';
 import { ColecaoService, ColecaoDTO } from './services/colecao.service';
-import { ChaveiroService, ChaveiroDTO } from './services/chaveiro.service'; // <-- 1. IMPORTAR NOVO SERVIÇO
+import { ChaveiroService, ChaveiroDTO } from './services/chaveiro.service';
 
 interface AccordionItem {
   id: number;
@@ -23,14 +21,25 @@ interface AccordionItem {
   styleUrl: './item-list-accordion.component.css'
 })
 export class ItemListAccordionComponent implements OnInit {
+
+  // 2. ADICIONAR O @Input()
+  //    Isto é um "setter". Ele roda toda vez que o valor de [itemIdToOpen] muda.
+  @Input() set itemIdToOpen(id: number | null) {
+    if (id !== null) {
+      this.toggleItem(id);
+    }
+  }
+
+  // O SEU CÓDIGO EXISTENTE CONTINUA IGUAL ABAIXO
+  // ===========================================
+
   openItemId = signal<number | null>(null);
 
-  // 2. INJETAR O NOVO SERVIÇO
   private pecaService = inject(PecaService);
   private estampaService = inject(EstampaService);
   private adesivoService = inject(AdesivoService);
   private colecaoService = inject(ColecaoService);
-  private chaveiroService = inject(ChaveiroService); // <-- NOVO
+  private chaveiroService = inject(ChaveiroService);
 
   items: AccordionItem[] = [
     { id: 1, title: 'Lista de Peças' },
@@ -40,15 +49,13 @@ export class ItemListAccordionComponent implements OnInit {
     { id: 5, title: 'Lista de Chaveiros' }
   ];
 
-  // 3. ADICIONAR O NOVO SIGNAL
   pecas = signal<PecaDTO[]>([]);
   estampas = signal<EstampaDTO[]>([]);
   adesivos = signal<AdesivoDTO[]>([]);
   colecoes = signal<ColecaoDTO[]>([]);
-  chaveiros = signal<ChaveiroDTO[]>([]); // <-- NOVO
+  chaveiros = signal<ChaveiroDTO[]>([]);
 
   ngOnInit(): void {
-    // 4. CARREGAR TODAS AS 5 LISTAS
     this.pecaService.listarPecas().subscribe(data => {
       this.pecas.set(data);
     });
@@ -65,7 +72,7 @@ export class ItemListAccordionComponent implements OnInit {
       this.colecoes.set(data);
     });
 
-    this.chaveiroService.listarChaveiros().subscribe(data => { // <-- NOVO
+    this.chaveiroService.listarChaveiros().subscribe(data => {
       this.chaveiros.set(data);
     });
   }

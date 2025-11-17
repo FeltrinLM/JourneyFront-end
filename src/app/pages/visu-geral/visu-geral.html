@@ -1,8 +1,13 @@
 <div class="page-container">
-  <app-page-sidebar></app-page-sidebar>
+
+  <!-- 1. "OUVE" O EVENTO (iconeClicado) e CHAMA O MÉTODO onIconClicked() -->
+  <app-page-sidebar (iconeClicado)="onIconClicked($event)"></app-page-sidebar>
 
   <div class="main-content">
-    <app-item-list-accordion></app-item-list-accordion>
+
+    <!-- 2. "PASSA" O VALOR DO SIGNAL (selectedItemId) PARA O INPUT [itemIdToOpen] -->
+    <app-item-list-accordion [itemIdToOpen]="selectedItemId()"></app-item-list-accordion>
+
   </div>
 
   <app-floating-add-button></app-floating-add-button>

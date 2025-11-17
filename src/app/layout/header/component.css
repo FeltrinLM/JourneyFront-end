@@ -75,3 +75,16 @@ header {
 
   filter: brightness(0) invert(1);
 }
+
+/* Em component.css (Opcional) */
+.icon-container a.active-link img {
+  transform: scale(1.20);
+
+  filter: brightness(0) invert(1);
+}
+
+/* Também remove o sublinhado padrão dos links */
+a, a.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
