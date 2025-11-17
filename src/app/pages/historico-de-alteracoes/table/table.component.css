@@ -1,0 +1,73 @@
+/* Container principal para centralizar a tabela */
+.page-container {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  /* --- MUDANÇA AQUI --- */
+  align-items: flex-start; /* Alinha ao topo (ao invés de 'center') */
+  min-height: 90vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Estilo base da tabela */
+.history-table {
+  width: 90%;
+  max-width: 1200px;
+  border-collapse: collapse;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  /* --- MUDANÇAS AQUI --- */
+  border-radius: 10px; /* Adiciona a borda arredondada */
+  overflow: hidden; /* Força os filhos a respeitarem a borda */
+}
+
+/* Estilo do cabeçalho (th) */
+.history-table th {
+  background-color: #9350DB;
+  color: white;
+  padding: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Estilo das células (td) */
+.history-table td {
+  padding: 16px;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+/* Células de "Ação", "Item" e "Responsável" com texto centralizado */
+.action-cell,
+.item-cell,
+.user-cell {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Célula de "Detalhes" com texto à esquerda */
+.details-cell {
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Remove margens dos parágrafos dentro dos detalhes */
+.details-cell p {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+/* * Cores específicas da coluna "Ação" (CORES ATUALIZADAS)
+ */
+.action-add {
+  background-color: #E8D6FB; /* Roxo claro */
+}
+
+.action-edit {
+  background-color: #B572FD; /* Roxo principal */
+  color: white;
+}
+
+.action-delete {
+  background-color: #F459B6; /* Rosa/Magenta claro */
+}

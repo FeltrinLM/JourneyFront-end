@@ -1,0 +1,72 @@
+<div class="page-container">
+
+  <table class="history-table">
+
+    <thead>
+    <tr>
+      <th>Ação</th>
+      <th>Item</th>
+      <th>Responsável</th>
+      <th>Detalhes</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr *ngIf="isLoading">
+      <td colspan="4" class="loading-cell">Carregando histórico...</td>
+    </tr>
+
+    <tr *ngIf="!isLoading && historicoAgrupado.length === 0">
+      <td colspan="4" class="loading-cell">Nenhum registro de alteração encontrado.</td>
+    </tr>
+
+    <tr *ngFor="let H of historicoAgrupado">
+
+      <td class="action-cell" [ngClass]="H.acaoClass">
+        {{ H.acao }}
+      </td>
+
+      <td class="item-cell">
+        {{ H.item }}
+      </td>
+
+      <td class="user-cell">
+        {{ H.responsavel }}
+      </td>
+
+      <td class="details-cell">
+
+        <p *ngIf="H.acao === 'Adicionado'"><strong>Campos criados:</strong></p>
+        <p *ngIf="H.acao === 'Editado'"><strong>Campos alterados:</strong></p>
+        <p *ngIf="H.acao === 'Excluído'"><strong>Item Removido:</strong></p>
+
+        <p *ngFor="let detalhe of H.detalhes">
+          - {{ detalhe }}
+        </p>
+
+        <p class="data-hora">
+          <em>Data: {{ H.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</em>
+        </p>
+      </td>
+
+    </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+<style>
+  .loading-cell {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    padding: 40px;
+  }
+  .data-hora {
+    margin-top: 10px;
+    font-size: 0.85em;
+    color: #333;
+  }
+</style>
