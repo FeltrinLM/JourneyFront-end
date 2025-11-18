@@ -1,0 +1,76 @@
+:host {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center; /* Centraliza horizontal */
+  align-items: flex-start; /* Começa do topo */
+  padding-top: 60px;       /* Distância do topo da tela */
+}
+
+/* === 1. O CABEÇALHO (Ícone + Texto) === */
+.login-header {
+  display: flex;
+  align-items: center;    /* Centraliza verticalmente um com o outro */
+  gap: 15px;              /* Distância entre ícone e texto */
+  width: 100%;
+  margin-bottom: 50px;    /* <--- Espaço GRANDE entre o título e os inputs (igual a imagem) */
+}
+
+.login-header img {
+  width: 50px;
+  height: 50px;
+}
+
+.login-header h2 {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* === 2. CONTAINER DOS CAMPOS === */
+.login-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaço entre input de nome e senha */
+  width: 100%;
+}
+
+/* === 3. ESTILO DOS INPUTS (Igual à imagem) === */
+input {
+  width: 100%;
+  height: 50px;           /* Altura fixa para ficar "gordinho" */
+  padding: 0 15px;
+  font-size: 16px;
+  border-radius: 8px;     /* Arredondamento */
+  border: 2px solid #000; /* <--- A BORDA PRETA da imagem */
+  outline: none;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: #aaa;
+  font-weight: bold;
+}
+
+/* ... (O resto do CSS continua igual) ... */
+
+/* === ESTILO DO BOTÃO === */
+button {
+  width: 100%;
+  height: 50px;
+
+  /* === MUDANÇA AQUI: Aumentei de 30px para 80px === */
+  margin-top: 80px;
+
+  border-radius: 8px;
+  border: 2px solid #000;
+  background-color: #C58AF9;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b070e6;
+}
