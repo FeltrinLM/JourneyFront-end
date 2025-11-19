@@ -1,32 +1,29 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Essencial para o ngModel funcionar
+import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-// Importação corrigida para AuthCardComponent (sem o "App" na frente)
 import { AuthCardComponent } from '../../shared/components/auth-card/auth-card.component';
 
-@Component({
-  selector: 'app-login', // Seletor simplificado
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,        // Habilita [(ngModel)]
-    AuthCardComponent   // Habilita <app-auth-card>
-  ],
-  templateUrl: './login.html', // Aponta para o arquivo HTML correto nesta pasta
-  styleUrls: ['./login.css']   // Certifique-se de que seu CSS se chama login.css ou ajuste aqui
-})
-export class Login { // <--- Renomeado para 'Login' para satisfazer o app.routes.ts
+// 1. IMPORTAR O SERVICE
+import { AuthService } from '../../services/auth.service';
 
-  // Variáveis do formulário
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, FormsModule, AuthCardComponent],
+  templateUrl: './login.html',
+  styleUrls: ['./login.css']
+})
+export class Login {
+
   nome = '';
   senha = '';
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService // 2. INJETAR O SERVICE
   ) {}
 
   fazerLogin() {
@@ -46,7 +43,11 @@ export class Login { // <--- Renomeado para 'Login' para satisfazer o app.routes
       next: (response) => {
         console.log('Login sucesso:', response);
         if (response.token) {
-          localStorage.setItem('token', response.token);
+
+          // 3. USAR O SERVICE PARA SALVAR E AVISAR O HEADER
+          // (Não usamos mais localStorage.setItem aqui direto)
+          this.authService.loginSucesso(response.token, this.nome);
+
           this.router.navigate(['/visu-geral']);
         }
       },

@@ -1,18 +1,19 @@
 <header>
   <!-- 1. LINHA DE CIMA -->
   <div class="header-top">
-    <!-- Bônus: Coloquei o logo como um link para a home também -->
     <a [routerLink]="['/visu-geral']" class="logo-link">
       <img src="/assets/images/logo-journey.png" alt="Logo" class="logo">
     </a>
-    <p>Sistema de gerenciamento de estoque Journey Brasil</p>
+
+    <!-- MUDANÇA AQUI: Texto dinâmico -->
+    <p>{{ textoCabecalho }}</p>
+
   </div>
 
   <!-- 2. LINHA DE BAIXO (Ícones com links) -->
   <div class="icon-container">
 
     <!-- Link do Dashboard -->
-    <!-- [routerLinkActiveOptions]="{exact: true}" garante que ele só fique "ativo" na home exata -->
     <a [routerLink]="['/visu-geral']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
       <img src="/assets/images/dashboard-icon.png" alt="Dashboard">
     </a>

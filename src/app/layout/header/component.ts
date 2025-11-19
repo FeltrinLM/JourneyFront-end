@@ -1,19 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// 1. IMPORTAR RouterLink e RouterLinkActive
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-header', // Esta é a tag que vamos usar
+  selector: 'app-header',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink, // 2. ADICIONAR AOS IMPORTS
+    RouterLink,
     RouterLinkActive
   ],
   templateUrl: './component.html',
   styleUrl: './component.css'
 })
 export class HeaderComponent {
+
+  // Esta propriedade 'calculada' verifica o localStorage automaticamente
+  get textoCabecalho(): string {
+    const nome = localStorage.getItem('nome_usuario');
+
+    if (nome) {
+      // Se tiver nome salvo, retorna a mensagem personalizada
+      return `Bem vindo ${nome}`;
+    }
+
+    // Se não tiver (não logado), retorna o padrão
+    return 'Sistema de gerenciamento de estoque Journey Brasil';
+  }
 
 }
