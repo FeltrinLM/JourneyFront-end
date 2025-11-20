@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-// 1. IMPORTE O SEU COMPONENTE DE PÁGINA
 import { CadastrarItem } from './pages/cadastrar-item/cadastrar-item';
 import { EditarPeca}  from './pages/editar-peca/editar-peca';
 import {EditarEstampa} from './pages/editar-estampa/editar-estampa';
@@ -10,43 +9,62 @@ import {Conta} from './pages/conta/conta';
 import {Login} from './pages/login/login';
 import {VisuGeral} from './pages/visu-geral/visu-geral';
 
+// IMPORTAR O GUARD QUE CRIAMOS
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
+  // 1. Redirecionamento padrão: Se a URL for vazia, vai para Login
   {
-    path: 'cadastrar', // O caminho da URL (ex: localhost:4200/cadastrar)
-    component: CadastrarItem // O componente que deve ser carregado
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
-  {
-    path: 'editar-peca',
-    component: EditarPeca
-  },
-  {
-    path: 'editar-estampa',
-    component: EditarEstampa
-  },
-  {
-    path: 'editar-colecao',
-    component: EditarColecao
-  },
-  {
-    path: 'editar-chaveiro',
-    component: EditarChaveiro
-  },
-  {
-    path: 'historico-de-alteracoes',
-    component: HistoricoDeAlteracoes
-  },
-  {
-    path: 'conta',
-    component: Conta
-  },
+
+  // 2. Rota de Login (Pública - não usa o Guard)
   {
     path: 'login',
     component: Login
   },
+
+  // 3. Rotas Protegidas (Todas usam canActivate: [authGuard])
+  {
+    path: 'cadastrar',
+    component: CadastrarItem,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editar-peca',
+    component: EditarPeca,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editar-estampa',
+    component: EditarEstampa,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editar-colecao',
+    component: EditarColecao,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editar-chaveiro',
+    component: EditarChaveiro,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'historico-de-alteracoes',
+    component: HistoricoDeAlteracoes,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'conta',
+    component: Conta,
+    canActivate: [authGuard]
+  },
   {
     path: 'visu-geral',
-    component: VisuGeral
+    component: VisuGeral,
+    canActivate: [authGuard]
   }
-
 ];

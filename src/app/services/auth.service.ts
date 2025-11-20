@@ -1,36 +1,51 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http'; // Import necessário para validar com o back
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root' // Isso torna o serviço disponível no app inteiro automaticamente
+  providedIn: 'root'
 })
 export class AuthService {
 
-  // BehaviorSubject guarda o valor atual e avisa quem estiver ouvindo.
-  // Inicializamos lendo do localStorage para caso o usuário dê F5 na página e continue logado.
   private nomeUsuarioSubject = new BehaviorSubject<string | null>(localStorage.getItem('nome_usuario'));
-
-  // Esta é a variável pública que o Header vai "assistir" (Observable)
   nomeUsuario$ = this.nomeUsuarioSubject.asObservable();
 
-  constructor() {}
+  // URL para teste de conexão (use qualquer rota GET protegida ou pública do seu back)
+  private apiUrl = 'http://localhost:8080/api/usuarios';
 
-  // Chamado pelo Login quando a autenticação for bem-sucedida
+  constructor(private http: HttpClient) {} // Injetamos o HttpClient
+
   loginSucesso(token: string, nome: string) {
-    // 1. Salva no navegador para persistir se fechar a aba
     localStorage.setItem('token', token);
     localStorage.setItem('nome_usuario', nome);
-
-    // 2. Avisa "ao vivo" a todos os componentes que o nome mudou
     this.nomeUsuarioSubject.next(nome);
   }
 
-  // Método para deslogar (usaremos no futuro)
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('nome_usuario');
-
-    // Avisa que agora o usuário é 'null'
     this.nomeUsuarioSubject.next(null);
+  }
+
+  estaLogado(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+
+  // NOVO: Tenta fazer uma requisição leve ao backend para ver se ele está vivo/token é válido
+  verificarEstadoBackend() {
+    // Tenta acessar uma rota qualquer. Se der erro (back desligado ou 403), desloga.
+    // Nota: Se sua API precisar do token no header, certifique-se que ele está sendo enviado
+    // (usando um interceptor ou passando nos headers aqui)
+    return this.http.get(this.apiUrl).pipe(
+      map(() => true), // Sucesso: Back end está on e token (se enviado) é válido
+      catchError((error) => {
+        // Erro: Back end off, erro de conexão, ou token expirado
+        console.log('Validação falhou ou Back End offline. Deslogando...', error);
+        this.logout();
+        return of(false);
+      })
+    );
   }
 }
