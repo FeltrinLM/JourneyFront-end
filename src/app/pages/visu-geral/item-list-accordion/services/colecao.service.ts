@@ -25,4 +25,8 @@ export class ColecaoService {
   listarColecoes(): Observable<ColecaoDTO[]> {
     return this.http.get<ColecaoDTO[]>(this.apiUrl);
   }
+
+  deletar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

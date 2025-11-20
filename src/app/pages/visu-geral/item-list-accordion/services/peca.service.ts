@@ -27,4 +27,8 @@ export class PecaService {
   listarPecas(): Observable<PecaDTO[]> {
     return this.http.get<PecaDTO[]>(this.apiUrl);
   }
+
+  deletar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

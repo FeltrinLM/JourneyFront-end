@@ -1,7 +1,7 @@
-import { Component, signal, inject, OnInit, Input } from '@angular/core'; // 1. IMPORTAR 'Input'
+import { Component, signal, inject, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
-// Imports dos serviços
 import { PecaService, PecaDTO } from './services/peca.service';
 import { EstampaService, EstampaDTO } from './services/estampa.service';
 import { AdesivoService, AdesivoDTO } from './services/adesivo.service';
@@ -22,19 +22,16 @@ interface AccordionItem {
 })
 export class ItemListAccordionComponent implements OnInit {
 
-  // 2. ADICIONAR O @Input()
-  //    Isto é um "setter". Ele roda toda vez que o valor de [itemIdToOpen] muda.
   @Input() set itemIdToOpen(id: number | null) {
     if (id !== null) {
       this.toggleItem(id);
     }
   }
 
-  // O SEU CÓDIGO EXISTENTE CONTINUA IGUAL ABAIXO
-  // ===========================================
-
   openItemId = signal<number | null>(null);
+  private router = inject(Router);
 
+  // Injeção dos serviços
   private pecaService = inject(PecaService);
   private estampaService = inject(EstampaService);
   private adesivoService = inject(AdesivoService);
@@ -56,32 +53,95 @@ export class ItemListAccordionComponent implements OnInit {
   chaveiros = signal<ChaveiroDTO[]>([]);
 
   ngOnInit(): void {
-    this.pecaService.listarPecas().subscribe(data => {
-      this.pecas.set(data);
-    });
-
-    this.estampaService.listarEstampas().subscribe(data => {
-      this.estampas.set(data);
-    });
-
-    this.adesivoService.listarAdesivos().subscribe(data => {
-      this.adesivos.set(data);
-    });
-
-    this.colecaoService.listarColecoes().subscribe(data => {
-      this.colecoes.set(data);
-    });
-
-    this.chaveiroService.listarChaveiros().subscribe(data => {
-      this.chaveiros.set(data);
-    });
+    this.carregarTudo();
   }
+
+  // --- CARREGAMENTO DE DADOS ---
+  carregarTudo() {
+    this.carregarPecas();
+    this.carregarEstampas();
+    this.carregarAdesivos();
+    this.carregarColecoes();
+    this.carregarChaveiros();
+  }
+
+  carregarPecas() { this.pecaService.listarPecas().subscribe(data => this.pecas.set(data)); }
+  carregarEstampas() { this.estampaService.listarEstampas().subscribe(data => this.estampas.set(data)); }
+  carregarAdesivos() { this.adesivoService.listarAdesivos().subscribe(data => this.adesivos.set(data)); }
+  carregarColecoes() { this.colecaoService.listarColecoes().subscribe(data => this.colecoes.set(data)); }
+  carregarChaveiros() { this.chaveiroService.listarChaveiros().subscribe(data => this.chaveiros.set(data)); }
 
   toggleItem(itemId: number): void {
     if (this.openItemId() === itemId) {
       this.openItemId.set(null);
     } else {
       this.openItemId.set(itemId);
+    }
+  }
+
+  navegarParaEdicao(rota: string) {
+    this.router.navigate([rota]);
+  }
+
+  // --- FUNÇÕES DE EXCLUSÃO ---
+
+  deletarPeca(id: number) {
+    if (confirm('Tem certeza que deseja excluir esta Peça?')) {
+      this.pecaService.deletar(id).subscribe({
+        next: () => {
+          alert('Peça excluída com sucesso!');
+          this.carregarPecas(); // Atualiza a lista na tela
+        },
+        error: (err) => alert('Erro ao excluir peça.')
+      });
+    }
+  }
+
+  deletarEstampa(id: number) {
+    if (confirm('Tem certeza que deseja excluir esta Estampa?')) {
+      this.estampaService.deletar(id).subscribe({
+        next: () => {
+          alert('Estampa excluída com sucesso!');
+          this.carregarEstampas();
+        },
+        error: (err) => alert('Erro ao excluir estampa.')
+      });
+    }
+  }
+
+  deletarAdesivo(id: number) {
+    if (confirm('Tem certeza que deseja excluir este Adesivo?')) {
+      this.adesivoService.deletar(id).subscribe({
+        next: () => {
+          alert('Adesivo excluído com sucesso!');
+          this.carregarAdesivos();
+        },
+        error: (err) => alert('Erro ao excluir adesivo.')
+      });
+    }
+  }
+
+  deletarColecao(id: number) {
+    if (confirm('Tem certeza que deseja excluir esta Coleção?')) {
+      this.colecaoService.deletar(id).subscribe({
+        next: () => {
+          alert('Coleção excluída com sucesso!');
+          this.carregarColecoes();
+        },
+        error: (err) => alert('Erro ao excluir coleção.')
+      });
+    }
+  }
+
+  deletarChaveiro(id: number) {
+    if (confirm('Tem certeza que deseja excluir este Chaveiro?')) {
+      this.chaveiroService.deletar(id).subscribe({
+        next: () => {
+          alert('Chaveiro excluído com sucesso!');
+          this.carregarChaveiros();
+        },
+        error: (err) => alert('Erro ao excluir chaveiro.')
+      });
     }
   }
 }

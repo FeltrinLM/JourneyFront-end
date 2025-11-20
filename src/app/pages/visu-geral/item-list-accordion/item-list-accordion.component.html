@@ -28,11 +28,10 @@
 
             @switch (item.id) {
 
-              @case (1) {
+              @case (1) { <!-- PEÇAS -->
                 <table class="items-table">
                   <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Tipo</th>
                     <th>Tamanho</th>
                     <th>Cor</th>
@@ -43,14 +42,14 @@
                   <tbody>
                     @for (peca of pecas(); track peca.pecaId) {
                       <tr>
-                        <td>{{ peca.pecaId }}</td>
                         <td>{{ peca.tipo }}</td>
                         <td>{{ peca.tamanho }}</td>
                         <td>{{ peca.cor }}</td>
                         <td>{{ peca.quantidade }}</td>
                         <td>
-                          <button class="action-btn edit-btn">Editar</button>
-                          <button class="action-btn delete-btn">Excluir</button>
+                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-peca')">Editar</button>
+                          <!-- Botão Excluir conectado -->
+                          <button class="action-btn delete-btn" (click)="deletarPeca(peca.pecaId)">Excluir</button>
                         </td>
                       </tr>
                     }
@@ -58,11 +57,10 @@
                 </table>
               }
 
-              @case (2) {
+              @case (2) { <!-- ESTAMPAS -->
                 <table class="items-table">
                   <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nome</th>
                     <th>Quantidade</th>
                     <th>Coleção ID</th>
@@ -72,13 +70,13 @@
                   <tbody>
                     @for (estampa of estampas(); track estampa.estampaId) {
                       <tr>
-                        <td>{{ estampa.estampaId }}</td>
                         <td>{{ estampa.nome }}</td>
                         <td>{{ estampa.quantidade }}</td>
                         <td>{{ estampa.colecaoId }}</td>
                         <td>
-                          <button class="action-btn edit-btn">Editar</button>
-                          <button class="action-btn delete-btn">Excluir</button>
+                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-estampa')">Editar</button>
+                          <!-- Botão Excluir conectado -->
+                          <button class="action-btn delete-btn" (click)="deletarEstampa(estampa.estampaId)">Excluir</button>
                         </td>
                       </tr>
                     }
@@ -86,11 +84,10 @@
                 </table>
               }
 
-              @case (3) {
+              @case (3) { <!-- ADESIVOS -->
                 <table class="items-table">
                   <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Modelo</th>
                     <th>Cromático</th>
                     <th>Ações</th>
@@ -99,23 +96,22 @@
                   <tbody>
                     @for (adesivo of adesivos(); track adesivo.adesivoId) {
                       <tr>
-                        <td>{{ adesivo.adesivoId }}</td>
                         <td>{{ adesivo.adesivoModelo }}</td>
                         <td>{{ adesivo.cromatico ? 'Sim' : 'Não' }}</td>
                         <td>
-                          <button class="action-btn edit-btn">Editar</button>
-                          <button class="action-btn delete-btn">Excluir</button>
+                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-adesivo')">Editar</button>
+                          <!-- Botão Excluir conectado -->
+                          <button class="action-btn delete-btn" (click)="deletarAdesivo(adesivo.adesivoId)">Excluir</button>
                         </td>
                       </tr>
                     }
                   </tbody>
                 </table>
               }
-              @case (4) {
+              @case (4) { <!-- COLEÇÕES -->
                 <table class="items-table">
                   <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Nome</th>
                     <th>Data Início</th>
                     <th>Data Fim</th>
@@ -125,24 +121,23 @@
                   <tbody>
                     @for (colecao of colecoes(); track colecao.colecaoId) {
                       <tr>
-                        <td>{{ colecao.colecaoId }}</td>
                         <td>{{ colecao.nome }}</td>
                         <td>{{ colecao.dataInicio | date:'dd/MM/yyyy' }}</td>
                         <td>{{ colecao.dataFim | date:'dd/MM/yyyy' }}</td>
                         <td>
-                          <button class="action-btn edit-btn">Editar</button>
-                          <button class="action-btn delete-btn">Excluir</button>
+                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-colecao')">Editar</button>
+                          <!-- Botão Excluir conectado -->
+                          <button class="action-btn delete-btn" (click)="deletarColecao(colecao.colecaoId)">Excluir</button>
                         </td>
                       </tr>
                     }
                   </tbody>
                 </table>
               }
-              @case (5) {
+              @case (5) { <!-- CHAVEIROS -->
                 <table class="items-table">
                   <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Modelo</th>
                     <th>Coleção ID</th>
                     <th>Ações</th>
@@ -151,12 +146,12 @@
                   <tbody>
                     @for (chaveiro of chaveiros(); track chaveiro.chaveiroId) {
                       <tr>
-                        <td>{{ chaveiro.chaveiroId }}</td>
                         <td>{{ chaveiro.chaveiroModelo }}</td>
                         <td>{{ chaveiro.colecaoId }}</td>
                         <td>
-                          <button class="action-btn edit-btn">Editar</button>
-                          <button class="action-btn delete-btn">Excluir</button>
+                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-chaveiro')">Editar</button>
+                          <!-- Botão Excluir conectado -->
+                          <button class="action-btn delete-btn" (click)="deletarChaveiro(chaveiro.chaveiroId)">Excluir</button>
                         </td>
                       </tr>
                     }

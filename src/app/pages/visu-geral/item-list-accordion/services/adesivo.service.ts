@@ -23,4 +23,8 @@ export class AdesivoService {
   listarAdesivos(): Observable<AdesivoDTO[]> {
     return this.http.get<AdesivoDTO[]>(this.apiUrl);
   }
+
+  deletar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

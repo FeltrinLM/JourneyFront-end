@@ -23,4 +23,8 @@ export class ChaveiroService {
   listarChaveiros(): Observable<ChaveiroDTO[]> {
     return this.http.get<ChaveiroDTO[]>(this.apiUrl);
   }
+
+  deletar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

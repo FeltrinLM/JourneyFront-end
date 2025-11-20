@@ -24,4 +24,7 @@ export class EstampaService {
   listarEstampas(): Observable<EstampaDTO[]> {
     return this.http.get<EstampaDTO[]>(this.apiUrl);
   }
+  deletar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

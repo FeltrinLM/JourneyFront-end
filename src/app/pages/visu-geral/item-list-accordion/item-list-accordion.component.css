@@ -5,17 +5,17 @@
   margin-right: 200px;
 }
 
-/* Título - exatamente como na imagem */
+/* Título */
 .list-title {
   font-family: sans-serif;
   font-size: 2rem;
   font-weight: bold;
   color: #242424;
   margin-bottom: 30px;
-  text-align: center; /* <-- MUDANÇA AQUI */
+  text-align: center;
 }
 
-/* Container dos itens do accordion */
+/* Accordion */
 .accordion-container {
   display: flex;
   flex-direction: column;
@@ -23,12 +23,10 @@
   width: 100%;
 }
 
-/* ITEM DO ACCORDION - LARGURA FIXA E GRANDE */
 .accordion-item {
   width: 100%;
 }
 
-/* Header do accordion - GRANDE E LARGO */
 .accordion-header {
   width: 100%;
   padding: 20px 25px;
@@ -64,10 +62,9 @@
   transform: rotate(180deg);
 }
 
-/* Conteúdo do accordion - MESMA LARGURA DO HEADER */
 .accordion-content {
   width: 100%;
-  padding: 0 20px; /* Mantém padding lateral, zera o vertical */
+  padding: 0 20px;
   font-family: sans-serif;
   background-color: #E8D6FB;
   border-radius: 0 0 12px 12px;
@@ -75,13 +72,9 @@
   border: 1px solid #E8D6FB;
   border-top: none;
   box-sizing: border-box;
-
-  /* --- ESTADO FECHADO (PADRÃO) --- */
   max-height: 0;
   overflow: hidden;
-  border-bottom-width: 0; /* Esconde a borda de baixo */
-
-  /* --- A TRANSIÇÃO SUAVE --- */
+  border-bottom-width: 0;
   transition:
     max-height 0.4s ease-out,
     padding-top 0.4s ease-out,
@@ -89,19 +82,18 @@
     border-bottom-width 0.4s ease-out;
 }
 
-/* --- ESTADO ABERTO (QUANDO TIVER A CLASSE '.open') --- */
 .accordion-content.open {
-  max-height: 1000px; /* Um valor BEM ALTO (maior que sua tabela) */
+  max-height: 1000px;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-bottom-width: 1px; /* Mostra a borda de baixo */
+  border-bottom-width: 1px;
 }
-/* Container da tabela */
+
+/* Tabela */
 .table-container {
   width: 100%;
 }
 
-/* Estilo da tabela */
 .items-table {
   width: 100%;
   border-collapse: collapse;
@@ -118,81 +110,77 @@
   text-align: left;
   font-weight: 600;
   font-size: 0.85rem;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .items-table td {
   padding: 12px 15px;
   border-bottom: 1px solid #f0f0f0;
   font-size: 0.85rem;
+  vertical-align: middle;
 }
 
 .items-table tr:hover {
   background-color: #E8D6FB;
 }
 
-/* Ajuste nas colunas */
-.items-table th:nth-child(1),
-.items-table td:nth-child(1) {
-  width: 10%;
-}
+/* Colunas */
+.items-table th:nth-child(1), .items-table td:nth-child(1) { width: 10%; }
+.items-table th:nth-child(2), .items-table td:nth-child(2) { width: 25%; }
+.items-table th:nth-child(3), .items-table td:nth-child(3) { width: 20%; }
+.items-table th:nth-child(4), .items-table td:nth-child(4) { width: 15%; }
+.items-table th:nth-child(5), .items-table td:nth-child(5) { width: 10%; }
 
-.items-table th:nth-child(2),
-.items-table td:nth-child(2) {
-  width: 25%;
-}
-
-.items-table th:nth-child(3),
-.items-table td:nth-child(3) {
-  width: 20%;
-}
-
-.items-table th:nth-child(4),
-.items-table td:nth-child(4) {
-  width: 15%;
-}
-
-.items-table th:nth-child(5),
-.items-table td:nth-child(5) {
-  width: 15%;
-}
-
+/* Coluna de Ações */
 .items-table th:nth-child(6),
 .items-table td:nth-child(6) {
-  width: 15%;
+  width: 20%;
+  /* Removemos o white-space: nowrap para permitir quebra de linha natural */
+  text-align: center;
+  vertical-align: middle;
 }
 
+/* === BOTÕES DE AÇÃO (CORRIGIDO PARA VERTICAL) === */
 
-/* Botões de ação */
 .action-btn {
-  padding: 5px 10px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 4px;
-  font-size: 0.75rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  margin-right: 5px;
-  transition: background-color 0.2s ease;
+  color: white;
+  font-family: sans-serif;
+  transition: filter 0.2s ease;
+
+  /* --- MUDANÇAS AQUI PARA FICAR VERTICAL --- */
+  display: block;        /* Força cada botão em sua própria linha */
+  width: 90px;           /* Largura fixa para alinharem perfeitamente */
+  margin: 0 auto 8px;    /* Centraliza horizontalmente e dá espaço vertical (embaixo) */
+}
+
+/* Tira a margem do último botão (Excluir) para não sobrar espaço à toa */
+.action-btn:last-child {
+  margin-bottom: 0;
 }
 
 .edit-btn {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #9351E5;
 }
 
 .edit-btn:hover {
-  background-color: #bbdefb;
+  filter: brightness(1.1);
 }
 
 .delete-btn {
-  background-color: #ffebee;
-  color: #c62828;
+  background-color: #FF69B4;
 }
 
 .delete-btn:hover {
-  background-color: #ffcdd2;
+  filter: brightness(1.1);
 }
 
-/* Botão de adicionar item */
+/* Botão Adicionar Item */
 .table-actions {
   margin-top: 15px;
   display: flex;

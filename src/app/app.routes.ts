@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { CadastrarItem } from './pages/cadastrar-item/cadastrar-item';
+import { EditarAdesivo} from './pages/editar-adesivo/editar-adesivo'
 import { EditarPeca}  from './pages/editar-peca/editar-peca';
 import {EditarEstampa} from './pages/editar-estampa/editar-estampa';
 import {EditarColecao} from './pages/editar-colecao/editar-colecao';
@@ -30,6 +31,11 @@ export const routes: Routes = [
   {
     path: 'cadastrar',
     component: CadastrarItem,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editar-adesivo',
+    component: EditarAdesivo,
     canActivate: [authGuard]
   },
   {
