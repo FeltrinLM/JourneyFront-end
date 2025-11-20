@@ -1,2 +1,90 @@
+<div class="page-container">
 
-<app-back-button></app-back-button>
+  <div class="layout-wrapper">
+
+    @if (!tipoSelecionado) {
+      <div class="cadastro-card">
+        <h2 class="titulo-card">Escolha o Item que voce quer cadastrar</h2>
+        <div class="lista-botoes">
+          <button class="btn-opcao" (click)="selecionarTipo('COLECAO')">Coleção</button>
+          <button class="btn-opcao" (click)="selecionarTipo('ESTAMPA')">Estampa</button>
+          <button class="btn-opcao" (click)="selecionarTipo('ADESIVO')">Adesivo</button>
+          <button class="btn-opcao" (click)="selecionarTipo('PECA')">Peça</button>
+          <button class="btn-opcao" (click)="selecionarTipo('CHAVEIRO')">Chaveiro</button>
+        </div>
+      </div>
+    }
+
+    @else {
+
+      <div class="banner-titulo">
+        @if (tipoSelecionado === 'COLECAO') { Coleção }
+        @if (tipoSelecionado === 'ESTAMPA') { Estampa }
+        @if (tipoSelecionado === 'ADESIVO') { Adesivo }
+        @if (tipoSelecionado === 'PECA') { Peça }
+        @if (tipoSelecionado === 'CHAVEIRO') { Chaveiro }
+      </div>
+
+      <div class="cadastro-card">
+        <div class="form-fields">
+
+          @if (tipoSelecionado === 'COLECAO') {
+            <div class="input-group"><input type="text" placeholder="Nome da Coleção"></div>
+            <div class="input-group"><input type="text" placeholder="Estação (ex: Verão 2025)"></div>
+          }
+
+          @if (tipoSelecionado === 'ESTAMPA') {
+            <div class="input-group"><input type="text" placeholder="Nome da Estampa"></div>
+            <div class="input-group"><input type="text" placeholder="URL da Imagem"></div>
+          }
+
+          @if (tipoSelecionado === 'ADESIVO') {
+            <div class="input-group"><input type="text" placeholder="Descrição do Adesivo"></div>
+            <div class="input-group"><input type="number" placeholder="Quantidade Disponível"></div>
+          }
+
+          @if (tipoSelecionado === 'PECA') {
+            <div class="input-group">
+              <select>
+                <option value="" disabled selected>Tipo</option>
+                <option value="camiseta">Camiseta</option>
+                <option value="calca">Calça</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <select>
+                <option value="" disabled selected>Tamanho</option>
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <select>
+                <option value="" disabled selected>Cor</option>
+                <option value="preto">Preto</option>
+                <option value="branco">Branco</option>
+              </select>
+            </div>
+            <div class="input-group"><input type="number" placeholder="Quantidade"></div>
+          }
+
+          @if (tipoSelecionado === 'CHAVEIRO') {
+            <div class="input-group"><input type="text" placeholder="Modelo do Chaveiro"></div>
+            <div class="input-group"><input type="number" placeholder="Quantidade"></div>
+          }
+
+          <button class="btn-salvar">Salvar</button>
+        </div>
+      </div>
+    }
+
+  </div>
+
+  <div class="container-voltar">
+    <app-back-button></app-back-button>
+
+    <div class="click-overlay" (click)="aoClicarVoltar($event)"></div>
+  </div>
+
+</div>

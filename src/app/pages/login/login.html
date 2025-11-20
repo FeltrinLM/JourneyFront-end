@@ -1,33 +1,19 @@
-<app-auth-card>
+<div class="login-container">
 
-  <!-- CABEÇALHO -->
-  <div class="login-header">
-    <img
-      src="./assets/images/solar_user-bold(2).png"
-      alt="Ícone Usuário"
-    >
-    <h2>Entrar no sistema</h2>
+  <div class="login-card">
+
+    <div class="login-header">
+      <img src="./assets/images/solar_user-bold(2).png" alt="Ícone Usuário">
+      <h2>Entrar no sistema</h2>
+    </div>
+
+    <div class="login-fields">
+      <input type="text" placeholder="Nome" [(ngModel)]="nome">
+      <input type="password" placeholder="Senha" [(ngModel)]="senha">
+
+      <button (click)="fazerLogin()">Entrar</button>
+    </div>
+
   </div>
 
-  <!-- CAMPOS -->
-  <div class="login-fields">
-
-    <!-- CAMPO NOME -->
-    <input
-      type="text"
-      placeholder="Nome"
-      [(ngModel)]="nome"
-    >
-
-    <!-- CAMPO SENHA -->
-    <input
-      type="password"
-      placeholder="Senha"
-      [(ngModel)]="senha"
-    >
-
-    <!-- BOTÃO -->
-    <button (click)="fazerLogin()">Entrar</button>
-  </div>
-
-</app-auth-card>
+</div>

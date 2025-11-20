@@ -1,76 +1,97 @@
 :host {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center; /* Centraliza horizontal */
-  align-items: flex-start; /* Começa do topo */
-  padding-top: 60px;       /* Distância do topo da tela */
+  display: block;
+  width: 100%;
 }
 
-/* === 1. O CABEÇALHO (Ícone + Texto) === */
+/* 1. CONTAINER DA PÁGINA */
+.login-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: flex-start; /* Começa do topo */
+  padding-top: 60px;       /* Distância do topo da tela */
+  box-sizing: border-box;
+}
+
+/* 2. O CARD DE LOGIN (Estilo Local) */
+.login-card {
+  width: 90%;
+  max-width: 550px; /* Largura específica para Login */
+
+  background-color: #9350DB;
+  border: 2px solid #000;
+  border-radius: 12px;
+  padding: 50px 40px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-family: sans-serif;
+}
+
+/* 3. CABEÇALHO */
 .login-header {
   display: flex;
-  align-items: center;    /* Centraliza verticalmente um com o outro */
-  gap: 15px;              /* Distância entre ícone e texto */
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 50px; /* Espaço grande antes dos inputs */
   width: 100%;
-  margin-bottom: 50px;    /* <--- Espaço GRANDE entre o título e os inputs (igual a imagem) */
 }
 
 .login-header img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 }
 
 .login-header h2 {
-  color: white;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   margin: 0;
 }
 
-/* === 2. CONTAINER DOS CAMPOS === */
+/* 4. CAMPOS */
 .login-fields {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Espaço entre input de nome e senha */
-  width: 100%;
+  gap: 25px;
 }
 
-/* === 3. ESTILO DOS INPUTS (Igual à imagem) === */
 input {
   width: 100%;
-  height: 50px;           /* Altura fixa para ficar "gordinho" */
+  height: 55px; /* Input alto */
   padding: 0 15px;
-  font-size: 16px;
-  border-radius: 8px;     /* Arredondamento */
-  border: 2px solid #000; /* <--- A BORDA PRETA da imagem */
+  border-radius: 8px;
+  border: 2px solid #000;
+  background-color: white;
+  font-size: 18px;
   outline: none;
   box-sizing: border-box;
 }
 
 input::placeholder {
-  color: #aaa;
+  color: #999;
   font-weight: bold;
 }
 
-/* ... (O resto do CSS continua igual) ... */
-
-/* === ESTILO DO BOTÃO === */
 button {
   width: 100%;
-  height: 50px;
+  height: 60px;
+  margin-top: 60px; /* Espaço GRANDE solicitado */
 
-  /* === MUDANÇA AQUI: Aumentei de 30px para 80px === */
-  margin-top: 80px;
-
-  border-radius: 8px;
-  border: 2px solid #000;
   background-color: #C58AF9;
+  border: 2px solid #000;
+  border-radius: 8px;
   color: white;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #b070e6;
+  background-color: #b57af2;
 }

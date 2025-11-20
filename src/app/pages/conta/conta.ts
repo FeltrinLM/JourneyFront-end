@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthCardComponent } from '../../shared/components/auth-card/auth-card.component';
 
 @Component({
   selector: 'app-conta',
-  imports: [AuthCardComponent],
+  imports: [],
   templateUrl: './conta.html',
   styleUrl: './conta.css'
 })
