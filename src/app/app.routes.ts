@@ -34,27 +34,27 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'editar-adesivo',
+    path: 'editar-adesivo/:id',
     component: EditarAdesivo,
     canActivate: [authGuard]
   },
   {
-    path: 'editar-peca',
+    path: 'editar-peca/:id',
     component: EditarPeca,
     canActivate: [authGuard]
   },
   {
-    path: 'editar-estampa',
+    path: 'editar-estampa/:id',
     component: EditarEstampa,
     canActivate: [authGuard]
   },
   {
-    path: 'editar-colecao',
+    path: 'editar-colecao/:id',
     component: EditarColecao,
     canActivate: [authGuard]
   },
   {
-    path: 'editar-chaveiro',
+    path: 'editar-chaveiro/:id',
     component: EditarChaveiro,
     canActivate: [authGuard]
   },

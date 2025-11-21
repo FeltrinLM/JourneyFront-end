@@ -1,0 +1,121 @@
+/* Reset e Container Principal */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinha mais ao topo */
+  padding-top: 100px;
+  background-color: #ffffff; /* Fundo branco */
+  font-family: 'Roboto', sans-serif; /* Fonte limpa */
+}
+
+/* Estilo do Cartão Roxo */
+.card {
+  width: 350px;
+  background-color: #9b4de0; /* Roxo principal da imagem */
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 15px rgba(155, 77, 224, 0.3);
+  position: relative;
+}
+
+/* Cabeçalho do Cartão */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-icon {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  opacity: 0.8;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+/* Formulário e Inputs */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Esconde labels e checkboxes antigos para limpar o visual */
+.hidden-logic, label {
+  display: none;
+}
+
+.form-group {
+  width: 100%;
+  margin: 0;
+}
+
+.pill-input {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #e6d7ff; /* Lilás claro do input */
+  border: 1px solid #000; /* Borda preta fina da imagem */
+  border-radius: 25px; /* Formato de pílula */
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  box-sizing: border-box;
+  outline: none;
+  text-align: left;
+}
+
+.pill-input::placeholder {
+  color: #000;
+  opacity: 1;
+}
+
+.pill-input:focus {
+  background-color: #fff;
+  border-color: #673ab7;
+}
+
+/* Botão Salvar */
+.save-btn {
+  width: 50%; /* Botão menor centralizado */
+  margin: 10px auto 0;
+  display: block;
+  padding: 10px 0;
+  background-color: #c58af9; /* Roxo mais claro do botão */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.save-btn:hover {
+  background-color: #d4a4fc;
+}
+
+.save-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Tratamento de Erro/Loading para não quebrar o layout novo */
+.loading, .error-state {
+  color: white;
+  text-align: center;
+}
+.error-state {
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 10px;
+}

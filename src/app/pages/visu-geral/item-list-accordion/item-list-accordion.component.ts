@@ -85,8 +85,35 @@ export class ItemListAccordionComponent implements OnInit {
     });
   }
 
-  navegarParaEdicao(rota: string) {
-    this.router.navigate([rota]);
+  // --- FUNÇÕES DE EDIÇÃO ESPECÍFICAS ---
+  editarPeca(id: number): void {
+    console.log('Editando peça ID:', id);
+    this.router.navigate(['/editar-peca', id]);
+  }
+
+  editarEstampa(id: number): void {
+    console.log('Editando estampa ID:', id);
+    this.router.navigate(['/editar-estampa', id]);
+  }
+
+  editarAdesivo(id: number): void {
+    console.log('Editando adesivo ID:', id);
+    this.router.navigate(['/editar-adesivo', id]);
+  }
+
+  editarColecao(id: number): void {
+    console.log('Editando coleção ID:', id);
+    if (!id || id <= 0) {
+      console.error('ID inválido para edição de coleção:', id);
+      alert('ID da coleção inválido');
+      return;
+    }
+    this.router.navigate(['/editar-colecao', id]);
+  }
+
+  editarChaveiro(id: number): void {
+    console.log('Editando chaveiro ID:', id);
+    this.router.navigate(['/editar-chaveiro', id]);
   }
 
   // --- FUNÇÕES DE EXCLUSÃO ---
@@ -135,11 +162,9 @@ export class ItemListAccordionComponent implements OnInit {
     }
   }
 
-  // --- NOVA FUNÇÃO HELPER ---
+  // --- FUNÇÃO HELPER ---
   obterNomeColecao(id: number): string {
-    // Procura na lista de coleções (signal) a coleção com esse ID
     const colecao = this.colecoes().find(c => c.colecaoId === id);
-    // Se achar, retorna o nome. Se não (ainda carregando ou deletada), retorna o ID ou aviso.
     return colecao ? colecao.nome : 'Carregando...';
   }
 }

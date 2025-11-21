@@ -47,7 +47,7 @@
                         <td>{{ peca.cor }}</td>
                         <td>{{ peca.quantidade }}</td>
                         <td>
-                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-peca')">Editar</button>
+                          <button class="action-btn edit-btn" (click)="editarPeca(peca.pecaId)">Editar</button>
                           <button class="action-btn delete-btn" (click)="deletarPeca(peca.pecaId)">Excluir</button>
                         </td>
                       </tr>
@@ -62,7 +62,6 @@
                   <tr>
                     <th>Nome</th>
                     <th>Quantidade</th>
-                    <!-- ALTERADO DE 'Coleção ID' PARA 'Coleção' -->
                     <th>Coleção</th>
                     <th>Ações</th>
                   </tr>
@@ -72,10 +71,9 @@
                       <tr>
                         <td>{{ estampa.nome }}</td>
                         <td>{{ estampa.quantidade }}</td>
-                        <!-- ALTERADO: Chamada da função obterNomeColecao -->
                         <td>{{ obterNomeColecao(estampa.colecaoId) }}</td>
                         <td>
-                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-estampa')">Editar</button>
+                          <button class="action-btn edit-btn" (click)="editarEstampa(estampa.estampaId)">Editar</button>
                           <button class="action-btn delete-btn" (click)="deletarEstampa(estampa.estampaId)">Excluir</button>
                         </td>
                       </tr>
@@ -99,7 +97,7 @@
                         <td>{{ adesivo.adesivoModelo }}</td>
                         <td>{{ adesivo.cromatico ? 'Sim' : 'Não' }}</td>
                         <td>
-                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-adesivo')">Editar</button>
+                          <button class="action-btn edit-btn" (click)="editarAdesivo(adesivo.adesivoId)">Editar</button>
                           <button class="action-btn delete-btn" (click)="deletarAdesivo(adesivo.adesivoId)">Excluir</button>
                         </td>
                       </tr>
@@ -107,6 +105,7 @@
                   </tbody>
                 </table>
               }
+
               @case (4) { <!-- COLEÇÕES -->
                 <table class="items-table">
                   <thead>
@@ -124,7 +123,7 @@
                         <td>{{ colecao.dataInicio | date:'dd/MM/yyyy' }}</td>
                         <td>{{ colecao.dataFim | date:'dd/MM/yyyy' }}</td>
                         <td>
-                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-colecao')">Editar</button>
+                          <button class="action-btn edit-btn" (click)="editarColecao(colecao.colecaoId)">Editar</button>
                           <button class="action-btn delete-btn" (click)="deletarColecao(colecao.colecaoId)">Excluir</button>
                         </td>
                       </tr>
@@ -132,12 +131,12 @@
                   </tbody>
                 </table>
               }
+
               @case (5) { <!-- CHAVEIROS -->
                 <table class="items-table">
                   <thead>
                   <tr>
                     <th>Modelo</th>
-                    <!-- ALTERADO DE 'Coleção ID' PARA 'Coleção' -->
                     <th>Coleção</th>
                     <th>Ações</th>
                   </tr>
@@ -146,10 +145,9 @@
                     @for (chaveiro of chaveiros(); track chaveiro.chaveiroId) {
                       <tr>
                         <td>{{ chaveiro.chaveiroModelo }}</td>
-                        <!-- ALTERADO: Chamada da função obterNomeColecao -->
                         <td>{{ obterNomeColecao(chaveiro.colecaoId) }}</td>
                         <td>
-                          <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-chaveiro')">Editar</button>
+                          <button class="action-btn edit-btn" (click)="editarChaveiro(chaveiro.chaveiroId)">Editar</button>
                           <button class="action-btn delete-btn" (click)="deletarChaveiro(chaveiro.chaveiroId)">Excluir</button>
                         </td>
                       </tr>
@@ -158,7 +156,8 @@
                 </table>
               }
 
-            } </div>
+            }
+          </div>
         </div>
       </div>
     }

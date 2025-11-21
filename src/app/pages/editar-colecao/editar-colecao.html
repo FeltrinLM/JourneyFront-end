@@ -1,3 +1,80 @@
+<div class="back-button-wrapper">
+  <app-back-button class="custom-back-btn"></app-back-button>
+</div>
 
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="header-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+          <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+        </svg>
+      </div>
+      <h2 class="card-title">Colecao</h2>
+    </div>
 
-<app-back-button></app-back-button>
+    <div *ngIf="carregando && !erroCarregamento" class="loading">
+      <p>Carregando...</p>
+    </div>
+
+    <div *ngIf="erroCarregamento" class="error-state">
+      <p>{{ erroCarregamento }}</p>
+      <button class="btn btn-primary" (click)="tentarNovamente()">Tentar</button>
+    </div>
+
+    <form *ngIf="!carregando && !erroCarregamento" class="form" (ngSubmit)="salvarEdicao()" #colecaoForm="ngForm">
+
+      <div class="hidden-logic">
+        <div class="form-group checkbox-group">
+          <input type="checkbox" />
+        </div>
+        <div class="dates-container">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          id="nome"
+          [(ngModel)]="colecao.nome"
+          name="nome"
+          required
+          class="form-input pill-input"
+          placeholder="Sublime"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          onfocus="(this.type='date')"
+          onblur="(this.type='text')"
+          id="dataInicio"
+          [(ngModel)]="colecao.dataInicio"
+          name="dataInicio"
+          required
+          class="form-input pill-input"
+          placeholder="24/11/2004"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          onfocus="(this.type='date')"
+          onblur="(this.type='text')"
+          id="dataFim"
+          [(ngModel)]="colecao.dataFim"
+          name="dataFim"
+          class="form-input pill-input"
+          placeholder="24/11/2005"
+        />
+      </div>
+
+      <button class="save-btn" type="submit" [disabled]="!colecaoForm.valid">
+        Salvar
+      </button>
+
+    </form>
+  </div>
+</div>
