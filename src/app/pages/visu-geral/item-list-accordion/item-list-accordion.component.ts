@@ -2,11 +2,19 @@ import { Component, signal, inject, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { PecaService, PecaDTO } from './services/peca.service';
-import { EstampaService, EstampaDTO } from './services/estampa.service';
-import { AdesivoService, AdesivoDTO } from './services/adesivo.service';
-import { ColecaoService, ColecaoDTO } from './services/colecao.service';
-import { ChaveiroService, ChaveiroDTO } from './services/chaveiro.service';
+import { PecaService, PecaDTO } from '../../../../app/core/services/api/peca.service';
+import { EstampaService, EstampaDTO } from '../../../../app/core/services/api/estampa.service';
+import { AdesivoService, AdesivoDTO } from '../../../../app/core/services/api/adesivo.service';
+import { ColecaoService, ColecaoDTO } from '../../../../app/core/services/api/colecao.service';
+import { ChaveiroService, ChaveiroDTO } from '../../../../app/core/services/api/chaveiro.service';
+
+import {
+  PecaDTO,
+  EstampaDTO,
+  AdesivoDTO,
+  ColecaoDTO,
+  ChaveiroDTO
+} from '../../../../core/models';
 
 interface AccordionItem {
   id: number;
@@ -67,11 +75,40 @@ export class ItemListAccordionComponent implements OnInit {
     this.carregarChaveiros();
   }
 
-  carregarPecas() { this.pecaService.listarPecas().subscribe(data => this.pecas.set(data)); }
-  carregarEstampas() { this.estampaService.listarEstampas().subscribe(data => this.estampas.set(data)); }
-  carregarAdesivos() { this.adesivoService.listarAdesivos().subscribe(data => this.adesivos.set(data)); }
-  carregarColecoes() { this.colecaoService.listarColecoes().subscribe(data => this.colecoes.set(data)); }
-  carregarChaveiros() { this.chaveiroService.listarChaveiros().subscribe(data => this.chaveiros.set(data)); }
+  carregarPecas() {
+    this.pecaService.listarPecas().subscribe({
+      next: (data) => this.pecas.set(data),
+      error: (err) => console.error('Erro ao carregar peças:', err)
+    });
+  }
+
+  carregarEstampas() {
+    this.estampaService.listarEstampas().subscribe({
+      next: (data) => this.estampas.set(data),
+      error: (err) => console.error('Erro ao carregar estampas:', err)
+    });
+  }
+
+  carregarAdesivos() {
+    this.adesivoService.listarAdesivos().subscribe({
+      next: (data) => this.adesivos.set(data),
+      error: (err) => console.error('Erro ao carregar adesivos:', err)
+    });
+  }
+
+  carregarColecoes() {
+    this.colecaoService.listarColecoes().subscribe({
+      next: (data) => this.colecoes.set(data),
+      error: (err) => console.error('Erro ao carregar coleções:', err)
+    });
+  }
+
+  carregarChaveiros() {
+    this.chaveiroService.listarChaveiros().subscribe({
+      next: (data) => this.chaveiros.set(data),
+      error: (err) => console.error('Erro ao carregar chaveiros:', err)
+    });
+  }
 
   toggleItem(itemId: number): void {
     this.openItemIds.update(currentSet => {
@@ -120,8 +157,14 @@ export class ItemListAccordionComponent implements OnInit {
   deletarPeca(id: number) {
     if (confirm('Tem certeza que deseja excluir esta Peça?')) {
       this.pecaService.deletar(id).subscribe({
-        next: () => { alert('Peça excluída com sucesso!'); this.carregarPecas(); },
-        error: (err) => alert('Erro ao excluir peça.')
+        next: () => {
+          alert('Peça excluída com sucesso!');
+          this.carregarPecas();
+        },
+        error: (err) => {
+          console.error('Erro ao excluir peça:', err);
+          alert('Erro ao excluir peça.');
+        }
       });
     }
   }
@@ -129,8 +172,14 @@ export class ItemListAccordionComponent implements OnInit {
   deletarEstampa(id: number) {
     if (confirm('Tem certeza que deseja excluir esta Estampa?')) {
       this.estampaService.deletar(id).subscribe({
-        next: () => { alert('Estampa excluída com sucesso!'); this.carregarEstampas(); },
-        error: (err) => alert('Erro ao excluir estampa.')
+        next: () => {
+          alert('Estampa excluída com sucesso!');
+          this.carregarEstampas();
+        },
+        error: (err) => {
+          console.error('Erro ao excluir estampa:', err);
+          alert('Erro ao excluir estampa.');
+        }
       });
     }
   }
@@ -138,8 +187,14 @@ export class ItemListAccordionComponent implements OnInit {
   deletarAdesivo(id: number) {
     if (confirm('Tem certeza que deseja excluir este Adesivo?')) {
       this.adesivoService.deletar(id).subscribe({
-        next: () => { alert('Adesivo excluído com sucesso!'); this.carregarAdesivos(); },
-        error: (err) => alert('Erro ao excluir adesivo.')
+        next: () => {
+          alert('Adesivo excluído com sucesso!');
+          this.carregarAdesivos();
+        },
+        error: (err) => {
+          console.error('Erro ao excluir adesivo:', err);
+          alert('Erro ao excluir adesivo.');
+        }
       });
     }
   }
@@ -147,8 +202,14 @@ export class ItemListAccordionComponent implements OnInit {
   deletarColecao(id: number) {
     if (confirm('Tem certeza que deseja excluir esta Coleção?')) {
       this.colecaoService.deletar(id).subscribe({
-        next: () => { alert('Coleção excluída com sucesso!'); this.carregarColecoes(); },
-        error: (err) => alert('Erro ao excluir coleção.')
+        next: () => {
+          alert('Coleção excluída com sucesso!');
+          this.carregarColecoes();
+        },
+        error: (err) => {
+          console.error('Erro ao excluir coleção:', err);
+          alert('Erro ao excluir coleção.');
+        }
       });
     }
   }
@@ -156,8 +217,14 @@ export class ItemListAccordionComponent implements OnInit {
   deletarChaveiro(id: number) {
     if (confirm('Tem certeza que deseja excluir este Chaveiro?')) {
       this.chaveiroService.deletar(id).subscribe({
-        next: () => { alert('Chaveiro excluído com sucesso!'); this.carregarChaveiros(); },
-        error: (err) => alert('Erro ao excluir chaveiro.')
+        next: () => {
+          alert('Chaveiro excluído com sucesso!');
+          this.carregarChaveiros();
+        },
+        error: (err) => {
+          console.error('Erro ao excluir chaveiro:', err);
+          alert('Erro ao excluir chaveiro.');
+        }
       });
     }
   }

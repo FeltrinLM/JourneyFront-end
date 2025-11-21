@@ -11,7 +11,7 @@ import {Login} from './pages/login/login';
 import {VisuGeral} from './pages/visu-geral/visu-geral';
 
 // IMPORTAR O GUARD QUE CRIAMOS
-import { authGuard } from './services/auth.guard';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   // 1. Redirecionamento padrão: Se a URL for vazia, vai para Login

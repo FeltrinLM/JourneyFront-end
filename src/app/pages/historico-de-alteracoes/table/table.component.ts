@@ -2,9 +2,9 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Imports relativos à pasta 'table'
-import { HistoricoAlteracaoService } from './services/historico-alteracao.service';
-import { UsuarioService } from './services/usuario.service';
-import { HistoricoAlteracaoDTO, UsuarioDTO } from './services/models';
+import { HistoricoAlteracaoService } from '../../../core/services/api/historico-alteracao.service';
+import { UsuarioService } from '../../../core/services/api/usuario.service';
+import { HistoricoAlteracaoDTO, UsuarioDTO } from '../../../core/services/api/base-api.service';
 
 interface DisplayHistorico {
   acao: 'Adicionado' | 'Editado' | 'Excluído';
