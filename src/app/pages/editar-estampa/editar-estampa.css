@@ -1,0 +1,176 @@
+/* Configuração Geral da Página */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinha mais ao topo */
+  padding-top: 100px;
+  background-color: #ffffff; /* Fundo Branco */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* O Cartão Roxo */
+.card {
+  width: 320px; /* Largura aproximada da imagem */
+  background-color: #9055dd; /* Roxo da imagem */
+  border-radius: 10px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 15px rgba(144, 85, 221, 0.3);
+  position: relative;
+}
+
+/* Cabeçalho */
+.card-header {
+  display: flex;
+  flex-direction: column; /* Ícone em cima, texto embaixo? Ou lado a lado? Na imagem parece um header unificado */
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Configuração do Ícone */
+.header-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: auto;
+  /* O segredo para deixar qualquer imagem PNG branca via CSS: */
+  filter: brightness(0) invert(1);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  text-align: center;
+  width: 100%; /* Para garantir que o texto fique centralizado */
+}
+
+/* Formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Esconde labels de texto externas para limpar o visual igual a imagem */
+label, .hidden-logic, .item-name, .info-container {
+  display: none;
+}
+
+.form-group {
+  width: 100%;
+  margin: 0;
+}
+
+/* Estilo dos Inputs (Pílula) */
+.pill-input {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #e6d7ff; /* Lilás claro do fundo do input */
+  border: 1px solid #000; /* Borda preta fina */
+  border-radius: 12px; /* Arredondamento conforme imagem */
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.pill-input::placeholder {
+  color: #000;
+  opacity: 1;
+}
+
+.pill-input:focus {
+  background-color: #fff;
+}
+
+/* Estilização Específica do Select */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+select.pill-input {
+  appearance: none; /* Remove a seta padrão do navegador */
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000;
+  font-size: 12px;
+  pointer-events: none; /* Permite clicar através da seta */
+  font-weight: bold;
+}
+
+/* Botão Salvar */
+.save-btn {
+  width: 50%;
+  margin: 10px auto 0;
+  display: block;
+  padding: 10px 0;
+  background-color: #b388ff; /* Roxo claro do botão */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #d1c4e9;
+}
+
+.save-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Botão Voltar (Estilo Rosa) */
+.back-button-wrapper {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 10;
+}
+
+/* Forçando estilo no componente filho */
+::ng-deep app-back-button button,
+.custom-back-btn button {
+  background-color: #ff4081 !important; /* Rosa choque */
+  color: white !important;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(255, 64, 129, 0.3);
+}
+
+/* Estados de Loading/Erro mantendo texto branco no card roxo */
+.loading, .error-state {
+  text-align: center;
+  color: white;
+}
+
+.error-state {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.error-state p {
+  color: white;
+}

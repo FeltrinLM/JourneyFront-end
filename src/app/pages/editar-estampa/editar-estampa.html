@@ -1,2 +1,78 @@
+<div class="back-button-wrapper">
+  <app-back-button class="custom-back-btn"></app-back-button>
+</div>
 
-<app-back-button></app-back-button>
+<div class="container">
+  <div class="card">
+
+    <div class="card-header">
+      <img src="./assets/images/estampas-icon.png" alt="Ícone Estampa" class="header-icon">
+      <h2 class="card-title">Estampa</h2>
+    </div>
+
+    <div *ngIf="carregando && !erroCarregamento" class="loading">
+      <p>Carregando...</p>
+    </div>
+
+    <div *ngIf="erroCarregamento" class="error-state">
+      <p>{{ erroCarregamento }}</p>
+      <button class="btn btn-primary" (click)="tentarNovamente()">Tentar Novamente</button>
+      <button class="btn btn-secondary" (click)="voltar()">Voltar</button>
+    </div>
+
+    <form *ngIf="!carregando && !erroCarregamento" class="form" (ngSubmit)="salvarEdicao()" #estampaForm="ngForm">
+
+      <div class="hidden-logic">
+        <input type="checkbox" />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          id="nome"
+          [(ngModel)]="estampa.nome"
+          name="nome"
+          required
+          class="form-input pill-input"
+          placeholder="Cronos"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="number"
+          id="quantidade"
+          [(ngModel)]="estampa.quantidade"
+          name="quantidade"
+          required
+          min="0"
+          class="form-input pill-input"
+          placeholder="40"
+        />
+      </div>
+
+      <div class="form-group">
+        <div class="select-wrapper">
+          <select
+            id="colecaoId"
+            [(ngModel)]="estampa.colecaoId"
+            name="colecaoId"
+            required
+            class="form-input pill-input"
+          >
+            <option value="" disabled selected>Selecione</option>
+            <option *ngFor="let colecao of colecoes" [value]="colecao.colecaoId">
+              {{ colecao.nome }}
+            </option>
+          </select>
+          <span class="select-arrow">▼</span>
+        </div>
+      </div>
+
+      <button class="save-btn" type="submit" [disabled]="!estampaForm.valid">
+        Salvar
+      </button>
+
+    </form>
+  </div>
+</div>
