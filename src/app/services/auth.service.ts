@@ -12,7 +12,7 @@ export class AuthService {
   nomeUsuario$ = this.nomeUsuarioSubject.asObservable();
 
   // URL para teste de conexão (use qualquer rota GET protegida ou pública do seu back)
-  private apiUrl = 'http://localhost:8080/api/usuarios';
+  private apiUrl = 'http://localhost:8080/api/usuarios/init';
 
   constructor(private http: HttpClient) {} // Injetamos o HttpClient
 

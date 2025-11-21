@@ -1,4 +1,11 @@
-// Define o tipo do DTO principal que vem do seu endpoint
+export interface UsuarioDTO {
+  usuarioId: number; // <--- Mude de 'id' para 'usuarioId' para bater com o Java
+  nome: string;
+  tipo: string;
+  senha?: string; // Opcional
+}
+
+// (As outras interfaces continuam iguais)
 export interface HistoricoAlteracaoDTO {
   id: number;
   entidade: string;
@@ -6,10 +13,9 @@ export interface HistoricoAlteracaoDTO {
   campoAlterado: string;
   valorAntigo: string | null;
   valorNovo: string | null;
-  dataHora: string; // O Angular irá receber o LocalDateTime como string
+  dataHora: string;
   usuarioId: number;
 }
-
 // Interfaces dos outros DTOs (para referência futura, se necessário)
 export interface AdesivoDTO {
   adesivoId: number;
@@ -43,11 +49,4 @@ export interface PecaDTO {
   tamanho: string;
   cor: string;
   quantidade: number;
-}
-
-export interface UsuarioDTO {
-  usuarioId: number;
-  nome: string;
-  senha?: string; // Senha é opcional no DTO de resposta
-  tipo: string;
 }

@@ -16,14 +16,14 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             class="chevron-icon"
-            [class.rotated]="openItemId() === item.id"
+            [class.rotated]="openItemIds().has(item.id)"
           >
             <path d="m6 9 6 6 6-6"/>
           </svg>
           <span>{{ item.title }}</span>
         </button>
 
-        <div class="accordion-content" [class.open]="openItemId() === item.id">
+        <div class="accordion-content" [class.open]="openItemIds().has(item.id)">
           <div class="table-container">
 
             @switch (item.id) {
@@ -48,7 +48,6 @@
                         <td>{{ peca.quantidade }}</td>
                         <td>
                           <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-peca')">Editar</button>
-                          <!-- Botão Excluir conectado -->
                           <button class="action-btn delete-btn" (click)="deletarPeca(peca.pecaId)">Excluir</button>
                         </td>
                       </tr>
@@ -63,7 +62,8 @@
                   <tr>
                     <th>Nome</th>
                     <th>Quantidade</th>
-                    <th>Coleção ID</th>
+                    <!-- ALTERADO DE 'Coleção ID' PARA 'Coleção' -->
+                    <th>Coleção</th>
                     <th>Ações</th>
                   </tr>
                   </thead>
@@ -72,10 +72,10 @@
                       <tr>
                         <td>{{ estampa.nome }}</td>
                         <td>{{ estampa.quantidade }}</td>
-                        <td>{{ estampa.colecaoId }}</td>
+                        <!-- ALTERADO: Chamada da função obterNomeColecao -->
+                        <td>{{ obterNomeColecao(estampa.colecaoId) }}</td>
                         <td>
                           <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-estampa')">Editar</button>
-                          <!-- Botão Excluir conectado -->
                           <button class="action-btn delete-btn" (click)="deletarEstampa(estampa.estampaId)">Excluir</button>
                         </td>
                       </tr>
@@ -100,7 +100,6 @@
                         <td>{{ adesivo.cromatico ? 'Sim' : 'Não' }}</td>
                         <td>
                           <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-adesivo')">Editar</button>
-                          <!-- Botão Excluir conectado -->
                           <button class="action-btn delete-btn" (click)="deletarAdesivo(adesivo.adesivoId)">Excluir</button>
                         </td>
                       </tr>
@@ -126,7 +125,6 @@
                         <td>{{ colecao.dataFim | date:'dd/MM/yyyy' }}</td>
                         <td>
                           <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-colecao')">Editar</button>
-                          <!-- Botão Excluir conectado -->
                           <button class="action-btn delete-btn" (click)="deletarColecao(colecao.colecaoId)">Excluir</button>
                         </td>
                       </tr>
@@ -139,7 +137,8 @@
                   <thead>
                   <tr>
                     <th>Modelo</th>
-                    <th>Coleção ID</th>
+                    <!-- ALTERADO DE 'Coleção ID' PARA 'Coleção' -->
+                    <th>Coleção</th>
                     <th>Ações</th>
                   </tr>
                   </thead>
@@ -147,10 +146,10 @@
                     @for (chaveiro of chaveiros(); track chaveiro.chaveiroId) {
                       <tr>
                         <td>{{ chaveiro.chaveiroModelo }}</td>
-                        <td>{{ chaveiro.colecaoId }}</td>
+                        <!-- ALTERADO: Chamada da função obterNomeColecao -->
+                        <td>{{ obterNomeColecao(chaveiro.colecaoId) }}</td>
                         <td>
                           <button class="action-btn edit-btn" (click)="navegarParaEdicao('editar-chaveiro')">Editar</button>
-                          <!-- Botão Excluir conectado -->
                           <button class="action-btn delete-btn" (click)="deletarChaveiro(chaveiro.chaveiroId)">Excluir</button>
                         </td>
                       </tr>

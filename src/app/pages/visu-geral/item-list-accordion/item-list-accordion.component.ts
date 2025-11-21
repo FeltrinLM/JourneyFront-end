@@ -24,14 +24,17 @@ export class ItemListAccordionComponent implements OnInit {
 
   @Input() set itemIdToOpen(id: number | null) {
     if (id !== null) {
-      this.toggleItem(id);
+      this.openItemIds.update(ids => {
+        const newIds = new Set(ids);
+        newIds.add(id);
+        return newIds;
+      });
     }
   }
 
-  openItemId = signal<number | null>(null);
+  openItemIds = signal<Set<number>>(new Set());
   private router = inject(Router);
 
-  // Injeção dos serviços
   private pecaService = inject(PecaService);
   private estampaService = inject(EstampaService);
   private adesivoService = inject(AdesivoService);
@@ -56,7 +59,6 @@ export class ItemListAccordionComponent implements OnInit {
     this.carregarTudo();
   }
 
-  // --- CARREGAMENTO DE DADOS ---
   carregarTudo() {
     this.carregarPecas();
     this.carregarEstampas();
@@ -72,11 +74,15 @@ export class ItemListAccordionComponent implements OnInit {
   carregarChaveiros() { this.chaveiroService.listarChaveiros().subscribe(data => this.chaveiros.set(data)); }
 
   toggleItem(itemId: number): void {
-    if (this.openItemId() === itemId) {
-      this.openItemId.set(null);
-    } else {
-      this.openItemId.set(itemId);
-    }
+    this.openItemIds.update(currentSet => {
+      const newSet = new Set(currentSet);
+      if (newSet.has(itemId)) {
+        newSet.delete(itemId);
+      } else {
+        newSet.add(itemId);
+      }
+      return newSet;
+    });
   }
 
   navegarParaEdicao(rota: string) {
@@ -84,14 +90,10 @@ export class ItemListAccordionComponent implements OnInit {
   }
 
   // --- FUNÇÕES DE EXCLUSÃO ---
-
   deletarPeca(id: number) {
     if (confirm('Tem certeza que deseja excluir esta Peça?')) {
       this.pecaService.deletar(id).subscribe({
-        next: () => {
-          alert('Peça excluída com sucesso!');
-          this.carregarPecas(); // Atualiza a lista na tela
-        },
+        next: () => { alert('Peça excluída com sucesso!'); this.carregarPecas(); },
         error: (err) => alert('Erro ao excluir peça.')
       });
     }
@@ -100,10 +102,7 @@ export class ItemListAccordionComponent implements OnInit {
   deletarEstampa(id: number) {
     if (confirm('Tem certeza que deseja excluir esta Estampa?')) {
       this.estampaService.deletar(id).subscribe({
-        next: () => {
-          alert('Estampa excluída com sucesso!');
-          this.carregarEstampas();
-        },
+        next: () => { alert('Estampa excluída com sucesso!'); this.carregarEstampas(); },
         error: (err) => alert('Erro ao excluir estampa.')
       });
     }
@@ -112,10 +111,7 @@ export class ItemListAccordionComponent implements OnInit {
   deletarAdesivo(id: number) {
     if (confirm('Tem certeza que deseja excluir este Adesivo?')) {
       this.adesivoService.deletar(id).subscribe({
-        next: () => {
-          alert('Adesivo excluído com sucesso!');
-          this.carregarAdesivos();
-        },
+        next: () => { alert('Adesivo excluído com sucesso!'); this.carregarAdesivos(); },
         error: (err) => alert('Erro ao excluir adesivo.')
       });
     }
@@ -124,10 +120,7 @@ export class ItemListAccordionComponent implements OnInit {
   deletarColecao(id: number) {
     if (confirm('Tem certeza que deseja excluir esta Coleção?')) {
       this.colecaoService.deletar(id).subscribe({
-        next: () => {
-          alert('Coleção excluída com sucesso!');
-          this.carregarColecoes();
-        },
+        next: () => { alert('Coleção excluída com sucesso!'); this.carregarColecoes(); },
         error: (err) => alert('Erro ao excluir coleção.')
       });
     }
@@ -136,12 +129,17 @@ export class ItemListAccordionComponent implements OnInit {
   deletarChaveiro(id: number) {
     if (confirm('Tem certeza que deseja excluir este Chaveiro?')) {
       this.chaveiroService.deletar(id).subscribe({
-        next: () => {
-          alert('Chaveiro excluído com sucesso!');
-          this.carregarChaveiros();
-        },
+        next: () => { alert('Chaveiro excluído com sucesso!'); this.carregarChaveiros(); },
         error: (err) => alert('Erro ao excluir chaveiro.')
       });
     }
+  }
+
+  // --- NOVA FUNÇÃO HELPER ---
+  obterNomeColecao(id: number): string {
+    // Procura na lista de coleções (signal) a coleção com esse ID
+    const colecao = this.colecoes().find(c => c.colecaoId === id);
+    // Se achar, retorna o nome. Se não (ainda carregando ou deletada), retorna o ID ou aviso.
+    return colecao ? colecao.nome : 'Carregando...';
   }
 }

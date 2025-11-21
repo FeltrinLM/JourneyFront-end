@@ -1,5 +1,6 @@
 <div class="page-container">
 
+
   <table class="history-table">
 
     <thead>
@@ -32,18 +33,21 @@
       </td>
 
       <td class="user-cell">
-        {{ H.responsavel }}
+        <!-- Chamamos a função aqui -->
+        {{ obterNomeUsuario(H.responsavel) }}
       </td>
 
       <td class="details-cell">
 
-        <p *ngIf="H.acao === 'Adicionado'"><strong>Campos criados:</strong></p>
-        <p *ngIf="H.acao === 'Editado'"><strong>Campos alterados:</strong></p>
-        <p *ngIf="H.acao === 'Excluído'"><strong>Item Removido:</strong></p>
+        <p *ngIf="H.acao === 'Adicionado'" class="detail-header"><strong>Campos criados:</strong></p>
+        <p *ngIf="H.acao === 'Editado'" class="detail-header"><strong>Campos alterados:</strong></p>
+        <p *ngIf="H.acao === 'Excluído'" class="detail-header"><strong>Item Removido:</strong></p>
 
-        <p *ngFor="let detalhe of H.detalhes">
-          - {{ detalhe }}
-        </p>
+        <div class="detail-list">
+          <p *ngFor="let detalhe of H.detalhes">
+            - {{ detalhe }}
+          </p>
+        </div>
 
         <p class="data-hora">
           <em>Data: {{ H.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</em>
@@ -56,17 +60,3 @@
   </table>
 
 </div>
-
-<style>
-  .loading-cell {
-    text-align: center;
-    font-style: italic;
-    color: #555;
-    padding: 40px;
-  }
-  .data-hora {
-    margin-top: 10px;
-    font-size: 0.85em;
-    color: #333;
-  }
-</style>
