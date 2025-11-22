@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  // 1. Pega o token que salvamos no login
+  // 1. Pega o token salvo no login
   const token = localStorage.getItem('token');
 
   // 2. Se o token existir, clonamos a requisição original e adicionamos o cabeçalho

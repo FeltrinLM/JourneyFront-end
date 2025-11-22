@@ -135,12 +135,11 @@
 .items-table th:nth-child(6),
 .items-table td:nth-child(6) {
   width: 20%;
-  /* Removemos o white-space: nowrap para permitir quebra de linha natural */
   text-align: center;
   vertical-align: middle;
 }
 
-/* === BOTÕES DE AÇÃO (CORRIGIDO PARA VERTICAL) === */
+/* botoes de acao */
 
 .action-btn {
   padding: 8px 16px;

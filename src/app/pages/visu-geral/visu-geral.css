@@ -17,11 +17,6 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-
-  /* MUDANÇA SUGERIDA:
-     'center' fará a lista gigante ficar no meio da página.
-     'flex-start' a mantém no topo, o que é mais natural.
-  */
   align-items: center;
   justify-content: flex-start; /* <-- MUDADO DE 'center' PARA 'flex-start' */
 }

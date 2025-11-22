@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
-import { ColecaoService, ColecaoDTO, ColecaoEdicaoDTO } from '../visu-geral/item-list-accordion/services/colecao.service';
+import { ColecaoService } from '../../../app/core/services/api/colecao.service';
+import{ ColecaoDTO} from '../../../app/core/models'
+import{ ColecaoEdicaoDTO} from '../../../app/core/models'
 
 @Component({
   selector: 'app-editar-colecao',

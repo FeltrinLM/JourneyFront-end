@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// Importando o componente de botão de voltar (ajuste o caminho se necessário)
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 
 @Component({
@@ -9,7 +7,7 @@ import { BackButtonComponent } from '../../shared/components/back-button/back-bu
   standalone: true,
   imports: [
     CommonModule,
-    BackButtonComponent // Adicionando aos imports
+    BackButtonComponent
   ],
   templateUrl: './editar-adesivo.html',
   styleUrl: './editar-adesivo.css'

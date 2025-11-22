@@ -1,16 +1,13 @@
 .back-button {
-  /* --- O TRUQUE PARA FICAR "FLUTUANDO" --- */
+  /* O botao fica flutuando */
   position: fixed; /* Posição fixa relativa à janela do navegador */
   bottom: 30px;    /* 30px do fundo */
   left: 30px;      /* 30px da esquerda */
   z-index: 100;    /* Garante que ele fique por cima de outros elementos */
 
-  /* --- O ESTILO QUE VOCÊ PEDIU --- */
   width: 200px;
   height: 80px;
   background-color: #F459B6;
-
-  /* --- ESTILOS ADICIONAIS PARA FICAR BONITO --- */
   border: none;
   border-radius: 12px;
   color: white;

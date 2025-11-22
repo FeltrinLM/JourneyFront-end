@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
-import { EstampaService, EstampaDTO } from '../visu-geral/item-list-accordion/services/estampa.service';
-import { ColecaoService, ColecaoDTO } from '../visu-geral/item-list-accordion/services/colecao.service';
+import { EstampaService } from '../../../app/core/services/api/estampa.service';
+import { ColecaoService } from '../../../app/core/services/api/colecao.service';
+import{EstampaDTO, ColecaoDTO} from '../../../app/core/models';
 
 interface EstampaEdicaoDTO {
   nome: string;

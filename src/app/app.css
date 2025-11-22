@@ -12,10 +12,7 @@ app-header {
   flex-shrink: 0;
 }
 
-/* Esta é a regra mais importante.
-  Dizemos ao <app-visu-geral> (o componente da página)
-  para crescer (flex-grow) e se comportar como um container flex.
-*/
+/* <app-visu-geral> (o componente da página) se comporta como um container flex.*/
 app-visu-geral {
   flex-grow: 1;
   display: flex;

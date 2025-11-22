@@ -6,7 +6,7 @@
   flex-shrink: 0; /* Impede a sidebar de encolher */
   display: flex;
   flex-direction: column;
-  height: 100%; /* <-- Isto agora funciona, pois o pai é esticado */
+  height: 100%;
   min-height: 650px;
 }
 
@@ -25,7 +25,7 @@
   padding-bottom: 20px;
 }
 
-/* --- NOVO: O container de cada item (o <li>) --- */
+/* --- O container de cada item (o <li>) --- */
 .nav-item {
   /* Define o <li> como o "chefe" do posicionamento */
   position: relative;
@@ -41,7 +41,6 @@
 .nav-icon {
   height: 50px;
   width: 50px;
-  /* cursor: pointer; */ /* Esta linha não é mais necessária aqui, já que o .nav-item cuida disso */
 
   /* A transição agora se aplica ao ícone */
   transition: filter 0.3s ease, transform 0.3s ease;
@@ -51,7 +50,7 @@
   z-index: 2;
 }
 
-/* --- NOVO: A "bolha" de texto (o tooltip) --- */
+/* --- A "bolha" de texto (o tooltip) --- */
 .nav-item::after {
   /* 1. Pega o texto do atributo "data-text" do HTML */
   content: attr(data-text);
@@ -67,7 +66,7 @@
   z-index: 1; /* Fica atrás do ícone */
 
   /* 4. Estilo do texto */
-  color: #e7e7e7; /* Texto escuro para ser legível */
+  color: #e7e7e7;
   padding: 8px 12px;
   font-size: 1rem;
   font-weight: bold;
@@ -79,11 +78,11 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* --- NOVO: A MÁGICA DO HOVER --- */
+/* --- A MÁGICA DO HOVER --- */
 
 /* Quando o mouse passar sobre o <li> (nav-item)... */
 .nav-item:hover .nav-icon {
-  /* 1. ...mova o ícone para a esquerda (como você pediu) */
+  /* 1. ...mova o ícone para a esquerda */
   transform: scale(1.1) translateX(-40px);
 
   /* 2. ...aplique o filtro no ícone */

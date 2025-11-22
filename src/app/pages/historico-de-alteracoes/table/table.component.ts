@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 // Imports relativos à pasta 'table'
 import { HistoricoAlteracaoService } from '../../../core/services/api/historico-alteracao.service';
 import { UsuarioService } from '../../../core/services/api/usuario.service';
-import { HistoricoAlteracaoDTO, UsuarioDTO } from '../../../core/services/api/base-api.service';
+import { HistoricoAlteracaoDTO, UsuarioDTO } from '../../../core/models';
 
 interface DisplayHistorico {
   acao: 'Adicionado' | 'Editado' | 'Excluído';
@@ -50,7 +50,7 @@ export class TableComponent implements OnInit {
         this.usuarios.set(data);
         this.statusUsuarios = 'sucesso';
 
-        // 🚨 CHAVE DA CORREÇÃO:
+        //  CHAVE DA CORREÇÃO:
         // Assim que os usuários carregam, chamamos o histórico
         this.carregarHistorico();
 
@@ -83,9 +83,6 @@ export class TableComponent implements OnInit {
     });
   }
 
-  // A função obterNomeUsuario() está perfeita, não precisa de alteração.
-  // Ela será chamada pelo template, e agora o statusUsuarios será 'sucesso' (ou 'erro')
-  // antes de o histórico ser renderizado.
   obterNomeUsuario(id: number): string {
     if (this.statusUsuarios === 'carregando') {
       return 'Carregando...';
@@ -97,7 +94,7 @@ export class TableComponent implements OnInit {
 
     const lista = this.usuarios();
 
-    // CORREÇÃO AQUI: mudamos de u.id para u.usuarioId
+    // mudei de u.id para u.usuarioId
     const usuario = lista.find(u => u.usuarioId === id);
 
     return usuario?.nome ?? `Desconhecido (ID: ${id})`;

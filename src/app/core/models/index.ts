@@ -1,16 +1,3 @@
-// src/app/core/models/index.ts
-
-// REMOVA TODAS ESTAS LINhas - elas estão causando conflito
-// export * from '..//services/api/adesivo.service';
-// export * from '..//services/api/chaveiro.service';
-// export * from '..//services/api/colecao.service';
-// export * from '..//services/api/estampa.service';
-// export * from '..//services/api/historico-alteracao.service';
-// export * from '..//services/api/peca.service';
-// export * from '..//services/api/usuario.service';
-
-// Mantenha APENAS as interfaces:
-
 // Adesivo
 export interface AdesivoDTO {
   adesivoId: number;

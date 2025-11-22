@@ -2,8 +2,7 @@
 .page-container {
   display: flex;
   justify-content: center; /* Centraliza horizontalmente */
-  /* --- MUDANÇA AQUI --- */
-  align-items: flex-start; /* Alinha ao topo (ao invés de 'center') */
+  align-items: flex-start; /* Alinha ao topo */
   min-height: 90vh;
   padding: 2rem;
   box-sizing: border-box;
@@ -16,7 +15,6 @@
   border-collapse: collapse;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
-  /* --- MUDANÇAS AQUI --- */
   border-radius: 10px; /* Adiciona a borda arredondada */
   overflow: hidden; /* Força os filhos a respeitarem a borda */
 }
@@ -57,17 +55,17 @@
   line-height: 1.4;
 }
 
-/* * Cores específicas da coluna "Ação" (CORES ATUALIZADAS)
- */
+/*  Cores específicas da coluna "Ação" */
+
 .action-add {
-  background-color: #E8D6FB; /* Roxo claro */
+  background-color: #E8D6FB;
 }
 
 .action-edit {
-  background-color: #B572FD; /* Roxo principal */
+  background-color: #B572FD;
   color: white;
 }
 
 .action-delete {
-  background-color: #F459B6; /* Rosa/Magenta claro */
+  background-color: #F459B6;
 }

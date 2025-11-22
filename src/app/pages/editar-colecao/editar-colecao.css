@@ -13,7 +13,7 @@
 /* Estilo do Cartão Roxo */
 .card {
   width: 350px;
-  background-color: #9b4de0; /* Roxo principal da imagem */
+  background-color: #9b4de0;
   border-radius: 12px;
   padding: 20px 30px;
   box-shadow: 0 4px 15px rgba(155, 77, 224, 0.3);
@@ -63,9 +63,9 @@
 .pill-input {
   width: 100%;
   padding: 12px 20px;
-  background-color: #e6d7ff; /* Lilás claro do input */
-  border: 1px solid #000; /* Borda preta fina da imagem */
-  border-radius: 25px; /* Formato de pílula */
+  background-color: #e6d7ff;
+  border: 1px solid #000;
+  border-radius: 25px;
   font-size: 16px;
   font-weight: 600;
   color: #000;
@@ -90,7 +90,7 @@
   margin: 10px auto 0;
   display: block;
   padding: 10px 0;
-  background-color: #c58af9; /* Roxo mais claro do botão */
+  background-color: #c58af9;
   color: white;
   border: none;
   border-radius: 12px;

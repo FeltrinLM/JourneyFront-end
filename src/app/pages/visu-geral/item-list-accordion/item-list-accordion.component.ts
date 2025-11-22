@@ -2,11 +2,11 @@ import { Component, signal, inject, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { PecaService, PecaDTO } from '../../../../app/core/services/api/peca.service';
-import { EstampaService, EstampaDTO } from '../../../../app/core/services/api/estampa.service';
-import { AdesivoService, AdesivoDTO } from '../../../../app/core/services/api/adesivo.service';
-import { ColecaoService, ColecaoDTO } from '../../../../app/core/services/api/colecao.service';
-import { ChaveiroService, ChaveiroDTO } from '../../../../app/core/services/api/chaveiro.service';
+import { PecaService } from '../../../../app/core/services/api/peca.service';
+import { EstampaService } from '../../../../app/core/services/api/estampa.service';
+import { AdesivoService} from '../../../../app/core/services/api/adesivo.service';
+import { ColecaoService} from '../../../../app/core/services/api/colecao.service';
+import { ChaveiroService } from '../../../../app/core/services/api/chaveiro.service';
 
 import {
   PecaDTO,
@@ -14,7 +14,7 @@ import {
   AdesivoDTO,
   ColecaoDTO,
   ChaveiroDTO
-} from '../../../../core/models';
+} from '../../../../app/core/models';
 
 interface AccordionItem {
   id: number;

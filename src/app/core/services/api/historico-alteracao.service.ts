@@ -13,7 +13,7 @@ export class HistoricoAlteracaoService extends BaseApiService {
     return this.get<HistoricoAlteracaoDTO[]>('historico');
   }
 
-  // Método para debug (opcional)
+  // Metodo para debug
   getApiUrl(): string {
     return `${this.baseUrl}/historico`;
   }
