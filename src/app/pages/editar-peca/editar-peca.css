@@ -1,0 +1,170 @@
+/* Container principal */
+.container-demonstracao {
+  display: flex;
+  justify-content: center;
+  /* Alterado de center para flex-start para subir o conteúdo */
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  position: relative; /* Necessário para o botão voltar absoluto */
+  /* Adicionado padding no topo para afastar um pouco do header, mas mantendo em cima */
+  padding-top: 80px;
+  box-sizing: border-box;
+}
+
+/* Posicionamento do Botão Voltar */
+.custom-back-btn {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  z-index: 10;
+}
+
+/* Estilos básicos para loading e erro */
+.loading-state, .error-state {
+  text-align: center;
+  padding: 20px;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* --- Estilos do Card --- */
+.card {
+  background-color: #9333EA; /* Roxo vibrante */
+  width: 320px;
+  border-radius: 12px;
+  padding: 25px 20px;
+  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  /* Removi margem automática se houvesse, o padding do container controla a altura agora */
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  width: 100%;
+  position: relative;
+}
+
+/* Configuração do ícone PNG */
+.card-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  position: absolute;
+  left: 10px;
+}
+
+/* Mágica para transformar PNG em Branco */
+.filter-white {
+  filter: brightness(0) invert(1);
+}
+
+.card-title {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+.card-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Estilo "Pop" dos Inputs e Selects */
+select, .input-qty {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid #000; /* Borda preta grossa */
+  background-color: #E9D5FF; /* Lilás claro */
+  font-size: 1rem;
+  font-weight: 700; /* Texto negrito */
+  color: #000;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: transform 0.1s ease;
+}
+
+select:active, .input-qty:focus {
+  transform: scale(1.02);
+}
+
+.input-qty {
+  -moz-appearance: textfield;
+}
+
+/* Ícone da seta customizada */
+.chevron {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+/* Botão Salvar */
+.btn-salvar {
+  margin-top: 10px;
+  width: 140px;
+  padding: 12px;
+  background-color: #C084FC; /* Lilás botão */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  align-self: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-salvar:hover {
+  background-color: #A855F7;
+}
+
+.btn-salvar:active {
+  transform: scale(0.95);
+}
+
+/* Responsividade: Em telas pequenas, o botão voltar deixa de ser absoluto para não cobrir conteúdo */
+@media (max-height: 600px) {
+  .custom-back-btn {
+    position: static;
+    margin-bottom: 20px;
+    align-self: flex-start;
+    margin-left: 20px;
+  }
+
+  .container-demonstracao {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+  }
+}
