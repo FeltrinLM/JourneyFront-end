@@ -18,73 +18,142 @@
     @else {
 
       <div class="banner-titulo">
-        @if (tipoSelecionado === 'COLECAO') { Coleção }
-        @if (tipoSelecionado === 'ESTAMPA') { Estampa }
-        @if (tipoSelecionado === 'ADESIVO') { Adesivo }
-        @if (tipoSelecionado === 'PECA') { Peça }
-        @if (tipoSelecionado === 'CHAVEIRO') { Chaveiro }
+        @if (tipoSelecionado === 'COLECAO') { Cadastrar Coleção }
+        @if (tipoSelecionado === 'ESTAMPA') { Cadastrar Estampa }
+        @if (tipoSelecionado === 'ADESIVO') { Cadastrar Adesivo }
+        @if (tipoSelecionado === 'PECA') { Cadastrar Peça }
+        @if (tipoSelecionado === 'CHAVEIRO') { Cadastrar Chaveiro }
       </div>
 
       <div class="cadastro-card">
-        <div class="form-fields">
+        <form class="form-fields" (ngSubmit)="salvarItem()" #itemForm="ngForm">
 
+          <!-- FORMULÁRIO COLECAO -->
           @if (tipoSelecionado === 'COLECAO') {
-            <div class="input-group"><input type="text" placeholder="Nome da Coleção"></div>
-            <div class="input-group"><input type="text" placeholder="Estação (ex: Verão 2025)"></div>
+            <div class="input-group">
+              <input type="text" placeholder="Nome da Coleção" [(ngModel)]="colecaoData.nome" name="colecaoNome" required>
+            </div>
+            <div class="input-group">
+              <label>Data de Início</label>
+              <input type="date" [(ngModel)]="colecaoData.dataInicio" name="colecaoDataInicio" required>
+            </div>
+            <div class="input-group">
+              <label>Data de Fim</label>
+              <input type="date" [(ngModel)]="colecaoData.dataFim" name="colecaoDataFim" required>
+            </div>
           }
 
+          <!-- FORMULÁRIO ESTAMPA -->
           @if (tipoSelecionado === 'ESTAMPA') {
-            <div class="input-group"><input type="text" placeholder="Nome da Estampa"></div>
-            <div class="input-group"><input type="text" placeholder="URL da Imagem"></div>
+            <div class="input-group">
+              <input type="text" placeholder="Nome da Estampa" [(ngModel)]="estampaData.nome" name="estampaNome" required>
+            </div>
+            <div class="input-group">
+              <input type="number" placeholder="Quantidade" [(ngModel)]="estampaData.quantidade" name="estampaQuantidade" min="0" required>
+            </div>
+            <div class="input-group">
+              <select [(ngModel)]="estampaData.colecaoId" name="estampaColecaoId" required>
+                <option value="" disabled selected>Selecione uma Coleção</option>
+                <option *ngFor="let colecao of colecoes" [value]="colecao.colecaoId">
+                  {{ colecao.nome }}
+                </option>
+              </select>
+            </div>
           }
 
+          <!-- FORMULÁRIO ADESIVO -->
           @if (tipoSelecionado === 'ADESIVO') {
-            <div class="input-group"><input type="text" placeholder="Descrição do Adesivo"></div>
-            <div class="input-group"><input type="number" placeholder="Quantidade Disponível"></div>
+            <div class="input-group">
+              <input type="text" placeholder="Modelo do Adesivo" [(ngModel)]="adesivoData.adesivoModelo" name="adesivoModelo" required>
+            </div>
+            <div class="input-group checkbox-container">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="adesivoData.cromatico" name="adesivoCromatico">
+                <span class="checkmark"></span>
+                Cromático
+              </label>
+            </div>
           }
 
+          <!-- FORMULÁRIO PEÇA -->
           @if (tipoSelecionado === 'PECA') {
             <div class="input-group">
-              <select>
-                <option value="" disabled selected>Tipo</option>
-                <option value="camiseta">Camiseta</option>
-                <option value="calca">Calça</option>
+              <select [(ngModel)]="pecaData.tipo" name="pecaTipo" required>
+                <option value="" disabled selected>Tipo da Peça</option>
+                <option value="Calca">Calça</option>
+                <option value="Camiseta">Camiseta</option>
+                <option value="Polo">Polo</option>
+                <option value="Moletom">Moletom</option>
+                <option value="Casaco">Casaco</option>
               </select>
             </div>
             <div class="input-group">
-              <select>
+              <select [(ngModel)]="pecaData.tamanho" name="pecaTamanho" required>
                 <option value="" disabled selected>Tamanho</option>
+                <option value="PP">PP</option>
                 <option value="P">P</option>
                 <option value="M">M</option>
                 <option value="G">G</option>
+                <option value="GG">GG</option>
               </select>
             </div>
             <div class="input-group">
-              <select>
+              <select [(ngModel)]="pecaData.cor" name="pecaCor" required>
                 <option value="" disabled selected>Cor</option>
-                <option value="preto">Preto</option>
-                <option value="branco">Branco</option>
+                <option value="Preto">Preto</option>
+                <option value="Branco">Branco</option>
+                <option value="Azul">Azul</option>
+                <option value="Vermelho">Vermelho</option>
+                <option value="Verde">Verde</option>
+                <option value="Amarelo">Amarelo</option>
+                <option value="Rosa">Rosa</option>
+                <option value="Cinza">Cinza</option>
+                <option value="Marrom">Marrom</option>
+                <option value="Laranja">Laranja</option>
+                <option value="Roxo">Roxo</option>
               </select>
             </div>
-            <div class="input-group"><input type="number" placeholder="Quantidade"></div>
+            <div class="input-group">
+              <input type="number" placeholder="Quantidade" [(ngModel)]="pecaData.quantidade" name="pecaQuantidade" min="0" required>
+            </div>
           }
 
+          <!-- FORMULÁRIO CHAVEIRO -->
           @if (tipoSelecionado === 'CHAVEIRO') {
-            <div class="input-group"><input type="text" placeholder="Modelo do Chaveiro"></div>
-            <div class="input-group"><input type="number" placeholder="Quantidade"></div>
+            <div class="input-group">
+              <input type="text" placeholder="Modelo do Chaveiro" [(ngModel)]="chaveiroData.chaveiroModelo" name="chaveiroModelo" required>
+            </div>
+            <div class="input-group">
+              <select [(ngModel)]="chaveiroData.colecaoId" name="chaveiroColecaoId" required>
+                <option value="" disabled selected>Selecione uma Coleção</option>
+                <option *ngFor="let colecao of colecoes" [value]="colecao.colecaoId">
+                  {{ colecao.nome }}
+                </option>
+              </select>
+            </div>
           }
 
-          <button class="btn-salvar">Salvar</button>
-        </div>
+          <button type="submit" class="btn-salvar" [disabled]="salvando || !itemForm.valid">
+            {{ salvando ? 'Salvando...' : 'Salvar' }}
+          </button>
+
+        </form>
       </div>
     }
 
   </div>
 
+  <!-- Container do botão - muda conforme o estado -->
   <div class="container-voltar">
-    <app-back-button></app-back-button>
-
-    <div class="click-overlay" (click)="aoClicarVoltar($event)"></div>
+    @if (!tipoSelecionado) {
+      <!-- Botão voltar normal (volta para página anterior) -->
+      <app-back-button></app-back-button>
+    } @else {
+      <!-- Botão voltar customizado (volta para seleção de itens) -->
+      <button class="btn-voltar-menu" (click)="voltarParaMenu()">
+        Voltar ao Menu
+      </button>
+    }
   </div>
 
 </div>

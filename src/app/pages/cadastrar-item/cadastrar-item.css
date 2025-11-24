@@ -113,22 +113,81 @@
 
 /* CONTAINER DO BOTÃO VOLTAR */
 .container-voltar {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-  z-index: 10;
-  /* Inline-block faz o container ter o tamanho exato do botão */
-  display: inline-block;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 100;
 }
 
-/* A CAMADA INVISÍVEL */
-.click-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent; /* Invisível */
+/* BOTÃO VOLTAR PERSONALIZADO - IDÊNTICO AO PADRÃO */
+.btn-voltar-menu {
+  width: 200px;
+  height: 80px;
+  background-color: #F459B6;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: sans-serif;
   cursor: pointer;
-  z-index: 20; /* Garante que fica POR CIMA do botão */
+
+  /* Para alinhar o conteúdo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  /* Efeito de hover */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-voltar-menu:hover {
+  transform: scale(1.05);
+  background-color: #f87eba;
+}
+
+/* Remove o SVG antigo e usa apenas texto */
+.btn-voltar-menu::before {
+  font-size: 1.6rem;
+}
+
+/* Estilo para o checkbox customizado */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  background-color: #efe5fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background-color: #000;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
 }
