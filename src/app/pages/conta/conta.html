@@ -1,1 +1,57 @@
+<div class="container-conta">
+  <h1 class="page-title">Sua conta</h1>
 
+  <div class="card">
+    <div class="profile-header">
+      <div class="avatar-circle">
+        <img
+          src="../../../assets/images/usuario-rosa.png"
+          class="avatar-icon"
+          alt="Avatar"
+        >
+      </div>
+
+      <div class="header-info">
+        <h2 class="username">{{ getNomeExibicao() }}</h2>
+        <span class="spacer"></span>
+        <span class="role">{{ getTipoUsuario() }}</span>
+      </div>
+    </div>
+
+    <div class="details-box">
+      <!-- Linha 1: Nome -->
+      <div class="detail-row">
+        <span class="detail-text">Nome : {{ getNomeExibicao() }}</span>
+        <button class="btn-editar">Editar</button>
+      </div>
+
+      <!-- Linha 2: Permissão -->
+      <div class="detail-row">
+        <span class="detail-text">Nível de permissão: {{ getTipoUsuario() }}</span>
+        <button class="btn-editar">
+          <span class="notification-dot" data-tooltip="Atenção: esta ação&#10; é sensível. &#10;Prossiga com cuidado">!</span> Editar
+        </button>
+      </div>
+
+      <!-- Linha 3: Senha -->
+      <div class="detail-row">
+        <div class="password-group">
+          <span class="detail-text">Senha : {{ getSenhaMascarada() }}</span>
+          <span class="eye-icon" (click)="toggleSenha()">
+            {{ senhaVisivel ? '👁️' : '🙈' }}
+          </span>
+        </div>
+        <button class="btn-editar">
+          <span class="notification-dot" data-tooltip="Atenção: esta ação&#10; é sensível. &#10;Prossiga com cuidado">!</span> Editar
+        </button>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn-sair" (click)="sair()">Sair</button>
+      <button class="btn-cadastrar">
+        Cadastrar<br>novo usuario
+      </button>
+    </div>
+  </div>
+</div>

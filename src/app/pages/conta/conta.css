@@ -1,0 +1,283 @@
+/* --- Layout Geral --- */
+.container-conta {
+  display: flex;
+  flex-direction: column; /* Empilha título e card */
+  align-items: center;
+  padding-top: 40px; /* Espaço do header */
+  min-height: 100vh;
+  background-color: #ffffff;
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título fora do card */
+.page-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+/* Botão Voltar */
+.custom-back-btn {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  z-index: 10;
+}
+
+/* --- Card Principal --- */
+.card {
+  background-color: #9333EA; /* Roxo vibrante */
+  width: 90%;
+  max-width: 600px; /* Card mais largo que os anteriores */
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Cabeçalho do Perfil (Avatar + Nome + Cargo) --- */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+.avatar-circle {
+  width: 70px;
+  height: 70px;
+  background-color: #FCE7F3; /* Fundo rosa claro */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.username {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.spacer {
+  flex-grow: 1; /* Empurra o cargo para a direita */
+}
+
+.role {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* --- Caixa de Detalhes (Interna) --- */
+.details-box {
+  background-color: rgba(0, 0, 0, 0.2); /* Roxo escuro translúcido */
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.detail-text {
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.password-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eye-icon {
+  filter: brightness(0) invert(1) opacity(0.5); /* Branco meio transparente */
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* --- Botões de Editar --- */
+.btn-editar {
+  background-color: #C084FC; /* Lilás claro */
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  min-width: 80px;
+  justify-content: center;
+  /* Necessário para o tooltip sair da caixa do botão se precisar */
+  position: relative;
+  overflow: visible;
+}
+
+/* Bolinha vermelha/rosa no botão editar */
+.notification-dot {
+  color: #EC4899; /* Rosa escuro */
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin-right: 2px;
+  position: relative; /* Importante para o tooltip se posicionar relativo a este ponto */
+  cursor: help;
+}
+
+/* --- TOOLTIP (Mensagem Flutuante) --- */
+
+/* Corpo do Tooltip */
+.notification-dot:hover::after {
+  content: attr(data-tooltip); /* Pega o texto do HTML */
+
+  position: absolute;
+  bottom: 150%; /* Joga para cima do ponto */
+  left: 50%;
+  transform: translateX(-90%); /* Desloca para a esquerda conforme a imagem */
+
+  background-color: rgba(40, 40, 40, 0.95); /* Fundo escuro quase preto */
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: normal;
+  line-height: 1.4;
+  white-space: pre-wrap; /* Permite as quebras de linha */
+  width: 140px; /* Largura fixa para quebrar o texto igual a imagem */
+  text-align: left;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  pointer-events: none; /* Evita que o mouse interfira */
+}
+
+/* Triângulo/Seta do Tooltip (opcional, para dar acabamento) */
+.notification-dot:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* Logo acima do ponto */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(40, 40, 40, 0.95) transparent transparent transparent;
+  z-index: 1000;
+}
+
+/* --- Rodapé (Footer) --- */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.btn-sair {
+  background-color: #C084FC;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 40px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-cadastrar {
+  background-color: #C084FC;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-sair:hover, .btn-cadastrar:hover, .btn-editar:hover {
+  background-color: #A855F7;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .card {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-info {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .detail-row {
+    flex-direction: row; /* Mantém linha, mas ajusta tamanho */
+    gap: 10px;
+  }
+
+  .detail-text {
+    font-size: 0.9rem;
+  }
+
+  .custom-back-btn {
+    position: static;
+    margin-bottom: 20px;
+    align-self: flex-start;
+    margin-left: 20px;
+  }
+}
+
+/* Adicione ao seu conta.css existente */
+.eye-icon {
+  filter: brightness(0) invert(1) opacity(0.5);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.eye-icon:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
