@@ -1,1 +1,68 @@
-<app-back-button></app-back-button>
+<div class="container-demonstracao">
+
+  <!-- Botão Voltar integrado -->
+  <app-back-button class="custom-back-btn"></app-back-button>
+
+  <!-- INICIO DO CARD -->
+  <div class="card">
+    <div class="card-header">
+      <img
+        src="./assets/images/adesivo-icon.png"
+        class="card-icon filter-white"
+        alt="Ícone Adesivo"
+        onerror="this.src='https://img.icons8.com/ios-filled/50/ffffff/sticker.png'"
+      >
+      <h2 class="card-title">{{adesivoId ? 'Editar Adesivo' : 'Novo Adesivo'}}</h2>
+    </div>
+
+    <div *ngIf="carregando" class="loading">
+      <p>Carregando...</p>
+    </div>
+
+    <form *ngIf="!carregando" class="card-form" (ngSubmit)="onSubmit()" #adesivoForm="ngForm">
+
+      <!-- Campo Modelo (Editável) -->
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="modelo"
+          name="modelo"
+          required
+          class="pop-input text-center"
+          [disabled]="salvando"
+          placeholder="Nome do modelo"
+        >
+      </div>
+
+      <!-- Campo Cromático (Checkbox Estilizado) -->
+      <div class="form-group">
+        <label class="pop-input checkbox-container">
+          <span class="label-text">Cromático</span>
+
+          <div class="custom-checkbox-wrapper">
+            <input
+              type="checkbox"
+              [(ngModel)]="cromatico"
+              name="cromatico"
+              (change)="onCheckboxChange()"
+              [disabled]="salvando"
+            >
+            <span class="checkmark"></span>
+          </div>
+        </label>
+      </div>
+
+      <!-- Botão Salvar -->
+      <button
+        type="submit"
+        class="btn-salvar"
+        [disabled]="salvando || !adesivoForm.valid"
+      >
+        {{salvando ? 'Salvando...' : 'Salvar'}}
+      </button>
+
+    </form>
+  </div>
+  <!-- FIM DO CARD -->
+
+</div>
