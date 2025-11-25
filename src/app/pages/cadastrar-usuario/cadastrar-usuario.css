@@ -1,0 +1,174 @@
+/* --- Layout Geral --- */
+.container-demonstracao {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinha no topo */
+  padding-top: 80px; /* Espaço para o header existente */
+  min-height: 100vh;
+  background-color: #ffffff;
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Card --- */
+.card {
+  background-color: #9333EA; /* Roxo vibrante */
+  width: 340px; /* Um pouco mais largo para caber o título */
+  border-radius: 12px;
+  border: 2px solid #000; /* Borda preta fina no card conforme imagem */
+  padding: 30px 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+  position: relative;
+  gap: 10px;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.filter-white {
+  filter: brightness(0) invert(1);
+}
+
+.card-title {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  /* Garante que o texto não quebre de forma estranha */
+  white-space: nowrap;
+}
+
+.card-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  width: 100%;
+}
+
+/* --- Estilo "Pop" dos Inputs (Branco com borda preta) --- */
+.pop-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 15px;
+  border-radius: 8px;
+  border: 2px solid #000; /* Borda preta grossa */
+  background-color: #ffffff; /* Fundo branco */
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  box-sizing: border-box;
+  outline: none;
+  font-family: inherit;
+}
+
+.pop-input::placeholder {
+  color: #999;
+  font-weight: 500;
+}
+
+/* Ajustes específicos para o Select */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-input {
+  appearance: none;
+  -webkit-appearance: none;
+  color: #000; /* Cor do texto selecionado */
+  cursor: pointer;
+}
+
+/* Placeholder simulado no select (primeira opção) */
+.select-input:invalid {
+  color: #000;
+  font-weight: 700;
+}
+
+.chevron {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+/* --- Botões --- */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.btn-voltar, .btn-cadastrar {
+  flex: 1; /* Botões ocupam largura igual */
+  height: 45px;
+  border: 2px solid #000; /* Borda preta nos botões */
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.btn-voltar {
+  background-color: #F472B6; /* Rosa */
+  color: white;
+}
+
+.btn-cadastrar {
+  background-color: #C084FC; /* Lilás claro */
+  color: white;
+}
+
+.btn-voltar:hover {
+  background-color: #EC4899;
+}
+
+.btn-cadastrar:hover {
+  background-color: #A855F7;
+}
+
+.btn-voltar:active, .btn-cadastrar:active {
+  transform: scale(0.98);
+}
+
+/* Responsividade */
+@media (max-width: 400px) {
+  .card {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}

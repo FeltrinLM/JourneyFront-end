@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; // ADICIONE ESTA LINHA
 import { UsuarioService } from '../../core/services/api/usuario.service';
 import { UsuarioDTO } from '../../core/models';
 
 @Component({
   selector: 'app-conta',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule], // ADICIONE RouterModule AQUI
   templateUrl: './conta.html',
   styleUrl: './conta.css'
 })
 export class Conta implements OnInit {
+  // ... resto do código permanece igual
   usuario: UsuarioDTO | null = null;
   senhaVisivel = false;
   carregando = true;

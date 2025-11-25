@@ -13,30 +13,31 @@ export class UsuarioService extends BaseApiService {
     return this.get<UsuarioDTO[]>('usuarios');
   }
 
-  // Método para obter usuário do localStorage ou dados básicos
+  // MÉTODO DE CADASTRO
+  cadastrarUsuario(usuario: { nome: string, tipo: string, senha: string }): Observable<UsuarioDTO> {
+    return this.post<UsuarioDTO>('usuarios', usuario);
+  }
+
+  // ... mantém os outros métodos existentes
   obterUsuarioAtual(): UsuarioDTO | null {
-    // Tenta pegar do localStorage primeiro
     const nome = localStorage.getItem('nome_usuario');
 
     if (nome) {
-      // Se tem o nome no localStorage, cria um objeto UsuarioDTO básico
       return {
-        usuarioId: 1, // Você pode precisar ajustar isso
+        usuarioId: 1,
         nome: nome,
-        tipo: 'Administrador' // Defina um padrão ou ajuste conforme sua lógica
+        tipo: 'Administrador'
       };
     }
 
     return null;
   }
 
-  // Método observável para compatibilidade
   obterMeuPerfil(): Observable<UsuarioDTO> {
     const usuario = this.obterUsuarioAtual();
     if (usuario) {
       return of(usuario);
     } else {
-      // Fallback caso não encontre
       return of({
         usuarioId: 1,
         nome: 'Usuário',

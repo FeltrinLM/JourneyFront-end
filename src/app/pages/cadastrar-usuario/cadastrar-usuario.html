@@ -1,0 +1,57 @@
+<div class="container-demonstracao">
+  <div class="card">
+    <div class="card-header">
+      <img
+        src="./assets/images/novo-usuario-icon.png"
+        class="card-icon filter-white"
+        alt="Ícone Novo Usuário"
+        onerror="this.src='https://img.icons8.com/ios-filled/50/ffffff/add-user-male.png'"
+      >
+      <h2 class="card-title">Cadastrar novo Usuário</h2>
+    </div>
+
+    <form class="card-form" (ngSubmit)="cadastrar()">
+      <!-- Input Nome -->
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="Nome"
+          class="pop-input"
+          [(ngModel)]="usuario.nome"
+          name="nome"
+          required
+        >
+      </div>
+
+      <!-- Input Senha -->
+      <div class="form-group">
+        <input
+          type="password"
+          placeholder="Senha"
+          class="pop-input"
+          [(ngModel)]="usuario.senha"
+          name="senha"
+          required
+        >
+      </div>
+
+      <!-- Select Permissão -->
+      <div class="form-group">
+        <div class="select-wrapper">
+          <select class="pop-input select-input" [(ngModel)]="usuario.tipo" name="tipo" required>
+            <option value="" disabled selected>Permissão</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Funcionario">Funcionário</option>
+          </select>
+          <span class="chevron">⌄</span>
+        </div>
+      </div>
+
+      <!-- Área dos Botões (Rodapé do Form) -->
+      <div class="form-actions">
+        <button type="button" class="btn-voltar" (click)="voltar()">Voltar</button>
+        <button type="submit" class="btn-cadastrar">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>
