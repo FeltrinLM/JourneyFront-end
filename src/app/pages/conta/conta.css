@@ -1,9 +1,9 @@
 /* --- Layout Geral --- */
 .container-conta {
   display: flex;
-  flex-direction: column; /* Empilha título e card */
+  flex-direction: column;
   align-items: center;
-  padding-top: 40px; /* Espaço do header */
+  padding-top: 40px;
   min-height: 100vh;
   background-color: #ffffff;
   position: relative;
@@ -11,7 +11,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Título fora do card */
 .page-title {
   font-size: 1.8rem;
   font-weight: bold;
@@ -19,7 +18,6 @@
   margin-bottom: 20px;
 }
 
-/* Botão Voltar */
 .custom-back-btn {
   position: absolute;
   bottom: 40px;
@@ -29,9 +27,9 @@
 
 /* --- Card Principal --- */
 .card {
-  background-color: #9333EA; /* Roxo vibrante */
+  background-color: #9333EA;
   width: 90%;
-  max-width: 600px; /* Card mais largo que os anteriores */
+  max-width: 600px;
   border-radius: 16px;
   padding: 30px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -39,7 +37,7 @@
   flex-direction: column;
 }
 
-/* --- Cabeçalho do Perfil (Avatar + Nome + Cargo) --- */
+/* --- Cabeçalho do Perfil --- */
 .profile-header {
   display: flex;
   align-items: center;
@@ -50,7 +48,7 @@
 .avatar-circle {
   width: 70px;
   height: 70px;
-  background-color: #FCE7F3; /* Fundo rosa claro */
+  background-color: #FCE7F3;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -77,7 +75,7 @@
 }
 
 .spacer {
-  flex-grow: 1; /* Empurra o cargo para a direita */
+  flex-grow: 1;
 }
 
 .role {
@@ -86,9 +84,9 @@
   font-weight: 500;
 }
 
-/* --- Caixa de Detalhes (Interna) --- */
+/* --- Caixa de Detalhes --- */
 .details-box {
-  background-color: rgba(0, 0, 0, 0.2); /* Roxo escuro translúcido */
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -110,21 +108,9 @@
   font-size: 1.1rem;
 }
 
-.password-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.eye-icon {
-  filter: brightness(0) invert(1) opacity(0.5); /* Branco meio transparente */
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
 /* --- Botões de Editar --- */
 .btn-editar {
-  background-color: #C084FC; /* Lilás claro */
+  background-color: #C084FC;
   color: white;
   border: none;
   padding: 6px 16px;
@@ -137,14 +123,13 @@
   font-size: 0.9rem;
   min-width: 80px;
   justify-content: center;
-  /* Necessário para o tooltip sair da caixa do botão se precisar */
   position: relative;
   overflow: visible;
 }
 
 /* Bolinha vermelha/rosa no botão editar */
 .notification-dot {
-  color: #EC4899; /* Rosa escuro */
+  color: #EC4899;
   background-color: rgba(255,255,255,0.2);
   border-radius: 50%;
   width: 16px;
@@ -154,41 +139,36 @@
   justify-content: center;
   font-size: 0.8rem;
   margin-right: 2px;
-  position: relative; /* Importante para o tooltip se posicionar relativo a este ponto */
+  position: relative;
   cursor: help;
 }
 
-/* --- TOOLTIP (Mensagem Flutuante) --- */
-
-/* Corpo do Tooltip */
+/* --- TOOLTIP --- */
 .notification-dot:hover::after {
-  content: attr(data-tooltip); /* Pega o texto do HTML */
-
+  content: attr(data-tooltip);
   position: absolute;
-  bottom: 150%; /* Joga para cima do ponto */
+  bottom: 150%;
   left: 50%;
-  transform: translateX(-90%); /* Desloca para a esquerda conforme a imagem */
-
-  background-color: rgba(40, 40, 40, 0.95); /* Fundo escuro quase preto */
+  transform: translateX(-90%);
+  background-color: rgba(40, 40, 40, 0.95);
   color: #fff;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 0.75rem;
   font-weight: normal;
   line-height: 1.4;
-  white-space: pre-wrap; /* Permite as quebras de linha */
-  width: 140px; /* Largura fixa para quebrar o texto igual a imagem */
+  white-space: pre-wrap;
+  width: 140px;
   text-align: left;
   z-index: 1000;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  pointer-events: none; /* Evita que o mouse interfira */
+  pointer-events: none;
 }
 
-/* Triângulo/Seta do Tooltip (opcional, para dar acabamento) */
 .notification-dot:hover::before {
   content: "";
   position: absolute;
-  bottom: 100%; /* Logo acima do ponto */
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   border-width: 6px;
@@ -197,7 +177,7 @@
   z-index: 1000;
 }
 
-/* --- Rodapé (Footer) --- */
+/* --- Rodapé --- */
 .card-footer {
   display: flex;
   justify-content: space-between;
@@ -253,7 +233,7 @@
   }
 
   .detail-row {
-    flex-direction: row; /* Mantém linha, mas ajusta tamanho */
+    flex-direction: row;
     gap: 10px;
   }
 
@@ -267,17 +247,4 @@
     align-self: flex-start;
     margin-left: 20px;
   }
-}
-
-/* Adicione ao seu conta.css existente */
-.eye-icon {
-  filter: brightness(0) invert(1) opacity(0.5);
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-}
-
-.eye-icon:hover {
-  opacity: 0.8;
-  transform: scale(1.1);
 }

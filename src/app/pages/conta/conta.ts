@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'; // ADICIONE ESTA LINHA
+import { RouterModule } from '@angular/router';
 import { UsuarioService } from '../../core/services/api/usuario.service';
 import { UsuarioDTO } from '../../core/models';
 
 @Component({
   selector: 'app-conta',
-  imports: [CommonModule, RouterModule], // ADICIONE RouterModule AQUI
+  imports: [CommonModule, RouterModule],
   templateUrl: './conta.html',
   styleUrl: './conta.css'
 })
 export class Conta implements OnInit {
-  // ... resto do código permanece igual
   usuario: UsuarioDTO | null = null;
-  senhaVisivel = false;
   carregando = true;
 
   constructor(private usuarioService: UsuarioService) {}
@@ -27,7 +25,7 @@ export class Conta implements OnInit {
       next: (user) => {
         this.usuario = user;
         this.carregando = false;
-        console.log('Usuário carregado:', user); // Para debug
+        console.log('Usuário carregado:', user);
       },
       error: (error) => {
         console.error('Erro ao carregar usuário:', error);
@@ -41,7 +39,6 @@ export class Conta implements OnInit {
     if (userLocal) {
       this.usuario = userLocal;
     } else {
-      // Fallback final
       this.usuario = {
         usuarioId: 1,
         nome: 'Usuário',
@@ -49,14 +46,6 @@ export class Conta implements OnInit {
       };
     }
     this.carregando = false;
-  }
-
-  toggleSenha() {
-    this.senhaVisivel = !this.senhaVisivel;
-  }
-
-  getSenhaMascarada(): string {
-    return this.senhaVisivel ? 'sua_senha_real' : '********';
   }
 
   getNomeExibicao(): string {
@@ -69,7 +58,6 @@ export class Conta implements OnInit {
     return this.usuario?.tipo || 'Usuário';
   }
 
-  // Método para sair (logout)
   sair() {
     localStorage.removeItem('token');
     localStorage.removeItem('nome_usuario');
