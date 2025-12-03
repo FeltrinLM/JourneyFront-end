@@ -13,11 +13,13 @@ export class BaseApiService {
     return this.http.get<T>(`${this.baseUrl}/${endpoint}`);
   }
 
-  protected post<T>(endpoint: string, data: any): Observable<T> {
+  // Mudança aqui: Adicionei <U> (Input) além do <T> (Output)
+  protected post<T, U>(endpoint: string, data: U): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data);
   }
 
-  protected put<T>(endpoint: string, data: any): Observable<T> {
+  // Mudança aqui também
+  protected put<T, U>(endpoint: string, data: U): Observable<T> {
     return this.http.put<T>(`${this.baseUrl}/${endpoint}`, data);
   }
 

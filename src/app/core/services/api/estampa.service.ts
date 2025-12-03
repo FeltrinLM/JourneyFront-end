@@ -1,4 +1,3 @@
-// src/app/core/services/api/estampa.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseApiService } from './base-api.service';
@@ -18,7 +17,7 @@ export class EstampaService extends BaseApiService {
   }
 
   atualizar(id: number, dto: EstampaEdicaoDTO): Observable<void> {
-    return this.put<void>(`estampas/${id}`, dto);
+    return this.put<void, EstampaEdicaoDTO>(`estampas/${id}`, dto);
   }
 
   deletar(id: number): Observable<void> {
@@ -26,6 +25,6 @@ export class EstampaService extends BaseApiService {
   }
 
   criar(dto: EstampaEdicaoDTO): Observable<EstampaDTO> {
-    return this.post<EstampaDTO>('estampas', dto);
+    return this.post<EstampaDTO, EstampaEdicaoDTO>('estampas', dto);
   }
 }

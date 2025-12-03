@@ -1,4 +1,3 @@
-// src/app/core/services/api/adesivo.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseApiService } from './base-api.service';
@@ -18,7 +17,7 @@ export class AdesivoService extends BaseApiService {
   }
 
   atualizar(id: number, dto: AdesivoEdicaoDTO): Observable<void> {
-    return this.put<void>(`adesivos/${id}`, dto);
+    return this.put<void, AdesivoEdicaoDTO>(`adesivos/${id}`, dto);
   }
 
   deletar(id: number): Observable<void> {
@@ -26,6 +25,6 @@ export class AdesivoService extends BaseApiService {
   }
 
   criar(dto: AdesivoEdicaoDTO): Observable<AdesivoDTO> {
-    return this.post<AdesivoDTO>('adesivos', dto);
+    return this.post<AdesivoDTO, AdesivoEdicaoDTO>('adesivos', dto);
   }
 }

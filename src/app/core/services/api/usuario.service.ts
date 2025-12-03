@@ -1,4 +1,3 @@
-// src/app/core/services/api/usuario.service.ts
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { BaseApiService } from './base-api.service';
@@ -15,10 +14,9 @@ export class UsuarioService extends BaseApiService {
 
   // MÉTODO DE CADASTRO
   cadastrarUsuario(usuario: { nome: string, tipo: string, senha: string }): Observable<UsuarioDTO> {
-    return this.post<UsuarioDTO>('usuarios', usuario);
+    return this.post<UsuarioDTO, { nome: string, tipo: string, senha: string }>('usuarios', usuario);
   }
 
-  // ... mantém os outros métodos existentes
   obterUsuarioAtual(): UsuarioDTO | null {
     const nome = localStorage.getItem('nome_usuario');
 

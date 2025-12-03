@@ -1,4 +1,3 @@
-// src/app/core/services/api/chaveiro.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseApiService } from './base-api.service';
@@ -18,7 +17,7 @@ export class ChaveiroService extends BaseApiService {
   }
 
   atualizar(id: number, dto: ChaveiroEdicaoDTO): Observable<void> {
-    return this.put<void>(`chaveiros/${id}`, dto);
+    return this.put<void, ChaveiroEdicaoDTO>(`chaveiros/${id}`, dto);
   }
 
   deletar(id: number): Observable<void> {
@@ -26,6 +25,6 @@ export class ChaveiroService extends BaseApiService {
   }
 
   criar(dto: ChaveiroEdicaoDTO): Observable<ChaveiroDTO> {
-    return this.post<ChaveiroDTO>('chaveiros', dto);
+    return this.post<ChaveiroDTO, ChaveiroEdicaoDTO>('chaveiros', dto);
   }
 }

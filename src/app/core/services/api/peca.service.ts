@@ -1,4 +1,3 @@
-// src/app/core/services/api/peca.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseApiService } from './base-api.service';
@@ -18,7 +17,7 @@ export class PecaService extends BaseApiService {
   }
 
   atualizar(id: number, dto: PecaEdicaoDTO): Observable<void> {
-    return this.put<void>(`pecas/${id}`, dto);
+    return this.put<void, PecaEdicaoDTO>(`pecas/${id}`, dto);
   }
 
   deletar(id: number): Observable<void> {
@@ -26,6 +25,6 @@ export class PecaService extends BaseApiService {
   }
 
   criar(dto: PecaEdicaoDTO): Observable<PecaDTO> {
-    return this.post<PecaDTO>('pecas', dto);
+    return this.post<PecaDTO, PecaEdicaoDTO>('pecas', dto);
   }
 }

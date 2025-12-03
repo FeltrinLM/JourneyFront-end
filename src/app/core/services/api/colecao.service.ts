@@ -1,4 +1,3 @@
-// src/app/core/services/api/colecao.service.ts
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseApiService } from './base-api.service';
@@ -18,7 +17,7 @@ export class ColecaoService extends BaseApiService {
   }
 
   atualizar(id: number, dto: ColecaoEdicaoDTO): Observable<void> {
-    return this.put<void>(`colecoes/${id}`, dto);
+    return this.put<void, ColecaoEdicaoDTO>(`colecoes/${id}`, dto);
   }
 
   deletar(id: number): Observable<void> {
@@ -26,6 +25,6 @@ export class ColecaoService extends BaseApiService {
   }
 
   criar(dto: ColecaoEdicaoDTO): Observable<ColecaoDTO> {
-    return this.post<ColecaoDTO>('colecoes', dto);
+    return this.post<ColecaoDTO, ColecaoEdicaoDTO>('colecoes', dto);
   }
 }
