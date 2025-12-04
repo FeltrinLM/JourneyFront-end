@@ -1,29 +1,45 @@
 <nav class="sidebar-container">
-
   <ul class="sidebar-nav-list">
 
-    <!-- IDs DE 1 A 5 CORRESPONDENDO AOS IDs DO ACCORDION -->
-
-    <li class="nav-item" data-text="pecas" (click)="onIconClick(1)">
-      <img src="/assets/images/roupas-icon.png" alt="pecas" class="nav-icon">
+    <li class="nav-item" data-text="pecas" [class.active]="itemAtivo === 1">
+      <button #sidebarBtn type="button" class="nav-btn"
+              (click)="onIconClick(1)"
+              (keydown)="handleNavigation($event, 0)">
+        <img src="/assets/images/roupas-icon.png" alt="pecas" class="nav-icon">
+      </button>
     </li>
 
-    <li class="nav-item" data-text="estampas" (click)="onIconClick(2)">
-      <img src="/assets/images/estampas-icon.png" alt="estampas" class="nav-icon">
+    <li class="nav-item" data-text="estampas" [class.active]="itemAtivo === 2">
+      <button #sidebarBtn type="button" class="nav-btn"
+              (click)="onIconClick(2)"
+              (keydown)="handleNavigation($event, 1)">
+        <img src="/assets/images/estampas-icon.png" alt="estampas" class="nav-icon">
+      </button>
     </li>
 
-    <li class="nav-item" data-text="adesivos" (click)="onIconClick(3)">
-      <img src="/assets/images/adesivo-icon.png" alt="adesivos" class="nav-icon">
+    <li class="nav-item" data-text="adesivos" [class.active]="itemAtivo === 3">
+      <button #sidebarBtn type="button" class="nav-btn"
+              (click)="onIconClick(3)"
+              (keydown)="handleNavigation($event, 2)">
+        <img src="/assets/images/adesivo-icon.png" alt="adesivos" class="nav-icon">
+      </button>
     </li>
 
-    <li class="nav-item" data-text="colecoes" (click)="onIconClick(4)">
-      <img src="/assets/images/colecao-icon.png" alt="colecoes" class="nav-icon">
+    <li class="nav-item" data-text="colecoes" [class.active]="itemAtivo === 4">
+      <button #sidebarBtn type="button" class="nav-btn"
+              (click)="onIconClick(4)"
+              (keydown)="handleNavigation($event, 3)">
+        <img src="/assets/images/colecao-icon.png" alt="colecoes" class="nav-icon">
+      </button>
     </li>
 
-    <li class="nav-item" data-text="chaveiros" (click)="onIconClick(5)">
-      <img src="/assets/images/chaveiro-icon.png" alt="chaveiros" class="nav-icon">
+    <li class="nav-item" data-text="chaveiros" [class.active]="itemAtivo === 5">
+      <button #sidebarBtn type="button" class="nav-btn"
+              (click)="onIconClick(5)"
+              (keydown)="handleNavigation($event, 4)">
+        <img src="/assets/images/chaveiro-icon.png" alt="chaveiros" class="nav-icon">
+      </button>
     </li>
 
   </ul>
-
 </nav>

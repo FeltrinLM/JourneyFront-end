@@ -19,11 +19,13 @@ import { FloatingAddButtonComponent } from './floating-add-button/floating-add-b
 })
 export class VisuGeral {
 
-  // CRIA UM SIGNAL PARA GUARDAR O ID SELECIONADO
+  // O Signal já aceita null, isso está certo
   selectedItemId = signal<number | null>(null);
 
-  // MÉTODO PARA ATUALIZAR O SIGNAL QUANDO O EVENTO DA SIDEBAR CHEGAR
-  onIconClicked(id: number): void {
+  // --- O ERRO ESTAVA AQUI ---
+  // Antes: onIconClicked(id: number): void
+  // Agora: deve aceitar "number | null"
+  onIconClicked(id: number | null): void {
     this.selectedItemId.set(id);
   }
 

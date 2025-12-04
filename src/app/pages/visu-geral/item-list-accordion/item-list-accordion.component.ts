@@ -30,19 +30,22 @@ interface AccordionItem {
 })
 export class ItemListAccordionComponent implements OnInit {
 
+  // --- LÓGICA DO TOGGLE (CORRIGIDA) ---
   @Input() set itemIdToOpen(id: number | null) {
     if (id !== null) {
-      this.openItemIds.update(ids => {
-        const newIds = new Set(ids);
-        newIds.add(id);
-        return newIds;
-      });
+      // Se vier um ID, fecha tudo e abre só ele
+      this.openItemIds.set(new Set([id]));
+    } else {
+      // Se vier null, fecha tudo
+      this.openItemIds.set(new Set());
     }
   }
 
   openItemIds = signal<Set<number>>(new Set());
+
   private router = inject(Router);
 
+  // Injeção dos Services
   private pecaService = inject(PecaService);
   private estampaService = inject(EstampaService);
   private adesivoService = inject(AdesivoService);
@@ -57,6 +60,7 @@ export class ItemListAccordionComponent implements OnInit {
     { id: 5, title: 'Lista de Chaveiros' }
   ];
 
+  // Signals para armazenar os dados
   pecas = signal<PecaDTO[]>([]);
   estampas = signal<EstampaDTO[]>([]);
   adesivos = signal<AdesivoDTO[]>([]);
@@ -75,6 +79,7 @@ export class ItemListAccordionComponent implements OnInit {
     this.carregarChaveiros();
   }
 
+  // --- LOADERS ---
   carregarPecas() {
     this.pecaService.listarPecas().subscribe({
       next: (data) => this.pecas.set(data),
@@ -110,50 +115,30 @@ export class ItemListAccordionComponent implements OnInit {
     });
   }
 
+  // --- TOGGLE MANUAL (Ao clicar no cabeçalho do accordion) ---
   toggleItem(itemId: number): void {
     this.openItemIds.update(currentSet => {
       const newSet = new Set(currentSet);
       if (newSet.has(itemId)) {
         newSet.delete(itemId);
       } else {
+        // Se quiser comportamento "sanfona" (fecha os outros ao abrir um), descomente abaixo:
+        // newSet.clear();
         newSet.add(itemId);
       }
       return newSet;
     });
   }
 
-  // --- FUNÇÕES DE EDIÇÃO ESPECÍFICAS ---
+  // =================================================================
+  // MÉTODOS DE AÇÃO (Esses eram os que estavam faltando!)
+  // =================================================================
+
+  // --- PEÇAS ---
   editarPeca(id: number): void {
-    console.log('Editando peça ID:', id);
     this.router.navigate(['/editar-peca', id]);
   }
 
-  editarEstampa(id: number): void {
-    console.log('Editando estampa ID:', id);
-    this.router.navigate(['/editar-estampa', id]);
-  }
-
-  editarAdesivo(id: number): void {
-    console.log('Editando adesivo ID:', id);
-    this.router.navigate(['/editar-adesivo', id]);
-  }
-
-  editarColecao(id: number): void {
-    console.log('Editando coleção ID:', id);
-    if (!id || id <= 0) {
-      console.error('ID inválido para edição de coleção:', id);
-      alert('ID da coleção inválido');
-      return;
-    }
-    this.router.navigate(['/editar-colecao', id]);
-  }
-
-  editarChaveiro(id: number): void {
-    console.log('Editando chaveiro ID:', id);
-    this.router.navigate(['/editar-chaveiro', id]);
-  }
-
-  // --- FUNÇÕES DE EXCLUSÃO ---
   deletarPeca(id: number) {
     if (confirm('Tem certeza que deseja excluir esta Peça?')) {
       this.pecaService.deletar(id).subscribe({
@@ -161,12 +146,14 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Peça excluída com sucesso!');
           this.carregarPecas();
         },
-        error: (err) => {
-          console.error('Erro ao excluir peça:', err);
-          alert('Erro ao excluir peça.');
-        }
+        error: (err) => alert('Erro ao excluir peça.')
       });
     }
+  }
+
+  // --- ESTAMPAS ---
+  editarEstampa(id: number): void {
+    this.router.navigate(['/editar-estampa', id]);
   }
 
   deletarEstampa(id: number) {
@@ -176,12 +163,14 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Estampa excluída com sucesso!');
           this.carregarEstampas();
         },
-        error: (err) => {
-          console.error('Erro ao excluir estampa:', err);
-          alert('Erro ao excluir estampa.');
-        }
+        error: (err) => alert('Erro ao excluir estampa.')
       });
     }
+  }
+
+  // --- ADESIVOS ---
+  editarAdesivo(id: number): void {
+    this.router.navigate(['/editar-adesivo', id]);
   }
 
   deletarAdesivo(id: number) {
@@ -191,12 +180,14 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Adesivo excluído com sucesso!');
           this.carregarAdesivos();
         },
-        error: (err) => {
-          console.error('Erro ao excluir adesivo:', err);
-          alert('Erro ao excluir adesivo.');
-        }
+        error: (err) => alert('Erro ao excluir adesivo.')
       });
     }
+  }
+
+  // --- COLEÇÕES ---
+  editarColecao(id: number): void {
+    this.router.navigate(['/editar-colecao', id]);
   }
 
   deletarColecao(id: number) {
@@ -206,12 +197,14 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Coleção excluída com sucesso!');
           this.carregarColecoes();
         },
-        error: (err) => {
-          console.error('Erro ao excluir coleção:', err);
-          alert('Erro ao excluir coleção.');
-        }
+        error: (err) => alert('Erro ao excluir coleção.')
       });
     }
+  }
+
+  // --- CHAVEIROS ---
+  editarChaveiro(id: number): void {
+    this.router.navigate(['/editar-chaveiro', id]);
   }
 
   deletarChaveiro(id: number) {
@@ -221,17 +214,14 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Chaveiro excluído com sucesso!');
           this.carregarChaveiros();
         },
-        error: (err) => {
-          console.error('Erro ao excluir chaveiro:', err);
-          alert('Erro ao excluir chaveiro.');
-        }
+        error: (err) => alert('Erro ao excluir chaveiro.')
       });
     }
   }
 
-  // --- FUNÇÃO HELPER ---
+  // --- HELPER ---
   obterNomeColecao(id: number): string {
     const colecao = this.colecoes().find(c => c.colecaoId === id);
-    return colecao ? colecao.nome : 'Carregando...';
+    return colecao ? colecao.nome : '...';
   }
 }
