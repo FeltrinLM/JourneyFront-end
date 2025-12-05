@@ -30,13 +30,10 @@ interface AccordionItem {
 })
 export class ItemListAccordionComponent implements OnInit {
 
-  // --- LÓGICA DO TOGGLE (CORRIGIDA) ---
   @Input() set itemIdToOpen(id: number | null) {
     if (id !== null) {
-      // Se vier um ID, fecha tudo e abre só ele
       this.openItemIds.set(new Set([id]));
     } else {
-      // Se vier null, fecha tudo
       this.openItemIds.set(new Set());
     }
   }
@@ -45,7 +42,6 @@ export class ItemListAccordionComponent implements OnInit {
 
   private router = inject(Router);
 
-  // Injeção dos Services
   private pecaService = inject(PecaService);
   private estampaService = inject(EstampaService);
   private adesivoService = inject(AdesivoService);
@@ -60,7 +56,6 @@ export class ItemListAccordionComponent implements OnInit {
     { id: 5, title: 'Lista de Chaveiros' }
   ];
 
-  // Signals para armazenar os dados
   pecas = signal<PecaDTO[]>([]);
   estampas = signal<EstampaDTO[]>([]);
   adesivos = signal<AdesivoDTO[]>([]);
@@ -80,6 +75,7 @@ export class ItemListAccordionComponent implements OnInit {
   }
 
   // --- LOADERS ---
+  // Nos loaders mantivemos o erro no console.error, então lá ele é usado.
   carregarPecas() {
     this.pecaService.listarPecas().subscribe({
       next: (data) => this.pecas.set(data),
@@ -115,15 +111,12 @@ export class ItemListAccordionComponent implements OnInit {
     });
   }
 
-  // --- TOGGLE MANUAL (Ao clicar no cabeçalho do accordion) ---
   toggleItem(itemId: number): void {
     this.openItemIds.update(currentSet => {
       const newSet = new Set(currentSet);
       if (newSet.has(itemId)) {
         newSet.delete(itemId);
       } else {
-        // Se quiser comportamento "sanfona" (fecha os outros ao abrir um), descomente abaixo:
-        // newSet.clear();
         newSet.add(itemId);
       }
       return newSet;
@@ -131,7 +124,7 @@ export class ItemListAccordionComponent implements OnInit {
   }
 
   // =================================================================
-  // MÉTODOS DE AÇÃO (Esses eram os que estavam faltando!)
+  // MÉTODOS DE AÇÃO (CORRIGIDOS: removi o argumento da função de erro)
   // =================================================================
 
   // --- PEÇAS ---
@@ -146,7 +139,8 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Peça excluída com sucesso!');
           this.carregarPecas();
         },
-        error: (err) => alert('Erro ao excluir peça.')
+        // MUDANÇA: Parênteses vazios ()
+        error: () => alert('Erro ao excluir peça.')
       });
     }
   }
@@ -163,7 +157,8 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Estampa excluída com sucesso!');
           this.carregarEstampas();
         },
-        error: (err) => alert('Erro ao excluir estampa.')
+        // MUDANÇA: Parênteses vazios ()
+        error: () => alert('Erro ao excluir estampa.')
       });
     }
   }
@@ -180,7 +175,8 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Adesivo excluído com sucesso!');
           this.carregarAdesivos();
         },
-        error: (err) => alert('Erro ao excluir adesivo.')
+        // MUDANÇA: Parênteses vazios ()
+        error: () => alert('Erro ao excluir adesivo.')
       });
     }
   }
@@ -197,7 +193,8 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Coleção excluída com sucesso!');
           this.carregarColecoes();
         },
-        error: (err) => alert('Erro ao excluir coleção.')
+        // MUDANÇA: Parênteses vazios ()
+        error: () => alert('Erro ao excluir coleção.')
       });
     }
   }
@@ -214,12 +211,12 @@ export class ItemListAccordionComponent implements OnInit {
           alert('Chaveiro excluído com sucesso!');
           this.carregarChaveiros();
         },
-        error: (err) => alert('Erro ao excluir chaveiro.')
+        // MUDANÇA: Parênteses vazios ()
+        error: () => alert('Erro ao excluir chaveiro.')
       });
     }
   }
 
-  // --- HELPER ---
   obterNomeColecao(id: number): string {
     const colecao = this.colecoes().find(c => c.colecaoId === id);
     return colecao ? colecao.nome : '...';

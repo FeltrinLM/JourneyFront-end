@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core'; // 1. Adicionei o inject aqui
 import { CommonModule, Location } from '@angular/common';
 
 @Component({
@@ -10,8 +10,8 @@ import { CommonModule, Location } from '@angular/common';
 })
 export class BackButtonComponent {
 
-  // Injetamos o 'Location' do Angular para podermos navegar
-  constructor(private location: Location) { }
+  // 2. Substituí o construtor pela função inject
+  private location = inject(Location);
 
   /**
    * Esta função usa o serviço Location para

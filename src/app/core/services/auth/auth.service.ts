@@ -16,7 +16,6 @@ export class AuthService {
   // URL para teste de conexão
   private apiUrl = 'http://localhost:8080/api/usuarios/init';
 
-  constructor() {}
 
   loginSucesso(token: string, nome: string) {
     localStorage.setItem('token', token);

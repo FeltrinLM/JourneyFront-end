@@ -1,6 +1,5 @@
 <div class="page-container">
 
-
   <table class="history-table">
 
     <thead>
@@ -14,47 +13,60 @@
 
     <tbody>
 
-    <tr *ngIf="isLoading">
-      <td colspan="4" class="loading-cell">Carregando histórico...</td>
-    </tr>
+      @if (isLoading) {
+        <tr>
+          <td colspan="4" class="loading-cell">Carregando histórico...</td>
+        </tr>
+      }
 
-    <tr *ngIf="!isLoading && historicoAgrupado.length === 0">
-      <td colspan="4" class="loading-cell">Nenhum registro de alteração encontrado.</td>
-    </tr>
+      @if (!isLoading && historicoAgrupado.length === 0) {
+        <tr>
+          <td colspan="4" class="loading-cell">Nenhum registro de alteração encontrado.</td>
+        </tr>
+      }
 
-    <tr *ngFor="let H of historicoAgrupado">
+      @for (H of historicoAgrupado; track $index) {
+        <tr>
 
-      <td class="action-cell" [ngClass]="H.acaoClass">
-        {{ H.acao }}
-      </td>
+          <td class="action-cell" [ngClass]="H.acaoClass">
+            {{ H.acao }}
+          </td>
 
-      <td class="item-cell">
-        {{ H.item }}
-      </td>
+          <td class="item-cell">
+            {{ H.item }}
+          </td>
 
-      <td class="user-cell">
-        <!-- Chamamos a função aqui -->
-        {{ obterNomeUsuario(H.responsavel) }}
-      </td>
+          <td class="user-cell">
+            {{ obterNomeUsuario(H.responsavel) }}
+          </td>
 
-      <td class="details-cell">
+          <td class="details-cell">
 
-        <p *ngIf="H.acao === 'Adicionado'" class="detail-header"><strong>Campos criados:</strong></p>
-        <p *ngIf="H.acao === 'Editado'" class="detail-header"><strong>Campos alterados:</strong></p>
-        <p *ngIf="H.acao === 'Excluído'" class="detail-header"><strong>Item Removido:</strong></p>
+            @if (H.acao === 'Adicionado') {
+              <p class="detail-header"><strong>Campos criados:</strong></p>
+            }
+            @if (H.acao === 'Editado') {
+              <p class="detail-header"><strong>Campos alterados:</strong></p>
+            }
+            @if (H.acao === 'Excluído') {
+              <p class="detail-header"><strong>Item Removido:</strong></p>
+            }
 
-        <div class="detail-list">
-          <p *ngFor="let detalhe of H.detalhes">
-            - {{ detalhe }}
-          </p>
-        </div>
+            <div class="detail-list">
+              @for (detalhe of H.detalhes; track $index) {
+                <p>
+                  - {{ detalhe }}
+                </p>
+              }
+            </div>
 
-        <p class="data-hora">
-          <em>Data: {{ H.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</em>
-        </p>
-      </td>
+            <p class="data-hora">
+              <em>Data: {{ H.dataHora | date:'dd/MM/yyyy HH:mm:ss' }}</em>
+            </p>
+          </td>
 
-    </tr>
+        </tr>
+      }
 
     </tbody>
   </table>
