@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core'; // 1. inject adicionado
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // 2. Tipagem de erro
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { AdesivoService } from '../../../app/core/services/api/adesivo.service';
 import { AdesivoDTO, AdesivoEdicaoDTO } from '../../../app/core/models';
@@ -19,26 +20,29 @@ import { AdesivoDTO, AdesivoEdicaoDTO } from '../../../app/core/models';
   styleUrl: './editar-adesivo.css'
 })
 export class EditarAdesivo implements OnInit {
+
+  // 3. Injeções convertidas
+  private location = inject(Location);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private adesivoService = inject(AdesivoService);
+
   // Variáveis para armazenar os dados do adesivo
   adesivoId: number | null = null;
-  modelo: string = '';
-  cromatico: boolean = true;
-  carregando: boolean = false;
-  salvando: boolean = false;
 
-  constructor(
-    private location: Location,
-    private route: ActivatedRoute,
-    private router: Router,
-    private adesivoService: AdesivoService
-  ) {}
+  // 4. Removidos tipos triviais (: string, : boolean)
+  modelo = '';
+  cromatico = true;
+  carregando = false;
+  salvando = false;
+
+  // Construtor removido!
 
   ngOnInit(): void {
     this.carregarDadosAdesivo();
   }
 
   carregarDadosAdesivo(): void {
-    // Obter ID da rota
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
@@ -51,7 +55,7 @@ export class EditarAdesivo implements OnInit {
           this.cromatico = adesivo.cromatico;
           this.carregando = false;
         },
-        error: (error) => {
+        error: (error: HttpErrorResponse) => { // Tipado corretamente
           console.error('Erro ao carregar adesivo:', error);
           this.carregando = false;
         }
@@ -81,9 +85,9 @@ export class EditarAdesivo implements OnInit {
           console.log('Adesivo atualizado com sucesso');
           this.salvando = false;
           alert('Adesivo atualizado com sucesso!');
-          this.router.navigate(['/visu-geral']); // Navega para a mesma rota da estampa
+          this.router.navigate(['/visu-geral']);
         },
-        error: (error) => {
+        error: (error: HttpErrorResponse) => { // Tipado corretamente
           console.error('Erro ao atualizar adesivo:', error);
           this.salvando = false;
           alert('Erro ao salvar alterações. Tente novamente.');
@@ -96,9 +100,9 @@ export class EditarAdesivo implements OnInit {
           console.log('Adesivo criado com sucesso:', novoAdesivo);
           this.salvando = false;
           alert('Adesivo criado com sucesso!');
-          this.router.navigate(['/visu-geral']); // Navega para a mesma rota da estampa
+          this.router.navigate(['/visu-geral']);
         },
-        error: (error) => {
+        error: (error: HttpErrorResponse) => { // Tipado corretamente
           console.error('Erro ao criar adesivo:', error);
           this.salvando = false;
           alert('Erro ao criar adesivo. Tente novamente.');

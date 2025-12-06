@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core'; // 1. inject adicionado
+import { CommonModule, Location } from '@angular/common'; // Location movido pra cá
 import { FormsModule } from '@angular/forms';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // 2. Tipagem de erro
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { ChaveiroService } from '../../../app/core/services/api/chaveiro.service';
 import { ColecaoService } from '../../../app/core/services/api/colecao.service';
@@ -20,26 +20,28 @@ import { ChaveiroDTO, ChaveiroEdicaoDTO, ColecaoDTO } from '../../../app/core/mo
   styleUrl: './editar-chaveiro.css'
 })
 export class EditarChaveiro implements OnInit {
+
+  // 3. Injeções convertidas
+  private location = inject(Location);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private chaveiroService = inject(ChaveiroService);
+  private colecaoService = inject(ColecaoService);
+
   // Variáveis para o formulário
-  modelo: string = '';
-  colecaoId: number = 0;
+  modelo = '';      // 4. Removido : string
+  colecaoId = 0;    // 4. Removido : number
 
   // Dados auxiliares
   colecoes: ColecaoDTO[] = [];
 
   // Estados
   chaveiroId: number | null = null;
-  carregando: boolean = false;
-  salvando: boolean = false;
-  erroCarregamento: string = '';
+  carregando = false;        // 4. Removido : boolean
+  salvando = false;          // 4. Removido : boolean
+  erroCarregamento = '';     // 4. Removido : string
 
-  constructor(
-    private location: Location,
-    private route: ActivatedRoute,
-    private router: Router,
-    private chaveiroService: ChaveiroService,
-    private colecaoService: ColecaoService
-  ) {}
+  // Construtor removido!
 
   ngOnInit(): void {
     this.carregarColecoes();
@@ -60,7 +62,7 @@ export class EditarChaveiro implements OnInit {
           this.carregando = false;
           console.log('Dados do chaveiro carregados:', chaveiro);
         },
-        error: (error) => {
+        error: (error: HttpErrorResponse) => { // Tipagem correta
           console.error('Erro ao carregar chaveiro:', error);
           this.erroCarregamento = 'Erro ao carregar dados do chaveiro';
           this.carregando = false;
@@ -84,7 +86,7 @@ export class EditarChaveiro implements OnInit {
           this.colecaoId = this.colecoes[0].colecaoId;
         }
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Tipagem correta
         console.error('Erro ao carregar coleções:', err);
         this.erroCarregamento = 'Erro ao carregar lista de coleções';
       }
@@ -112,7 +114,7 @@ export class EditarChaveiro implements OnInit {
           alert('Chaveiro atualizado com sucesso!');
           this.router.navigate(['/visu-geral']);
         },
-        error: (error) => {
+        error: (error: HttpErrorResponse) => { // Tipagem correta
           console.error('Erro ao atualizar chaveiro:', error);
           this.salvando = false;
           alert('Erro ao salvar alterações. Tente novamente.');
@@ -127,7 +129,7 @@ export class EditarChaveiro implements OnInit {
           alert('Chaveiro criado com sucesso!');
           this.router.navigate(['/visu-geral']);
         },
-        error: (error) => {
+        error: (error: HttpErrorResponse) => { // Tipagem correta
           console.error('Erro ao criar chaveiro:', error);
           this.salvando = false;
           alert('Erro ao criar chaveiro. Tente novamente.');

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core'; // 1. Adicionei inject
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // 2. Import para tipar o erro corretamente
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { PecaService } from '../../../app/core/services/api/peca.service';
 import { PecaDTO, PecaEdicaoDTO } from '../../../app/core/models';
@@ -19,6 +20,11 @@ import { PecaDTO, PecaEdicaoDTO } from '../../../app/core/models';
 })
 export class EditarPeca implements OnInit {
 
+  // 3. Substituí o construtor por inject()
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private pecaService = inject(PecaService);
+
   peca: PecaEdicaoDTO = {
     tipo: '',
     tamanho: '',
@@ -27,19 +33,17 @@ export class EditarPeca implements OnInit {
   };
 
   id!: number;
-  carregando: boolean = true;
-  erroCarregamento: string = '';
+
+  // 4. Removi as tipagens redundantes (: boolean e : string)
+  carregando = true;
+  erroCarregamento = '';
 
   // Opções para os dropdowns
   tipos: string[] = ['Camiseta', 'Calça', 'Jaqueta', 'Vestido', 'Short', 'Blusa'];
   tamanhos: string[] = ['PP', 'P', 'M', 'G', 'GG', 'XG'];
   cores: string[] = ['Preto', 'Branco', 'Vermelho', 'Azul', 'Verde', 'Amarelo', 'Rosa', 'Cinza'];
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private pecaService: PecaService
-  ) {}
+  // Construtor removido!
 
   ngOnInit(): void {
     this.carregarIdEPeca();
@@ -83,7 +87,8 @@ export class EditarPeca implements OnInit {
         console.log('Dados formatados para edição:', this.peca);
         this.carregando = false;
       },
-      error: (err: any) => {
+      // 5. Substituí 'any' por 'HttpErrorResponse'
+      error: (err: HttpErrorResponse) => {
         console.error('Erro completo ao carregar peça:', err);
 
         if (err.status === 404 || err.status === 500) {
@@ -111,7 +116,8 @@ export class EditarPeca implements OnInit {
         alert('Peça atualizada com sucesso!');
         this.router.navigate(['/visu-geral']);
       },
-      error: (err: any) => {
+      // 6. Substituí 'any' por 'HttpErrorResponse' aqui também
+      error: (err: HttpErrorResponse) => {
         console.error('Erro ao salvar edição:', err);
         alert('Erro ao salvar alterações. Tente novamente.');
       }

@@ -1,76 +1,75 @@
 <div class="container-demonstracao">
 
-  <!-- Botão Voltar integrado -->
   <app-back-button class="custom-back-btn"></app-back-button>
 
-  <!-- Estado de Carregamento -->
-  <div *ngIf="carregando && !erroCarregamento" class="loading-state">
-    <p>Carregando...</p>
-  </div>
-
-  <!-- Estado de Erro -->
-  <div *ngIf="erroCarregamento" class="error-state">
-    <p>{{ erroCarregamento }}</p>
-    <button (click)="tentarNovamente()">Tentar Novamente</button>
-  </div>
-
-  <!-- INICIO DO CARD (Exibido apenas se não houver erro e não estiver carregando) -->
-  <div class="card" *ngIf="!carregando && !erroCarregamento">
-    <div class="card-header">
-      <!--
-        O filtro CSS 'filter-white' faz a imagem ficar branca.
-      -->
-      <img
-        src="./assets/images/roupas-icon.png"
-        class="card-icon filter-white"
-        alt="Ícone Roupa"
-        onerror="this.src='https://img.icons8.com/ios-filled/50/ffffff/t-shirt.png'"
-      >
-      <h2 class="card-title">Peça</h2>
+  @if (carregando && !erroCarregamento) {
+    <div class="loading-state">
+      <p>Carregando...</p>
     </div>
+  }
 
-    <form (ngSubmit)="salvarEdicao()" class="card-form">
+  @if (erroCarregamento) {
+    <div class="error-state">
+      <p>{{ erroCarregamento }}</p>
+      <button (click)="tentarNovamente()">Tentar Novamente</button>
+    </div>
+  }
 
-      <!-- Tipo -->
-      <div class="form-group">
-        <div class="select-wrapper">
-          <select [(ngModel)]="peca.tipo" name="tipo">
-            <option *ngFor="let t of tipos" [value]="t">{{ t }}</option>
-          </select>
-          <span class="chevron">⌄</span>
+  @if (!carregando && !erroCarregamento) {
+    <div class="card">
+      <div class="card-header">
+        <img
+          src="./assets/images/roupas-icon.png"
+          class="card-icon filter-white"
+          alt="Ícone Roupa"
+          onerror="this.src='https://img.icons8.com/ios-filled/50/ffffff/t-shirt.png'"
+        >
+        <h2 class="card-title">Peça</h2>
+      </div>
+
+      <form (ngSubmit)="salvarEdicao()" class="card-form">
+
+        <div class="form-group">
+          <div class="select-wrapper">
+            <select [(ngModel)]="peca.tipo" name="tipo">
+              @for (t of tipos; track $index) {
+                <option [value]="t">{{ t }}</option>
+              }
+            </select>
+            <span class="chevron">⌄</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Tamanho -->
-      <div class="form-group">
-        <div class="select-wrapper">
-          <select [(ngModel)]="peca.tamanho" name="tamanho">
-            <option *ngFor="let tam of tamanhos" [value]="tam">{{ tam }}</option>
-          </select>
-          <span class="chevron">⌄</span>
+        <div class="form-group">
+          <div class="select-wrapper">
+            <select [(ngModel)]="peca.tamanho" name="tamanho">
+              @for (tam of tamanhos; track $index) {
+                <option [value]="tam">{{ tam }}</option>
+              }
+            </select>
+            <span class="chevron">⌄</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Cor -->
-      <div class="form-group">
-        <div class="select-wrapper">
-          <select [(ngModel)]="peca.cor" name="cor">
-            <option *ngFor="let c of cores" [value]="c">{{ c }}</option>
-          </select>
-          <span class="chevron">⌄</span>
+        <div class="form-group">
+          <div class="select-wrapper">
+            <select [(ngModel)]="peca.cor" name="cor">
+              @for (c of cores; track $index) {
+                <option [value]="c">{{ c }}</option>
+              }
+            </select>
+            <span class="chevron">⌄</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Quantidade -->
-      <div class="form-group">
-        <input type="number" [(ngModel)]="peca.quantidade" name="quantidade" class="input-qty">
-      </div>
+        <div class="form-group">
+          <input type="number" [(ngModel)]="peca.quantidade" name="quantidade" class="input-qty">
+        </div>
 
-      <!-- Botão Salvar -->
-      <button type="submit" class="btn-salvar">Salvar</button>
+        <button type="submit" class="btn-salvar">Salvar</button>
 
-    </form>
-  </div>
-  <!-- FIM DO CARD -->
+      </form>
+    </div>
+  }
 
 </div>

@@ -1,9 +1,7 @@
 <div class="container-demonstracao">
 
-  <!-- Botão Voltar integrado -->
   <app-back-button class="custom-back-btn"></app-back-button>
 
-  <!-- INICIO DO CARD -->
   <div class="card">
     <div class="card-header">
       <img
@@ -15,62 +13,65 @@
       <h2 class="card-title">{{chaveiroId ? 'Editar Chaveiro' : 'Novo Chaveiro'}}</h2>
     </div>
 
-    <div *ngIf="carregando" class="loading">
-      <p>Carregando...</p>
-    </div>
-
-    <div *ngIf="erroCarregamento" class="error-state">
-      <p>{{ erroCarregamento }}</p>
-      <button class="btn btn-primary" (click)="tentarNovamente()">Tentar Novamente</button>
-      <button class="btn btn-secondary" (click)="voltar()">Voltar</button>
-    </div>
-
-    <form *ngIf="!carregando && !erroCarregamento" class="card-form" (ngSubmit)="onSubmit()" #chaveiroForm="ngForm">
-
-      <!-- Campo Modelo (Editável) -->
-      <div class="form-group">
-        <input
-          type="text"
-          [(ngModel)]="modelo"
-          name="modelo"
-          required
-          class="pop-input text-center"
-          [disabled]="salvando"
-          placeholder="Nome do modelo"
-        >
+    @if (carregando) {
+      <div class="loading">
+        <p>Carregando...</p>
       </div>
+    }
 
-      <!-- Campo Coleção (Select com coleções reais do sistema) -->
-      <div class="form-group">
-        <div class="select-wrapper">
-          <select
-            [(ngModel)]="colecaoId"
-            name="colecaoId"
+    @if (erroCarregamento) {
+      <div class="error-state">
+        <p>{{ erroCarregamento }}</p>
+        <button class="btn btn-primary" (click)="tentarNovamente()">Tentar Novamente</button>
+        <button class="btn btn-secondary" (click)="voltar()">Voltar</button>
+      </div>
+    }
+
+    @if (!carregando && !erroCarregamento) {
+      <form class="card-form" (ngSubmit)="onSubmit()" #chaveiroForm="ngForm">
+
+        <div class="form-group">
+          <input
+            type="text"
+            [(ngModel)]="modelo"
+            name="modelo"
             required
-            class="pop-input"
+            class="pop-input text-center"
             [disabled]="salvando"
+            placeholder="Nome do modelo"
           >
-            <option value="" disabled selected>Selecione uma coleção</option>
-            <option *ngFor="let colecao of colecoes" [value]="colecao.colecaoId">
-              {{ colecao.nome }}
-            </option>
-          </select>
-          <!-- Seta customizada -->
-          <span class="chevron">⌄</span>
         </div>
-      </div>
 
-      <!-- Botão Salvar -->
-      <button
-        type="submit"
-        class="btn-salvar"
-        [disabled]="salvando || !chaveiroForm.valid"
-      >
-        {{salvando ? 'Salvando...' : 'Salvar'}}
-      </button>
+        <div class="form-group">
+          <div class="select-wrapper">
+            <select
+              [(ngModel)]="colecaoId"
+              name="colecaoId"
+              required
+              class="pop-input"
+              [disabled]="salvando"
+            >
+              <option value="" disabled selected>Selecione uma coleção</option>
 
-    </form>
+              @for (colecao of colecoes; track colecao.colecaoId) {
+                <option [value]="colecao.colecaoId">
+                  {{ colecao.nome }}
+                </option>
+              }
+            </select>
+            <span class="chevron">⌄</span>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn-salvar"
+          [disabled]="salvando || !chaveiroForm.valid"
+        >
+          {{salvando ? 'Salvando...' : 'Salvar'}}
+        </button>
+
+      </form>
+    }
   </div>
-  <!-- FIM DO CARD -->
-
 </div>

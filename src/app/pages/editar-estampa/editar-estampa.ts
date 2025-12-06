@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core'; // 1. Adicionado inject
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // 2. Adicionado para tipar o erro
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { EstampaService } from '../../../app/core/services/api/estampa.service';
 import { ColecaoService } from '../../../app/core/services/api/colecao.service';
-import{EstampaDTO, ColecaoDTO} from '../../../app/core/models';
+import { EstampaDTO, ColecaoDTO } from '../../../app/core/models';
 
 interface EstampaEdicaoDTO {
   nome: string;
@@ -26,6 +27,12 @@ interface EstampaEdicaoDTO {
 })
 export class EditarEstampa implements OnInit {
 
+  // 3. Injeções convertidas
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private estampaService = inject(EstampaService);
+  private colecaoService = inject(ColecaoService);
+
   estampa: EstampaEdicaoDTO = {
     nome: '',
     quantidade: 0,
@@ -34,15 +41,12 @@ export class EditarEstampa implements OnInit {
 
   colecoes: ColecaoDTO[] = [];
   id!: number;
-  carregando: boolean = true;
-  erroCarregamento: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private estampaService: EstampaService,
-    private colecaoService: ColecaoService
-  ) {}
+  // 4. Removidas anotações de tipo redundantes
+  carregando = true;
+  erroCarregamento = '';
+
+  // Construtor removido!
 
   ngOnInit(): void {
     this.carregarIdEEstampa();
@@ -74,7 +78,7 @@ export class EditarEstampa implements OnInit {
       next: (data) => {
         this.colecoes = data;
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Tipado corretamente
         console.error('Erro ao carregar coleções:', err);
       }
     });
@@ -97,7 +101,7 @@ export class EditarEstampa implements OnInit {
         console.log('Dados formatados para edição:', this.estampa);
         this.carregando = false;
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Tipado corretamente
         console.error('Erro completo ao carregar estampa:', err);
 
         if (err.status === 404 || err.status === 500) {
@@ -130,7 +134,7 @@ export class EditarEstampa implements OnInit {
         alert('Estampa atualizada com sucesso!');
         this.router.navigate(['/visu-geral']);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Tipado corretamente
         console.error('Erro ao salvar edição:', err);
         alert('Erro ao salvar alterações. Tente novamente.');
       }

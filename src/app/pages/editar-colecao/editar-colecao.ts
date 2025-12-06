@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core'; // 1. inject adicionado
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http'; // 2. Tipagem de erro
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { ColecaoService } from '../../../app/core/services/api/colecao.service';
-import{ ColecaoDTO} from '../../../app/core/models'
-import{ ColecaoEdicaoDTO} from '../../../app/core/models'
+import { ColecaoDTO, ColecaoEdicaoDTO } from '../../../app/core/models';
 
 @Component({
   selector: 'app-editar-colecao',
@@ -20,6 +20,11 @@ import{ ColecaoEdicaoDTO} from '../../../app/core/models'
 })
 export class EditarColecao implements OnInit {
 
+  // 3. Injeções convertidas
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private colecaoService = inject(ColecaoService);
+
   colecao: ColecaoEdicaoDTO = {
     nome: '',
     dataInicio: '',
@@ -27,27 +32,20 @@ export class EditarColecao implements OnInit {
   };
 
   id!: number;
-  carregando: boolean = true;
-  erroCarregamento: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private colecaoService: ColecaoService
-  ) {}
+  // 4. Removidos tipos triviais (: boolean e : string)
+  carregando = true;
+  erroCarregamento = '';
+
+  // Construtor removido!
 
   ngOnInit(): void {
     this.carregarIdERcolecao();
   }
 
   carregarIdERcolecao(): void {
-    // Método 1: Tenta pegar o ID dos parâmetros da rota
     const idFromRoute = this.route.snapshot.paramMap.get('id');
-
-    // Método 2: Se não encontrar, tenta dos query parameters
     const idFromQuery = this.route.snapshot.queryParamMap.get('id');
-
-    // Método 3: Tenta pegar do state da navegação
     const navigation = this.router.getCurrentNavigation();
     const idFromState = navigation?.extras.state?.['id'];
 
@@ -55,8 +53,8 @@ export class EditarColecao implements OnInit {
     console.log('ID da query:', idFromQuery);
     console.log('ID do state:', idFromState);
 
-    // Prioridade: Rota > Query > State
-    let idEncontrado = idFromRoute || idFromQuery || idFromState;
+    // 5. 'let' alterado para 'const' conforme pedido pelo Linter
+    const idEncontrado = idFromRoute || idFromQuery || idFromState;
 
     if (!idEncontrado) {
       this.erroCarregamento = 'ID da coleção não encontrado na URL';
@@ -94,7 +92,7 @@ export class EditarColecao implements OnInit {
         console.log('Dados formatados para edição:', this.colecao);
         this.carregando = false;
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Tipado corretamente
         console.error('Erro completo ao carregar coleção:', err);
 
         if (err.status === 404 || err.status === 500) {
@@ -144,7 +142,7 @@ export class EditarColecao implements OnInit {
         alert('Coleção atualizada com sucesso!');
         this.router.navigate(['/colecoes']);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Tipado corretamente
         console.error('Erro ao salvar edição:', err);
         alert('Erro ao salvar alterações. Tente novamente.');
       }
