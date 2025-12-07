@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core'; // 1. inject adicionado
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // Boa prática para o erro
 import { UsuarioService } from '../../core/services/api/usuario.service';
 
 @Component({
@@ -12,16 +13,18 @@ import { UsuarioService } from '../../core/services/api/usuario.service';
   styleUrls: ['./cadastrar-usuario.css']
 })
 export class CadastrarUsuario {
+
+  // 2. Substituindo construtor por inject
+  private usuarioService = inject(UsuarioService);
+  private router = inject(Router);
+
   usuario = {
     nome: '',
     senha: '',
     tipo: '' as 'Administrador' | 'Funcionario'
   };
 
-  constructor(
-    private usuarioService: UsuarioService,
-    private router: Router
-  ) {}
+  // Construtor removido!
 
   cadastrar() {
     if (!this.usuario.nome || !this.usuario.senha || !this.usuario.tipo) {
@@ -30,11 +33,12 @@ export class CadastrarUsuario {
     }
 
     this.usuarioService.cadastrarUsuario(this.usuario).subscribe({
-      next: (response) => {
+      // 3. Removi o argumento 'response', já que não estava sendo usado
+      next: () => {
         alert('Usuário cadastrado com sucesso!');
         this.router.navigate(['/conta']);
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Erro ao cadastrar usuário:', error);
         alert('Erro ao cadastrar usuário. Tente novamente.');
       }

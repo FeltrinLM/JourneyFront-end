@@ -2,15 +2,25 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 
-export const authGuard: CanActivateFn = (_route, _state) => {
+// CORREÇÃO: Removi o ', state' que estava sobrando ali
+export const authGuard: CanActivateFn = (route) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Verifica se o usuário está logado usando a lógica do Service
-  if (authService.estaLogado()) {
-    return true; // Permite o acesso
-  } else {
-    // Se não estiver logado, redireciona para o login
+  // 1. Verifica se está logado (Básico)
+  if (!authService.estaLogado()) {
     return router.createUrlTree(['/login']);
   }
+
+  // 2. Verifica se a rota exige um cargo específico
+  const cargoEsperado = route.data['role'];
+
+  if (cargoEsperado && cargoEsperado === 'Administrador') {
+    if (!authService.ehAdministrador()) {
+      alert('Acesso negado: Apenas administradores podem acessar esta página.');
+      return false;
+    }
+  }
+
+  return true;
 };

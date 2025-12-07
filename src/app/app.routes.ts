@@ -72,6 +72,7 @@ export const routes: Routes = [
   {
     path: 'cadastrar-usuario',
     component: CadastrarUsuario,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    data: { role: 'Administrador' }
   }
 ];

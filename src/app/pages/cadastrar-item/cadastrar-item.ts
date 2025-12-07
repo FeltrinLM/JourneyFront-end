@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core'; // 1. inject adicionado
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http'; // 2. Tipagem de erro
 import { BackButtonComponent } from '../../shared/components/back-button/back-button.component';
 import { ColecaoService } from '../../../app/core/services/api/colecao.service';
 import { EstampaService } from '../../../app/core/services/api/estampa.service';
@@ -17,7 +18,7 @@ import {
   ChaveiroEdicaoDTO,
   AdesivoDTO,
   ChaveiroDTO,
-  ColecaoDTO as BackendColecaoDTO,
+  // BackendColecaoDTO removido (não usado)
   EstampaDTO,
   PecaDTO
 } from '../../../app/core/models';
@@ -35,9 +36,19 @@ import {
 })
 export class CadastrarItem implements OnInit {
 
+  // 3. Injeções convertidas
+  private router = inject(Router);
+  private colecaoService = inject(ColecaoService);
+  private estampaService = inject(EstampaService);
+  private adesivoService = inject(AdesivoService);
+  private pecaService = inject(PecaService);
+  private chaveiroService = inject(ChaveiroService);
+
   tipoSelecionado: string | null = null;
   colecoes: ColecaoDTO[] = [];
-  salvando: boolean = false;
+
+  // 4. Removido tipo trivial (: boolean)
+  salvando = false;
 
   // Dados para cada tipo de item
   colecaoData: ColecaoEdicaoDTO = {
@@ -69,14 +80,7 @@ export class CadastrarItem implements OnInit {
     colecaoId: 0
   };
 
-  constructor(
-    private router: Router,
-    private colecaoService: ColecaoService,
-    private estampaService: EstampaService,
-    private adesivoService: AdesivoService,
-    private pecaService: PecaService,
-    private chaveiroService: ChaveiroService
-  ) {}
+  // Construtor removido!
 
   ngOnInit(): void {
     this.carregarColecoes();
@@ -88,7 +92,7 @@ export class CadastrarItem implements OnInit {
         this.colecoes = data;
         console.log('Coleções carregadas:', this.colecoes);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => { // Tipagem correta
         console.error('Erro ao carregar coleções:', err);
         alert('Erro ao carregar lista de coleções. Tente novamente.');
       }
@@ -162,7 +166,7 @@ export class CadastrarItem implements OnInit {
         this.resetarDados();
         this.voltarParaMenu();
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Erro ao criar coleção:', error);
         alert('Erro ao criar coleção. Tente novamente.');
         this.salvando = false;
@@ -179,7 +183,7 @@ export class CadastrarItem implements OnInit {
         this.resetarDados();
         this.voltarParaMenu();
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Erro ao criar estampa:', error);
         alert('Erro ao criar estampa. Tente novamente.');
         this.salvando = false;
@@ -196,7 +200,7 @@ export class CadastrarItem implements OnInit {
         this.resetarDados();
         this.voltarParaMenu();
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Erro ao criar adesivo:', error);
         alert('Erro ao criar adesivo. Tente novamente.');
         this.salvando = false;
@@ -213,7 +217,7 @@ export class CadastrarItem implements OnInit {
         this.resetarDados();
         this.voltarParaMenu();
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Erro ao criar peça:', error);
         alert('Erro ao criar peça. Tente novamente.');
         this.salvando = false;
@@ -230,7 +234,7 @@ export class CadastrarItem implements OnInit {
         this.resetarDados();
         this.voltarParaMenu();
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Erro ao criar chaveiro:', error);
         alert('Erro ao criar chaveiro. Tente novamente.');
         this.salvando = false;
@@ -310,7 +314,8 @@ export class CadastrarItem implements OnInit {
     return true;
   }
 
-  private getDadosAtuais(): any {
+  // 5. Substituído 'any' por união de tipos
+  private getDadosAtuais(): ColecaoEdicaoDTO | EstampaEdicaoDTO | AdesivoEdicaoDTO | PecaEdicaoDTO | ChaveiroEdicaoDTO | null {
     switch (this.tipoSelecionado) {
       case 'COLECAO': return this.colecaoData;
       case 'ESTAMPA': return this.estampaData;

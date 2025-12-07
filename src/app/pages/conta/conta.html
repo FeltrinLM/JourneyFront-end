@@ -19,13 +19,11 @@
     </div>
 
     <div class="details-box">
-      <!-- Linha 1: Nome -->
       <div class="detail-row">
         <span class="detail-text">Nome : {{ getNomeExibicao() }}</span>
         <button class="btn-editar">Editar</button>
       </div>
 
-      <!-- Linha 2: Permissão -->
       <div class="detail-row">
         <span class="detail-text">Nível de permissão: {{ getTipoUsuario() }}</span>
         <button class="btn-editar">
@@ -33,7 +31,6 @@
         </button>
       </div>
 
-      <!-- Linha 3: Senha - MODIFICADA -->
       <div class="detail-row">
         <span class="detail-text">Senha</span>
         <button class="btn-editar">
@@ -44,9 +41,12 @@
 
     <div class="card-footer">
       <button class="btn-sair" (click)="sair()">Sair</button>
-      <button class="btn-cadastrar" routerLink="/cadastrar-usuario">
-        Cadastrar<br>novo usuario
-      </button>
+
+      @if (usuario?.tipo === 'Administrador') {
+        <button class="btn-cadastrar" routerLink="/cadastrar-usuario">
+          Cadastrar<br>novo usuario
+        </button>
+      }
     </div>
   </div>
 </div>
