@@ -248,3 +248,176 @@
     margin-left: 20px;
   }
 }
+
+/* --- ESTILOS DO MODAL --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que fique na frente de tudo */
+  backdrop-filter: blur(3px); /* Efeito de desfoque no fundo */
+}
+
+.modal-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: popIn 0.3s ease-out;
+}
+
+.modal-box h3 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.modal-box p {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Botões do Modal */
+.btn-modal-cancelar {
+  padding: 10px 25px;
+  border: 2px solid #ccc;
+  background: white;
+  color: #555;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-modal-cancelar:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(172, 117, 227, 0.3);
+}
+
+.btn-modal-confirmar {
+  padding: 10px 25px;
+  border: none;
+  background: #F459B6; /* Vermelho para ação de sair */
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-modal-confirmar:hover {
+  background-color: #d53b96;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(172, 117, 227, 0.3);
+}
+
+/* Animação de entrada */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- ÁREA DE EDIÇÃO EXPANDIDA --- */
+.edit-form-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: slideDown 0.3s ease-out;
+}
+
+.edit-form-container label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.input-editar {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-editar:focus {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-color: #C084FC;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.btn-cancelar-edicao {
+  background-color: #d53b96;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.btn-salvar-edicao {
+  background-color: #10B981; /* Verde para salvar */
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.btn-salvar-edicao:hover {
+  background-color: #059669;
+}
+
+.btn-cancelar-edicao:hover {
+  background-color: #b02679;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -19,28 +19,74 @@
     </div>
 
     <div class="details-box">
+
       <div class="detail-row">
         <span class="detail-text">Nome : {{ getNomeExibicao() }}</span>
-        <button class="btn-editar">Editar</button>
+        <button class="btn-editar" (click)="iniciarEdicaoNome()" [disabled]="editandoSenha">Editar</button>
       </div>
 
+      @if (editandoNome) {
+        <div class="edit-form-container">
+          <label for="novoNomeInput">Novo nome:</label>
+          <input
+            id="novoNomeInput"
+            type="text"
+            [(ngModel)]="novoNome"
+            class="input-editar"
+            placeholder="Digite o novo nome"
+          >
+          <div class="edit-actions">
+            <button class="btn-cancelar-edicao" (click)="cancelarEdicaoNome()">Cancelar</button>
+            <button class="btn-salvar-edicao" (click)="salvarNome()">Salvar</button>
+          </div>
+        </div>
+      }
+
       <div class="detail-row">
-        <span class="detail-text">Nível de permissão: {{ getTipoUsuario() }}</span>
-        <button class="btn-editar">
+        <span class="detail-text">Senha *********</span>
+        <button class="btn-editar" (click)="iniciarEdicaoSenha()" [disabled]="editandoNome">
           <span class="notification-dot" data-tooltip="Atenção: esta ação&#10; é sensível. &#10;Prossiga com cuidado">!</span> Editar
         </button>
       </div>
 
-      <div class="detail-row">
-        <span class="detail-text">Senha</span>
-        <button class="btn-editar">
-          <span class="notification-dot" data-tooltip="Atenção: esta ação&#10; é sensível. &#10;Prossiga com cuidado">!</span> Editar
-        </button>
-      </div>
+      @if (editandoSenha) {
+        <div class="edit-form-container">
+
+          <label>Senha Atual:</label>
+          <input
+            type="password"
+            [(ngModel)]="senhaAtual"
+            class="input-editar"
+            placeholder="Digite sua senha atual"
+          >
+
+          <label>Nova Senha:</label>
+          <input
+            type="password"
+            [(ngModel)]="novaSenha"
+            class="input-editar"
+            placeholder="Digite a nova senha"
+          >
+
+          <label>Confirmar Nova Senha:</label>
+          <input
+            type="password"
+            [(ngModel)]="confirmarSenha"
+            class="input-editar"
+            placeholder="Repita a nova senha"
+          >
+
+          <div class="edit-actions">
+            <button class="btn-cancelar-edicao" (click)="cancelarEdicaoSenha()">Cancelar</button>
+            <button class="btn-salvar-edicao" (click)="salvarSenha()">Salvar</button>
+          </div>
+        </div>
+      }
+
     </div>
 
     <div class="card-footer">
-      <button class="btn-sair" (click)="sair()">Sair</button>
+      <button class="btn-sair" (click)="solicitarSair()">Sair</button>
 
       @if (usuario?.tipo === 'Administrador') {
         <button class="btn-cadastrar" routerLink="/cadastrar-usuario">
@@ -49,4 +95,19 @@
       }
     </div>
   </div>
+
+  @if (mostrarModalSair) {
+    <div class="modal-overlay">
+      <div class="modal-box">
+        <h3>Sair da conta</h3>
+        <p>Tem certeza que quer sair da sua conta?</p>
+
+        <div class="modal-actions">
+          <button class="btn-modal-cancelar" (click)="cancelarSair()">Não</button>
+          <button class="btn-modal-confirmar" (click)="confirmarSair()">Sair</button>
+        </div>
+      </div>
+    </div>
+  }
+
 </div>
