@@ -17,11 +17,9 @@ export class Conta implements OnInit {
   carregando = true;
   mostrarModalSair = false;
 
-  // Edição de Nome
+  // Edição
   editandoNome = false;
   novoNome = '';
-
-  // Edição de Senha
   editandoSenha = false;
   senhaAtual = '';
   novaSenha = '';
@@ -38,7 +36,6 @@ export class Conta implements OnInit {
       next: (user) => {
         this.usuario = user;
         this.carregando = false;
-        console.log('Usuário carregado:', user);
       },
       error: (error: HttpErrorResponse) => {
         console.error('Erro ao carregar usuário:', error);
@@ -62,19 +59,17 @@ export class Conta implements OnInit {
   }
 
   getNomeExibicao(): string {
-    if (this.carregando) return 'Carregando...';
     return this.usuario?.nome || 'Usuário';
   }
 
   getTipoUsuario(): string {
-    if (this.carregando) return 'Carregando...';
     return this.usuario?.tipo || 'Usuário';
   }
 
-  // --- LÓGICA DE EDIÇÃO DE NOME ---
+  // --- SALVAR NOME (PATCH) ---
   iniciarEdicaoNome() {
     this.editandoNome = true;
-    this.editandoSenha = false; // Fecha a senha se estiver aberta
+    this.editandoSenha = false;
     this.novoNome = this.usuario?.nome || '';
   }
 
@@ -88,18 +83,30 @@ export class Conta implements OnInit {
       alert('O nome não pode estar vazio.');
       return;
     }
-    console.log('Salvando novo nome:', this.novoNome);
-    if (this.usuario) {
-      this.usuario.nome = this.novoNome;
+
+    if (!this.usuario?.usuarioId) {
+      alert('Erro: ID do usuário não encontrado.');
+      return;
     }
-    this.editandoNome = false;
-    alert('Nome atualizado com sucesso (Simulação)!');
+
+    this.usuarioService.atualizarNome(this.usuario.usuarioId, this.novoNome).subscribe({
+      next: () => {
+        alert('Nome atualizado com sucesso!');
+        if (this.usuario) this.usuario.nome = this.novoNome;
+        localStorage.setItem('nome_usuario', this.novoNome);
+        this.editandoNome = false;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Erro ao salvar nome:', err);
+        alert('Erro ao atualizar nome. Tente novamente.');
+      }
+    });
   }
 
-  // --- LÓGICA DE EDIÇÃO DE SENHA ---
+  // --- SALVAR SENHA (PUT) ---
   iniciarEdicaoSenha() {
     this.editandoSenha = true;
-    this.editandoNome = false; // Fecha o nome se estiver aberto
+    this.editandoNome = false;
     this.limparCamposSenha();
   }
 
@@ -116,29 +123,47 @@ export class Conta implements OnInit {
 
   salvarSenha() {
     if (!this.senhaAtual || !this.novaSenha || !this.confirmarSenha) {
-      alert('Por favor, preencha todos os campos de senha.');
+      alert('Preencha todos os campos.');
       return;
     }
-
     if (this.novaSenha !== this.confirmarSenha) {
       alert('A nova senha e a confirmação não coincidem.');
       return;
     }
-
     if (this.novaSenha.length < 6) {
       alert('A nova senha deve ter pelo menos 6 caracteres.');
       return;
     }
+    if (!this.usuario?.usuarioId) {
+      alert('Erro: Usuário não identificado.');
+      return;
+    }
 
-    console.log('Salvando nova senha...');
-    // AQUI CHAMARIA O BACKEND PARA VALIDAR A SENHA ATUAL E TROCAR PELA NOVA
+    const payload = {
+      senhaAtual: this.senhaAtual,
+      novaSenha: this.novaSenha
+    };
 
-    this.editandoSenha = false;
-    this.limparCamposSenha();
-    alert('Senha atualizada com sucesso (Simulação)!');
+    // Chamada direta para o endpoint que valida e troca
+    this.usuarioService.alterarSenha(this.usuario.usuarioId, payload).subscribe({
+      next: () => {
+        alert('Senha alterada com sucesso!');
+        this.editandoSenha = false;
+        this.limparCamposSenha();
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Erro ao alterar senha:', err);
+        // O Backend retorna 401 se a senha antiga estiver errada
+        if (err.status === 401 || err.status === 400) {
+          alert('A senha atual está incorreta.');
+        } else {
+          alert('Erro ao alterar senha. Tente novamente.');
+        }
+      }
+    });
   }
 
-  // --- LÓGICA DE SAIR ---
+  // --- SAIR ---
   solicitarSair() {
     this.mostrarModalSair = true;
   }

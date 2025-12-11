@@ -343,7 +343,7 @@
 
 /* --- ÁREA DE EDIÇÃO EXPANDIDA --- */
 .edit-form-container {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #551c8a;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 15px;
@@ -363,7 +363,7 @@
   padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(225, 225, 225, 0.2);
   color: white;
   font-size: 1rem;
   outline: none;

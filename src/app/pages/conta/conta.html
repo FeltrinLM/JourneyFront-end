@@ -30,6 +30,7 @@
           <label for="novoNomeInput">Novo nome:</label>
           <input
             id="novoNomeInput"
+            name="novoNome"
             type="text"
             [(ngModel)]="novoNome"
             class="input-editar"
@@ -52,24 +53,30 @@
       @if (editandoSenha) {
         <div class="edit-form-container">
 
-          <label>Senha Atual:</label>
+          <label for="senhaAtualInput">Senha Atual:</label>
           <input
+            id="senhaAtualInput"
+            name="senhaAtual"
             type="password"
             [(ngModel)]="senhaAtual"
             class="input-editar"
             placeholder="Digite sua senha atual"
           >
 
-          <label>Nova Senha:</label>
+          <label for="novaSenhaInput">Nova Senha:</label>
           <input
+            id="novaSenhaInput"
+            name="novaSenha"
             type="password"
             [(ngModel)]="novaSenha"
             class="input-editar"
             placeholder="Digite a nova senha"
           >
 
-          <label>Confirmar Nova Senha:</label>
+          <label for="confirmarSenhaInput">Confirmar Nova Senha:</label>
           <input
+            id="confirmarSenhaInput"
+            name="confirmarSenha"
             type="password"
             [(ngModel)]="confirmarSenha"
             class="input-editar"

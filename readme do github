@@ -1,0 +1,101 @@
+<div align="center">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=110&color=828282"/>
+  <br>
+  I'm a student who knows a little bit of everything. Need a full-stack project? LLM implementation or legacy code refactoring? You can count on me. My passion lies in organizing both teams and code, which is why I focus my studies on Project Management and Software Engineering.
+  <br>
+  Here you will find a little about the technologies that I use in my daily life and the ones that I am currently studying.
+</div>
+
+<div align="center">
+  <h1>Languages, Tools & Skills</h1>
+</div>
+
+<table align="center" width="100%">
+  <tr>
+    <td valign="top" width="33%">
+      <h3 align="center">Frontend & Prototype</h3>
+      <div align="center">
+        <a href="https://en.wikipedia.org/wiki/HTML5" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg" alt="HTML5" height="40" /></a>
+        <a href="https://www.typescriptlang.org/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/typescript-original.svg" alt="TypeScript" height="40" /></a>
+        <a href="https://www.javascript.com/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/javascript-original.svg" alt="JavaScript" height="40" /></a>
+        <a href="https://www.w3schools.com/css/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg" alt="CSS3" height="40" /></a>
+        <a href="https://angular.io/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/angularjs-original.svg" alt="Angular" height="40" /></a>
+        <a href="https://www.figma.com/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/figma-icon.svg" alt="Figma" height="40" /></a>
+        <a href="https://en.wikipedia.org/wiki/React" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/React-original-wordmark.svg" alt="React" height="40" /></a>
+      </div>
+    </td>
+    <td valign="top" width="33%">
+      <h3 align="center">Backend & Database</h3>
+      <div align="center">
+        <a href="https://www.php.net/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/php-original.svg" alt="PHP" height="40" /></a>
+        <a href="https://www.python.org/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/python-original.svg" alt="Python" height="40" /></a>
+        <a href="https://www.java.com/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/java-original-wordmark.svg" alt="Java" height="40" /></a>
+        <a href="https://www.cprogramming.com/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/c-original.svg" alt="C" height="40" /></a>
+        <a href="https://www.mysql.com/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/mysql-original-wordmark.svg" alt="MySQL" height="40" /></a>
+        <a href="https://www.mongodb.com/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/mongodb-original-wordmark.svg" alt="MongoDB" height="40" /></a>
+        <a href="https://spring.io/projects/spring-boot" target="_blank"><img style="margin: 5px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" height="40" /></a>
+        <a href="https://www.postgresql.org/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/postgresql-original-wordmark.svg" alt="PostgreSQL" height="40" /></a>
+        <a href="https://www.docker.com/" target="_blank"><img style="margin: 5px" src="https://profilinator.rishav.dev/skills-assets/docker-original-wordmark.svg" alt="Docker" height="40" /></a>
+        <a href="https://www.postman.com/" target="_blank"><img style="margin: 5px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" alt="Postman" height="40" /></a>
+      </div>
+    </td>
+    <td valign="top" width="33%">
+      <h3 align="center">PM & SWE</h3>
+      <div align="center">
+        <img style="margin: 5px;" src="https://cdn-icons-png.flaticon.com/512/3967/3967189.png" alt="Scrum" height="40" />
+        <img style="margin: 5px;" src="https://avatars.slack-edge.com/2023-08-31/5829953712962_3ea143691967fed79611_512.png" alt="Mermaid.js" height="40" />
+        <img style="margin: 5px;" src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git" height="40" />
+        <br/>
+        <img style="margin: 5px;" src="https://cdn-icons-png.flaticon.com/512/5084/5084666.png" alt="Kanban Board" height="40" />
+        <img style="margin: 5px;" src="https://www.cdnlogo.com/logos/p/22/pmi.svg" alt="PMI Global" height="40" />
+      </div>
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+<div align="center">
+  <h1>Reach me</h1>
+</div>
+
+<table align="center" width="100%">
+  <tr>
+    <td width="50%" valign="middle">
+      <h4 align="center">
+        If you're a baddie or a billionaire company that finally realized you can't rely 100% on AI to build actual good stuff, you have my permission to hit me up.
+      </h4>
+      <br/>
+      <div align="center">
+        <a href="mailto:lorenzofmendes49@gmail.com">
+          <img alt="Gmail" width="50" height="50" src="https://cdn-icons-png.flaticon.com/128/732/732200.png" />
+        </a>
+        <a href="https://www.linkedin.com/in/lorenzo-feltrin-086870227/">
+          <img alt="LinkedIn" width="50" height="50" src="https://cdn-icons-png.flaticon.com/128/3536/3536505.png" />
+        </a>
+      </div>
+    </td>
+    <td width="50%" valign="middle">
+      <img width="100%" alt="GIF" src="https://media1.tenor.com/m/vyeMw0bTCbsAAAAC/renoir-renoir-clair-obscur.gif">
+    </td>
+  </tr>
+</table>
+
+<br/><br/>
+
+<div align="center">
+  <h1>GitHub Status</h1>
+</div>
+
+<table align="center" width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <img width="100%" src="https://streak-stats.demolab.com/?user=FeltrinLM&theme=dark&hide_border=false" alt="Streak Stats">
+    </td>
+    <td width="50%" valign="top">
+      <img width="100%" src="https://github-readme-stats-sigma-five.vercel.app/api?username=FeltrinLM&show_icons=true&theme=dark&hide_border=false&count_private=true" alt="GitHub Stats">
+    </td>
+  </tr>
+</table>
+
+<br/><br/>
